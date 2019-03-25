@@ -29,21 +29,21 @@ Users can accomplish below functionality using format parameter
 ## Getting Started
 
 Public Entity Details can be accessed from Beta or Alpha via the following end points:
-   * Beta: https://api.sam.gov/prod/entity-management?api_key=< value >
-   * Alpha: https://api-alpha.sam.gov/prodlike/entity-management?api_key=< value >
+   * https://api.sam.gov/prod/entity-management?api_key=< value >
+   * https://api-alpha.sam.gov/prodlike/entity-management?api_key=< value >
 
 FOUO Entity Details can be accessed from Beta or Alpha via the following end points:
-   * Beta: https://api.sam.gov/prod/entity-management/fouo?api_key=< value >
-   * Alpha: https://api-alpha.sam.gov/prodlike/entity-management/fouo?api_key=< value >
+   * https://api.sam.gov/prod/entity-management/fouo?api_key=< value >
+   * https://api-alpha.sam.gov/prodlike/entity-management/fouo?api_key=< value >
 
 Sensitive Entity Details  can be accessed from Beta or Alpha via the following end points:
-   * Beta: https://api.sam.gov/prod/entity-management/sensitive?api_key=< value >
-   * Alpha: https://api-alpha.sam.gov/prodlike/entity-management/sensitive?api_key=< value >  
+   * https://api.sam.gov/prod/entity-management/sensitive?api_key=< value >
+   * https://api-alpha.sam.gov/prodlike/entity-management/sensitive?api_key=< value >  
 
-Generating a personal API Key:
+Generating the API Key:
 * Registered users can request for a public API on 'Account Details' page.
-* Users must enter their password on â€˜Account Detailsâ€™ page to view the API Key information. If an incorrect password is entered, an error will be returned. 
-* After the API Key is generated on â€˜Account Detailsâ€™ page, the API Key can be viewed on the Account Details page immediately. The API Key is visible until users navigate to a different page. 
+* Users must enter their password on ‘Account Details’ page to view the API Key information. If an incorrect password is entered, an error will be returned. 
+* After the API Key is generated on ‘Account Details’ page, the API Key can be viewed on the Account Details page immediately. The API Key is visible until users navigate to a different page. 
 * If an error is encountered during the API Key generation/retrieval, then users will receive an error message and they can try again.
 
 
@@ -115,7 +115,9 @@ Generating a personal API Key:
 
 <tr>
 <td>ueiSAMMI</td>
-<td>TBD</td>
+<td>Unique Entity Identifier SAMMI -Allows 9 digit value, a maximum of up to 100 values can be sent.
+<br>Example: 'https://api.sam.gov/prod/entity-management?
+<br>api_key=< value >&ueiSAMMI=025114695</td>
 </tr>
 
 <tr>
@@ -323,7 +325,7 @@ Generating a personal API Key:
 
 <tr>
 <td>servedDisasterStateName</td>
-<td>Allows Name or null.
+<td>Allows Name or null Virginia.
 <br>https://api.sam.gov/prod/entity-management?
 <br>api_key=< value >&servedDisasterStateName=Virginia</td>
 </tr>
@@ -397,37 +399,37 @@ Generating a personal API Key:
 </tr>
 
 <tr>
-<td>cageCodeÂ </td>
+<td>cageCode </td>
 <td>string</td>
 <td>CAGE Code</td>
 </tr>
 
 <tr>
-<td>nCageCodeÂ </td>
+<td>nCageCode </td>
 <td>string</td>
 <td>NCAGE Code</td>
 </tr>
 
 <tr>
-<td>dodaacÂ </td>
+<td>dodaac </td>
 <td>string</td>
 <td>DoDAAC</td>
 </tr>
 
 <tr>
-<td>legalBusinessNameÂ </td>
+<td>legalBusinessName </td>
 <td>string</td>
 <td>Legal Business Name</td>
 </tr>
 
 <tr>
-<td>dbaNameÂ </td>
+<td>dbaName </td>
 <td>string</td>
 <td>Doing Business As Name</td>
 </tr>
 
 <tr>
-<td>purposeOfRegistrationCodeÂ </td>
+<td>purposeOfRegistrationCode </td>
 <td>string</td>
 <td>Purpose of Registration Code</td>
 </tr>
@@ -439,7 +441,7 @@ Generating a personal API Key:
 </tr>
 
 <tr>
-<td>registrationStatusÂ </td>
+<td>registrationStatus </td>
 <td>string</td>
 <td>Registration Status</td>
 </tr>
@@ -507,13 +509,13 @@ Generating a personal API Key:
 <tr>
 <td>entityDivisionName</td>
 <td>string</td>
-<td>Entity DivisionÂ Name</td>
+<td>Entity Division Name</td>
 </tr>
 
 <tr>
 <td>entityDivisionNumber</td>
 <td>string</td>
-<td>Entity DivisionÂ Number</td>
+<td>Entity Division Number</td>
 </tr>
 
 <tr>
@@ -550,7 +552,7 @@ Generating a personal API Key:
 </tr>
 
 <tr>
-<td>address1Â </td>
+<td>address1 </td>
 <td>string</td>
 <td>Physical Address 1 and Mailing Address 1</td>
 </tr>
@@ -562,7 +564,7 @@ Generating a personal API Key:
 </tr>
 
 <tr>
-<td>cityÂ </td>
+<td>city </td>
 <td>string</td>
 <td>Physical Address City and Mailing Address City</td>
 </tr>
@@ -774,7 +776,7 @@ Generating a personal API Key:
 <tr>
 <td>debtSubjectToOffset</td>
 <td>string</td>
-<td>Debt Subject to Offset Flag</td>
+<td>Delinquent Federal Debt Flag</td>
 </tr>
 </table>
 </details>
@@ -915,7 +917,7 @@ Generating a personal API Key:
 <tr>
 <td>geographicalAreaServedCountyCode</td>
 <td>string</td>
-<td>County code</td>
+<td>County name</td>
 </tr>
 
 <tr>
@@ -2230,7 +2232,9 @@ First Name</td>
 
 <tr>
 <td>ueiSAMMI</td>
-<td>TBD</td>
+<td>Unique Entity Identifier SAMMI -Allows 9 digit value, a maximum of up to 100 values can be sent.
+<br>Example: 'https://api.sam.gov/prod/entity-management/fouo?
+<br>api_key=< value >&ueiSAMMI=025114695</td>
 </tr>
 
 <tr>
@@ -2505,37 +2509,37 @@ First Name</td>
 </tr>
 
 <tr>
-<td>cageCodeÂ </td>
+<td>cageCode </td>
 <td>string</td>
 <td>CAGE Code</td>
 </tr>
 
 <tr>
-<td>nCageCodeÂ </td>
+<td>nCageCode </td>
 <td>string</td>
 <td>NCAGE Code</td>
 </tr>
 
 <tr>
-<td>dodaacÂ </td>
+<td>dodaac </td>
 <td>string</td>
 <td>DoDAAC</td>
 </tr>
 
 <tr>
-<td>legalBusinessNameÂ </td>
+<td>legalBusinessName </td>
 <td>string</td>
 <td>Legal Business Name</td>
 </tr>
 
 <tr>
-<td>dbaNameÂ </td>
+<td>dbaName </td>
 <td>string</td>
 <td>Doing Business As Name</td>
 </tr>
 
 <tr>
-<td>purposeOfRegistrationCodeÂ </td>
+<td>purposeOfRegistrationCode </td>
 <td>string</td>
 <td>Purpose of Registration Code</td>
 </tr>
@@ -2547,7 +2551,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>registrationStatusÂ </td>
+<td>registrationStatus </td>
 <td>string</td>
 <td>Registration Status</td>
 </tr>
@@ -2597,14 +2601,8 @@ First Name</td>
 </details>
 
 <details>
-<summary>parentEntity Section</summary><br>
-<summary>immediateParent Sub Section</summary>
-<summary>domesticParent Sub Section</summary>
-</details>
-
-<details>
 <summary>core Data Section</summary><br>
-<summary>Entity Hierarchy Information</summary>
+<summary>dunsInformation Sub Section</summary>
 <table>
 <tr>
 <th style="background-color: #f1f1f1;"><b>Field Name</b></th>
@@ -2731,7 +2729,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>ultimateParentEntity</td>
+<td>globalParentDUNS</td>
 <td>object</td>
 <td>
 <details>
@@ -2766,7 +2764,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>EVSMonitoring</td>
+<td>dnbMonitoring</td>
 <td>object</td>
 <td>
 <details>
@@ -2932,13 +2930,13 @@ First Name</td>
 <tr>
 <td>entityDivisionName</td>
 <td>string</td>
-<td>Entity DivisionÂ Name</td>
+<td>Entity Division Name</td>
 </tr>
 
 <tr>
 <td>entityDivisionNumber</td>
 <td>string</td>
-<td>Entity DivisionÂ Number</td>
+<td>Entity Division Number</td>
 </tr>
 
 <tr>
@@ -2975,7 +2973,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>address1Â </td>
+<td>address1 </td>
 <td>string</td>
 <td>Physical Address 1 and Mailing Address 1</td>
 </tr>
@@ -2987,7 +2985,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>cityÂ </td>
+<td>city </td>
 <td>string</td>
 <td>Physical Address City and Mailing Address City</td>
 </tr>
@@ -3196,7 +3194,7 @@ First Name</td>
 <tr>
 <td>debtSubjectToOffset</td>
 <td>string</td>
-<td>Debt Subject to Offset Flag</td>
+<td>Delinquent Federal Debt Flag</td>
 </tr>
 </table>
 </details>
@@ -5502,7 +5500,9 @@ First Name</td>
 
 <tr>
 <td>ueiSAMMI</td>
-<td>TBD</td>
+<td>Unique Entity Identifier SAMMI -Allows 9 digit value, a maximum of up to 100 values can be sent.
+<br>Example: 'https://api.sam.gov/prod/entity-management/sensitive?
+<br>api_key=< value >&ueiSAMMI=025114695</td>
 </tr>
 
 <tr>
@@ -5792,43 +5792,43 @@ First Name</td>
 </tr>
 
 <tr>
-<td>cageCodeÂ </td>
+<td>cageCode </td>
 <td>string</td>
 <td>CAGE Code</td>
 </tr>
 
 <tr>
-<td>nCageCodeÂ </td>
+<td>nCageCode </td>
 <td>string</td>
 <td>NCAGE Code</td>
 </tr>
 
 <tr>
-<td>dodaacÂ </td>
+<td>dodaac </td>
 <td>string</td>
 <td>DoDAAC</td>
 </tr>
 
 <tr>
-<td>legalBusinessNameÂ </td>
+<td>legalBusinessName </td>
 <td>string</td>
 <td>Legal Business Name</td>
 </tr>
 
 <tr>
-<td>dbaNameÂ </td>
+<td>dbaName </td>
 <td>string</td>
 <td>Doing Business As Name</td>
 </tr>
 
 <tr>
-<td>purposeOfRegistrationÂ </td>
+<td>purposeOfRegistration </td>
 <td>string</td>
 <td>Purpose of Registration</td>
 </tr>
 
 <tr>
-<td>registrationStatusÂ </td>
+<td>registrationStatus </td>
 <td>string</td>
 <td>Registration Status</td>
 </tr>
@@ -5879,7 +5879,7 @@ First Name</td>
 
 <details>
 <summary>core Data Section</summary><br>
-<summary>Entity Hierarchy Information</summary>
+<summary>dunsInformation Sub Section</summary>
 <table>
 <tr>
 <th style="background-color: #f1f1f1;"><b>Field Name</b></th>
@@ -5994,7 +5994,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>ultimateParentEntity</td>
+<td>globalParentDUNS</td>
 <td>object</td>
 <td>
 <details>
@@ -6029,7 +6029,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>EVSMonitoring</td>
+<td>dnbMonitoring</td>
 <td>object</td>
 <td>
 <details>
@@ -6201,13 +6201,13 @@ First Name</td>
 <tr>
 <td>entityDivisionName</td>
 <td>string</td>
-<td>Entity DivisionÂ Name</td>
+<td>Entity Division Name</td>
 </tr>
 
 <tr>
 <td>entityDivisionNumber</td>
 <td>string</td>
-<td>Entity DivisionÂ Number</td>
+<td>Entity Division Number</td>
 </tr>
 
 <tr>
@@ -6244,7 +6244,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>address1Â </td>
+<td>address1 </td>
 <td>string</td>
 <td>Physical Address 1 and Mailing Address 1</td>
 </tr>
@@ -6256,7 +6256,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>cityÂ </td>
+<td>city </td>
 <td>string</td>
 <td>Physical Address City and Mailing Address City</td>
 </tr>
@@ -6465,7 +6465,7 @@ First Name</td>
 <tr>
 <td>debtSubjectToOffset</td>
 <td>string</td>
-<td>Debt Subject to Offset Flag</td>
+<td>Delinquent Federal Debt Flag</td>
 </tr>
 
 <tr>
@@ -8931,6 +8931,3 @@ The API will return one of the following responses:
 ## Contact Us
 
 <p><small><a href="#">Back to top</a></small></p>
-
-
-
