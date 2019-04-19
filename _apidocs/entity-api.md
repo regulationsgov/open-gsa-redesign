@@ -138,8 +138,8 @@ If you are using Chrome, subsections that can be expanded are denoted with an ar
 
 <tr>
 <td>entityStructureDesc</td>
-<td>Allows a text.
-<br>entityStructureDesc=Partnership or Limited Liability Partnership</td>
+<td>Allows Description or null.
+<br>entityStructureDesc=Partnership or Limited Liability Partnership
 <br>Example: entityStructureDesc=Sole Proprietorship</td>
 </tr>
 
@@ -352,6 +352,9 @@ If you are using Chrome, subsections that can be expanded are denoted with an ar
 
 <tr>
 <td><b> Expected Result:</b></td>
+</tr>
+<tr>
+<td>There are a few placeholder elements that return ‘Currently Not Available’ until they are made available in the database.</td>
 </tr>
 <details>
 <summary>entityRegistration Section</summary>
@@ -1644,6 +1647,20 @@ First Name</td>
 </tr>
 </table>
 
+<summary>financialAssistanceCertifications Sub Section</summary>
+<table>
+<tr>
+<th style="background-color: #f1f1f1;"><b>Field Name</b></th>
+<th style="background-color: #f1f1f1;"><b>Type</b></th>
+<th style="background-color: #f1f1f1;"><b>Description</b></th>
+</tr>
+<tr>
+<td>financialAssistanceResponse</td>
+<td>string</td>
+<td>Financial Assistance Response</td>
+</tr>
+</table>
+
 </details>
 
 <details>
@@ -2351,7 +2368,7 @@ First Name</td>
 
 <tr>
 <td>entityStructureDesc</td>
-<td>Allows a text.
+<td>Allows Description or null.
 <br>Example: entityStructureDesc=Partnership or Limited Liability Partnership</td>
 </tr>
 
@@ -2557,6 +2574,9 @@ First Name</td>
 
 <tr>
 <td><b> Expected Result:</b></td>
+</tr>
+<tr>
+<td>There are a few placeholder elements that return ‘Currently Not Available’ until they are made available in the database.</td>
 </tr>
 <details>
 <summary>entityRegistration Section</summary>
@@ -4526,6 +4546,41 @@ First Name</td>
 <td>Company Is Reference</td>
 </tr>
 <tr>
+<td>firmNumOfEmployees</td>
+<td>string</td>
+<td>Number of Employees in the Firm</td>
+</tr>
+<tr>
+<td>branchNumOfEmployees</td>
+<td>string</td>
+<td>Number of Employees in the Branch</td>
+</tr>
+<tr>
+<td>experienceCode</td>
+<td>string</td>
+<td>Experience Code</td>
+</tr>
+<tr>
+<td>annualAvgRevenueCode	</td>
+<td>string</td>
+<td>Annual Average Revenue Code</td>
+</tr>
+<tr>
+<td>federalRevenueCode</td>
+<td>string</td>	
+<td>Federal Revenue Code</td>
+</tr>
+<tr>
+<td>nonFedRevenueCode</td>	
+<td>string</td>	
+<td>Non-Federal Revenue Code</td>
+</tr>
+<tr>
+<td>totalRevenueCode	</td>
+<td>string</td>
+<td>Total Revenue Code</td>
+</tr>
+<tr>
 <td>qualificationURLPDF</td>
 <td>string</td>
 <td>Qualification URL PDF</td>
@@ -4542,6 +4597,20 @@ First Name</td>
 </table>
 </details>
 </td>
+</tr>
+</table>
+
+<summary>financialAssistanceCertifications Sub Section</summary>
+<table>
+<tr>
+<th style="background-color: #f1f1f1;"><b>Field Name</b></th>
+<th style="background-color: #f1f1f1;"><b>Type</b></th>
+<th style="background-color: #f1f1f1;"><b>Description</b></th>
+</tr>
+<tr>
+<td>financialAssistanceResponse</td>
+<td>string</td>
+<td>Financial Assistance Response</td>
 </tr>
 </table>
 
@@ -5989,7 +6058,7 @@ First Name</td>
 
 <tr>
 <td>entityStructureDesc</td>
-<td>Allows Description or null
+<td>Allows Description or null.
 <br>Example: entityStructureDesc=Partnership or Limited Liability Partnership</td>
 </tr>
 
@@ -6208,6 +6277,9 @@ First Name</td>
 
 <tr>
 <td><b> Expected Result:</b></td>
+</tr>
+<tr>
+<td>There are a few placeholder elements that return ‘Currently Not Available’ until they are made available in the database.</td>
 </tr>
 <details>
 <summary>entityRegistration Section</summary>
@@ -8379,6 +8451,41 @@ First Name</td>
 <td>Company Is Reference</td>
 </tr>
 <tr>
+<td>firmNumOfEmployees</td>
+<td>string</td>
+<td>Number of Employees in the Firm</td>
+</tr>
+<tr>
+<td>branchNumOfEmployees</td>
+<td>string</td>
+<td>Number of Employees in the Branch</td>
+</tr>
+<tr>
+<td>experienceCode</td>
+<td>string</td>
+<td>Experience Code</td>
+</tr>
+<tr>
+<td>annualAvgRevenueCode	</td>
+<td>string</td>
+<td>Annual Average Revenue Code</td>
+</tr>
+<tr>
+<td>federalRevenueCode</td>
+<td>string</td>	
+<td>Federal Revenue Code</td>
+</tr>
+<tr>
+<td>nonFedRevenueCode</td>	
+<td>string</td>	
+<td>Non-Federal Revenue Code</td>
+</tr>
+<tr>
+<td>totalRevenueCode	</td>
+<td>string</td>
+<td>Total Revenue Code</td>
+</tr>
+<tr>
 <td>qualificationURLPDF</td>
 <td>string</td>
 <td>Qualification URL PDF</td>
@@ -8395,6 +8502,20 @@ First Name</td>
 </table>
 </details>
 </td>
+</tr>
+</table>
+
+<summary>financialAssistanceCertifications Sub Section</summary>
+<table>
+<tr>
+<th style="background-color: #f1f1f1;"><b>Field Name</b></th>
+<th style="background-color: #f1f1f1;"><b>Type</b></th>
+<th style="background-color: #f1f1f1;"><b>Description</b></th>
+</tr>
+<tr>
+<td>financialAssistanceResponse</td>
+<td>string</td>
+<td>Financial Assistance Response</td>
 </tr>
 </table>
 
