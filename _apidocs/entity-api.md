@@ -139,8 +139,7 @@ If you are using Chrome, subsections that can be expanded are denoted with an ar
 <tr>
 <td>entityStructureDesc</td>
 <td>Allows Description or null.
-<br>entityStructureDesc=Partnership or Limited Liability Partnership
-<br>Example: entityStructureDesc=Sole Proprietorship</td>
+<br>Example: entityStructureDesc=Partnership or Limited Liability Partnership</td>
 </tr>
 
 <tr>
