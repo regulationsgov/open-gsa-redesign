@@ -93,7 +93,7 @@ Utilizing the Exclusion API as an extract:
 
 **Expected Result**
 
-API response consists of Sections, Sub-sections and Tags underneath each of the Sections or Sub-sections
+API response consists of Sections, Sub-sections and Tags underneath each of the Sections or Sub-sections. There are a few placeholder elements that return ‘Currently Not Available’ until they are made available in the database.
 
 | Section/Sub-section/Tag | Type | Description |
 | ---- | ---- | ----------- |
