@@ -26,8 +26,8 @@ The response will be provided in the JSON format in a paginated manner.
 ## Getting Started
 
 Exclusions API can be accessed from Beta or Alpha via the following end points:
-* Beta: Coming soon
-* Alpha: Coming soon
+* Beta: https://api.sam.gov/prod/entity-information/v1/api/exclusions?api_key= < value >
+* Alpha: https://api-alpha.sam.gov/prodlike/entity-information/v1/api/exclusions?api_key= < value >
 
 Generating a personal API Key:
 * Registered users can request for a public API on 'Account Details' page. This page can be accessed here: <a href="https://beta.sam.gov/profile/details" target="_blank">Account Details page on beta.sam.gov</a>
@@ -57,7 +57,7 @@ Utilizing the Exclusion API as an extract:
 
 ## API Description
 
-**Endpoint:** Coming soon
+**Endpoint:** https://api.sam.gov/prod/entity-information/v1/api/exclusions?api_key= < value >
 
 **Description** Restful endpoint to retrieve Exclusion detail information
 
