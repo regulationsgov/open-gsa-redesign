@@ -1,340 +1,599 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
+  title: Entity Management Rest API
   description: Entity Management API to retrieve entity information via Request parameters
     in the paginated manner
-  version: "1.0"
-  title: Entity Management Rest API
   termsOfService: Terms of service
   contact:
     name: GSA
-    url: www.beta.sam.gov
-    email: newsamtesting@gsa.gov
+    url: https://www.beta.sam.gov
+    email: reply@gsa.gov
   license:
     name: GSA
+  version: "1.0"
+servers:
+- url: //api-nonprod.prod-iae.bsp.gsa.gov/prodlike
 tags:
-  - name: entity-management-controller
-    description: Operations pertaining to Entity Management Data
+- name: entity-management-controller
+  description: Operations pertaining to Entity Management Data
+- name: entity-management-extract-controller
+  description: Operations pertaining to Entity Management Extract Data
 paths:
-  Coming soon:
+  /entity-information/v1/api/entities:
     get:
       tags:
-        - entity-management-controller
-      summary: " get Entity Management Details"
+      - entity-management-controller
+      summary: ' get Entity Management Details'
       operationId: getEntityManagementDataUsingGET
       parameters:
-        - name: api_key
-          in: query
-          description: API KEY
-          required: true
-          schema:
-            type: string
-        - name: activationDate
-          in: query
-          description: A single Date or Date range in the format MM/DD/YYYY
-          required: false
-          schema:
-            type: string
-        - name: cageCode
-          in: query
-          description: The exact 5 character value; a maximum of up to 100 values can be
-            sent
-          required: false
-          schema:
-            type: string
-        - name: dbaName
-          in: query
-          description: Partial or Complete value
-          required: false
-          schema:
-            type: string
-        - name: debtSubjectToOffset
-          in: query
-          description: Y or N or null
-          required: false
-          schema:
-            type: string
-        - name: dodaac
-          in: query
-          description: 9 character value
-          required: false
-          schema:
-            type: string
-        - name: ueiDUNS
-          in: query
-          description: Unique Entity Identifier DUNS- 9 digit value; a maximum of up to 100
-            values can be sent
-          required: false
-          schema:
-            type: string
-        - name: ueiSAM
-          in: query
-          description: Unique Entity Identifier SAM- 9 digit value; a maximum of up to
-            100 values can be sent
-          required: false
-          schema:
-            type: string
-        - name: entityStructureCode
-          in: query
-          description: 2 character code or null
-          required: false
-          schema:
-            type: string
-        - name: entityStructureDesc
-          in: query
-          description: Description or null
-          required: false
-          schema:
-            type: string
-        - name: exclusionStatusFlag
-          in: query
-          description: D or null
-          required: false
-          schema:
-            type: string
-        - name: expirationDate
-          in: query
-          description: A single Date or Date range in the format MM/DD/YYYY
-          required: false
-          schema:
-            type: string
-        - name: legalBusinessName
-          in: query
-          description: Partial or Complete value
-          required: false
-          schema:
-            type: string
-        - name: primaryNaics
-          in: query
-          description: 6 digit NAICS; accepts multiple NAICS
-          required: false
-          schema:
-            type: string
-        - name: purposeOfRegistrationCode
-          in: query
-          description: 2 character code
-          required: false
-          schema:
-            type: string
-        - name: purposeOfRegistrationDesc
-          in: query
-          description: Description or Null
-          required: false
-          schema:
-            type: string
-        - name: registrationDate
-          in: query
-          description: A single Date or Date range in the format MM/DD/YYYY
-          required: false
-          schema:
-            type: string
-        - name: physicalAddressCity
-          in: query
-          description: City name
-          required: false
-          schema:
-            type: string
-        - name: physicalAddressCongressionalDistrict
-          in: query
-          description: 2 characters
-          required: false
-          schema:
-            type: string
-        - name: physicalAddressCountryCode
-          in: query
-          description: 3 character code
-          required: false
-          schema:
-            type: string
-        - name: samExtractCode
-          in: query
-          description: 1 character code (A or E)
-          required: false
-          schema:
-            type: string
-        - name: physicalAddressProvinceOrState
-          in: query
-          description: 2 character code
-          required: false
-          schema:
-            type: string
-        - name: physicalAddressZipPostalCode
-          in: query
-          description: 5 digit zip code
-          required: false
-          schema:
-            type: string
-        - name: businessTypeCode
-          in: query
-          description: 2 Character business typecodes
-          required: false
-          schema:
-            type: string
-        - name: businessTypeDesc
-          in: query
-          description: Description or null
-          required: false
-          schema:
-            type: string
-        - name: sbaBusinessTypeCode
-          in: query
-          description: 2 Character business typecodes
-          required: false
-          schema:
-            type: string
-        - name: sbaBusinessTypeDesc
-          in: query
-          description: Description or null
-          required: false
-          schema:
-            type: string
-        - name: entityType
-          in: query
-          description: 2 Character entity typ codes
-          required: false
-          schema:
-            type: string
-        - name: organizationStructure
-          in: query
-          description: 2 Character entity structure codes
-          required: false
-          schema:
-            type: string
-        - name: stateOfIncorporationCode
-          in: query
-          description: 2 Character state code
-          required: false
-          schema:
-            type: string
-        - name: stateOfIncorporationDesc
-          in: query
-          description: Description or null
-          required: false
-          schema:
-            type: string
-        - name: countryOfIncorporationCode
-          in: query
-          description: 3 Character country code
-          required: false
-          schema:
-            type: string
-        - name: countryOfIncorporationDesc
-          in: query
-          description: Description or null
-          required: false
-          schema:
-            type: string
-        - name: naicsCode
-          in: query
-          description: 6 Characters NAICS code
-          required: false
-          schema:
-            type: string
-        - name: naicsDesc
-          in: query
-          description: Description or null
-          required: false
-          schema:
-            type: string
-        - name: naicsLimitedSB
-          in: query
-          description: 6 Characters NAICS code(with small business - Y)
-          required: false
-          schema:
-            type: string
-        - name: pscCode
-          in: query
-          description: 4 Characters PSC code
-          required: false
-          schema:
-            type: string
-        - name: pscDescription
-          in: query
-          description: Description or null
-          required: false
-          schema:
-            type: string
-        - name: servedDisasterStateCode
-          in: query
-          description: Disaster relief served state, 2 character code
-          required: false
-          schema:
-            type: string
-        - name: servedDisasterStateName
-          in: query
-          description: Name or null
-          required: false
-          schema:
-            type: string
-        - name: servedDisasterCountyCode
-          in: query
-          description: Disaster relief served county
-          required: false
-          schema:
-            type: string
-        - name: servedDisasterCountyName
-          in: query
-          description: Name or null
-          required: false
-          schema:
-            type: string
-        - name: servedDisasterMSA
-          in: query
-          description: Disaster relief served MSA
-          required: false
-          schema:
-            type: string
-        - name: includeSections
-          in: query
-          description: Schema filtering param to filter sections, eg:entityRegistration,
-            coreData, assertions, repsAndCerts, mandatoryPOCs, optionalPOCs
-          required: false
-          schema:
-            type: string
-        - name: q
-          in: query
-          description: Q paramter for Search Operations
-          required: false
-          schema:
-            type: string
-        - name: page
-          in: query
-          description: page
-          required: false
-          schema:
-            type: string
-        - name: size
-          in: query
-          description: record limit per page
-          required: false
-          schema:
-            type: string
-        - name: format
-          in: query
-          description: Format paramter to get data as an extract file (Allowable values JSON and CSV)
-          required: false
-          schema:
-            type: string
-        - name: emailId
-          in: query
-          description: Email Id paramter to get file download link to user provided email address. Email Id parameter should go in conjunction with format
-          required: false
-          schema:
-            type: string
+      - name: api_key
+        in: query
+        description: API KEY
+        required: true
+        schema:
+          type: string
+      - name: activationDate
+        in: query
+        description: A single Date or Date range in the format MM/DD/YYYY
+        schema:
+          type: string
+      - name: cageCode
+        in: query
+        description: The exact 5 character value; a maximum of up to 100 values can
+          be sent
+        schema:
+          type: string
+      - name: dbaName
+        in: query
+        description: Partial or Complete value
+        schema:
+          type: string
+      - name: debtSubjectToOffset
+        in: query
+        description: Y or N or null
+        schema:
+          type: string
+      - name: dodaac
+        in: query
+        description: 9 character value
+        schema:
+          type: string
+      - name: ueiDUNS
+        in: query
+        description: Unique Entity Identifier DUNS- 9 digit value; a maximum of up
+          to 100 values can be sent
+        schema:
+          type: string
+      - name: ueiSAM
+        in: query
+        description: Unique Entity Identifier SAM- 9 digit value; a maximum of up
+          to 100 values can be sent (This will replace ueiDUNS)
+        schema:
+          type: string
+      - name: entityStructureCode
+        in: query
+        description: 2 character code or null
+        schema:
+          type: string
+      - name: entityStructureDesc
+        in: query
+        description: Description or null
+        schema:
+          type: string
+      - name: exclusionStatusFlag
+        in: query
+        description: D or null
+        schema:
+          type: string
+      - name: expirationDate
+        in: query
+        description: A single Date or Date range in the format MM/DD/YYYY
+        schema:
+          type: string
+      - name: legalBusinessName
+        in: query
+        description: Partial or Complete value
+        schema:
+          type: string
+      - name: primaryNaics
+        in: query
+        description: 6 digit NAICS; accepts multiple NAICS
+        schema:
+          type: string
+      - name: purposeOfRegistrationCode
+        in: query
+        description: 2 character code
+        schema:
+          type: string
+      - name: purposeOfRegistrationDesc
+        in: query
+        description: Description or Null
+        schema:
+          type: string
+      - name: registrationDate
+        in: query
+        description: A single Date or Date range in the format MM/DD/YYYY
+        schema:
+          type: string
+      - name: physicalAddressCity
+        in: query
+        description: City name
+        schema:
+          type: string
+      - name: physicalAddressCongressionalDistrict
+        in: query
+        description: 2 characters
+        schema:
+          type: string
+      - name: physicalAddressCountryCode
+        in: query
+        description: 3 character code
+        schema:
+          type: string
+      - name: samExtractCode
+        in: query
+        description: 1 character code (A or E)
+        schema:
+          type: string
+      - name: physicalAddressProvinceOrState
+        in: query
+        description: 2 character code
+        schema:
+          type: string
+      - name: physicalAddressZipPostalCode
+        in: query
+        description: 5 digit zip code
+        schema:
+          type: string
+      - name: businessTypeCode
+        in: query
+        description: 2 Character business typecodes
+        schema:
+          type: string
+      - name: businessTypeDesc
+        in: query
+        description: Description or null
+        schema:
+          type: string
+      - name: sbaBusinessTypeCode
+        in: query
+        description: 2 Character business typecodes
+        schema:
+          type: string
+      - name: sbaBusinessTypeDesc
+        in: query
+        description: Description or null
+        schema:
+          type: string
+      - name: entityType
+        in: query
+        description: 2 Character entity typ codes
+        schema:
+          type: string
+      - name: organizationStructureCode
+        in: query
+        description: 2 Character entity structure codes
+        schema:
+          type: string
+      - name: organizationStructureDesc
+        in: query
+        description: Entity structure Descriptions
+        schema:
+          type: string
+      - name: stateOfIncorporationCode
+        in: query
+        description: 2 Character state code
+        schema:
+          type: string
+      - name: stateOfIncorporationDesc
+        in: query
+        description: Description or null
+        schema:
+          type: string
+      - name: countryOfIncorporationCode
+        in: query
+        description: 3 Character country code
+        schema:
+          type: string
+      - name: countryOfIncorporationDesc
+        in: query
+        description: Description or null
+        schema:
+          type: string
+      - name: naicsCode
+        in: query
+        description: 6 Characters NAICS code
+        schema:
+          type: string
+      - name: naicsDesc
+        in: query
+        description: Description or null
+        schema:
+          type: string
+      - name: naicsLimitedSB
+        in: query
+        description: 6 Characters NAICS code(with small business - Y)
+        schema:
+          type: string
+      - name: pscCode
+        in: query
+        description: 4 Characters PSC code
+        schema:
+          type: string
+      - name: pscDescription
+        in: query
+        description: Description or null
+        schema:
+          type: string
+      - name: servedDisasterStateCode
+        in: query
+        description: Disaster relief served state, 2 character code
+        schema:
+          type: string
+      - name: servedDisasterStateName
+        in: query
+        description: Name or null
+        schema:
+          type: string
+      - name: servedDisasterCountyCode
+        in: query
+        description: Disaster relief served county
+        schema:
+          type: string
+      - name: servedDisasterCountyName
+        in: query
+        description: Name or null
+        schema:
+          type: string
+      - name: servedDisasterMSA
+        in: query
+        description: Disaster relief served MSA
+        schema:
+          type: string
+      - name: includeSections
+        in: query
+        description: Schema filtering param to filter sections, eg:entityRegistration,
+          coreData, assertions, repsAndCerts, mandatoryPOCs, optionalPOCs
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Q paramter for Search Operations
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: page
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: record limit per page
+        schema:
+          type: string
       responses:
-        "200":
+        200:
           description: Successfully retrieved list
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/EMResponse"
-        "401":
+                $ref: '#/components/schemas/EMResponse'
+        401:
           description: You are not authorized to view the resource
-        "403":
+          content: {}
+        403:
           description: Accessing the resource you were trying to reach is forbidden
-        "404":
+          content: {}
+        404:
           description: The resource you were trying to reach is not found
-servers:
-  - url: Coming soon
+          content: {}
+  /entity-information/v1/api/entities/:
+    get:
+      tags:
+      - entity-management-extract-controller
+      summary: ' get Entity Extract Management Details'
+      operationId: getEntityManagementDataUsingGET_1
+      parameters:
+      - name: api_key
+        in: query
+        description: API KEY
+        required: true
+        schema:
+          type: string
+      - name: activationDate
+        in: query
+        description: A single Date or Date range in the format MM/DD/YYYY
+        schema:
+          type: string
+      - name: cageCode
+        in: query
+        description: The exact 5 character value; a maximum of up to 100 values can
+          be sent
+        schema:
+          type: string
+      - name: dbaName
+        in: query
+        description: Partial or Complete value
+        schema:
+          type: string
+      - name: debtSubjectToOffset
+        in: query
+        description: Y or N or null
+        schema:
+          type: string
+      - name: dodaac
+        in: query
+        description: 9 character value
+        schema:
+          type: string
+      - name: ueiDUNS
+        in: query
+        description: Unique Entity Identifier DUNS- 9 digit value; a maximum of up
+          to 100 values can be sent
+        schema:
+          type: string
+      - name: ueiSAM
+        in: query
+        description: Unique Entity Identifier SAM- 9 digit value; a maximum of up
+          to 100 values can be sent (This will replace ueiDUNS)
+        schema:
+          type: string
+      - name: entityStructureCode
+        in: query
+        description: 2 character code or null
+        schema:
+          type: string
+      - name: entityStructureDesc
+        in: query
+        description: Description of Entity Structure
+        schema:
+          type: string
+      - name: exclusionStatusFlag
+        in: query
+        description: D or null
+        schema:
+          type: string
+      - name: expirationDate
+        in: query
+        description: A single Date or Date range in the format MM/DD/YYYY
+        schema:
+          type: string
+      - name: legalBusinessName
+        in: query
+        description: Partial or Complete value
+        schema:
+          type: string
+      - name: primaryNaics
+        in: query
+        description: 6 digit NAICS; accepts multiple NAICS
+        schema:
+          type: string
+      - name: purposeOfRegistrationCode
+        in: query
+        description: 2 character code
+        schema:
+          type: string
+      - name: purposeOfRegistrationDesc
+        in: query
+        description: Description of Purpose Of Registration
+        schema:
+          type: string
+      - name: registrationDate
+        in: query
+        description: A single Date or Date range in the format MM/DD/YYYY
+        schema:
+          type: string
+      - name: physicalAddressCity
+        in: query
+        description: City name
+        schema:
+          type: string
+      - name: physicalAddressCongressionalDistrict
+        in: query
+        description: 2 characters
+        schema:
+          type: string
+      - name: physicalAddressCountryCode
+        in: query
+        description: 3 character code
+        schema:
+          type: string
+      - name: samExtractCode
+        in: query
+        description: 1 character code (A or E)
+        schema:
+          type: string
+      - name: physicalAddressProvinceOrState
+        in: query
+        description: 2 character code
+        schema:
+          type: string
+      - name: physicalAddressZipPostalCode
+        in: query
+        description: 5 digit zip code
+        schema:
+          type: string
+      - name: businessTypeCode
+        in: query
+        description: 2 Character business type codes
+        schema:
+          type: string
+      - name: businessTypeDesc
+        in: query
+        description: Description of business type code
+        schema:
+          type: string
+      - name: entityType
+        in: query
+        description: 2 Character entity type codes
+        schema:
+          type: string
+      - name: organizationStructure
+        in: query
+        description: 2 Character entity structure codes
+        schema:
+          type: string
+      - name: stateOfIncorporationCode
+        in: query
+        description: 2 Character state code
+        schema:
+          type: string
+      - name: stateOfIncorporationDesc
+        in: query
+        description: Descriptionof state
+        schema:
+          type: string
+      - name: countryOfIncorporationCode
+        in: query
+        description: 3 Character country code
+        schema:
+          type: string
+      - name: countryOfIncorporationDesc
+        in: query
+        description: Description of country
+        schema:
+          type: string
+      - name: naicsCode
+        in: query
+        description: 6 Characters NAICS code
+        schema:
+          type: string
+      - name: naicsDesc
+        in: query
+        description: Description of Naics code
+        schema:
+          type: string
+      - name: naicsLimitedSB
+        in: query
+        description: 6 Characters NAICS code(with small business - Y)
+        schema:
+          type: string
+      - name: pscCode
+        in: query
+        description: 4 Characters PSC code
+        schema:
+          type: string
+      - name: pscDesc
+        in: query
+        description: Description of PSC code
+        schema:
+          type: string
+      - name: servedDisasterStateCode
+        in: query
+        description: Disaster relief served state, 2 character code
+        schema:
+          type: string
+      - name: servedDisasterStateName
+        in: query
+        description: Description of Disaster relief served state
+        schema:
+          type: string
+      - name: servedDisasterCountyCode
+        in: query
+        description: Disaster relief served county code
+        schema:
+          type: string
+      - name: servedDisasterCountyName
+        in: query
+        description: Description of Disaster relief served county
+        schema:
+          type: string
+      - name: servedDisasterMSA
+        in: query
+        description: Disaster relief served MSA
+        schema:
+          type: string
+      - name: sbaBusinessTypeCode
+        in: query
+        description: 'A two character code or null '
+        schema:
+          type: string
+      - name: sbaBusinessTypeDesc
+        in: query
+        description: Description of SBa Business Type code
+        schema:
+          type: string
+      - name: includeSections
+        in: query
+        description: entityInformation, coreData, assertions, repsAndCerts, mandatoryPOCs,
+          optionalPOCs
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Q paramter for Search Operations
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: page
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: record limit per page
+        schema:
+          type: string
+      - name: emailId
+        in: query
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: Acceptable values JSON and CSV
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successfully retrieved list
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EMResponse'
+        401:
+          description: You are not authorized to view the resource
+          content: {}
+        403:
+          description: Accessing the resource you were trying to reach is forbidden
+          content: {}
+        404:
+          description: The resource you were trying to reach is not found
+          content: {}
+  /entity-information/v1/download/entities:
+    get:
+      tags:
+      - entity-management-extract-controller
+      summary: getFileFromS3
+      operationId: getFileFromS3UsingGET
+      parameters:
+      - name: api_key
+        in: query
+        description: API KEY
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: query
+        description: token
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
 components:
   schemas:
     BusinessInformation:
@@ -374,11 +633,11 @@ components:
         fARResponses:
           type: array
           items:
-            $ref: "#/components/schemas/FARResponses"
+            $ref: '#/components/schemas/FARResponses'
         dFARResponses:
           type: array
           items:
-            $ref: "#/components/schemas/DFARResponses"
+            $ref: '#/components/schemas/DFARResponses'
     FinancialInformation:
       type: object
       properties:
@@ -393,17 +652,106 @@ components:
           type: string
         businessTypeDesc:
           type: string
+    ModelAndView:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        model:
+          type: object
+          properties: {}
+        modelMap:
+          type: object
+          additionalProperties:
+            type: object
+            properties: {}
+        reference:
+          type: boolean
+        status:
+          type: string
+          enum:
+          - 100 CONTINUE
+          - 101 SWITCHING_PROTOCOLS
+          - 102 PROCESSING
+          - 103 CHECKPOINT
+          - 200 OK
+          - 201 CREATED
+          - 202 ACCEPTED
+          - 203 NON_AUTHORITATIVE_INFORMATION
+          - 204 NO_CONTENT
+          - 205 RESET_CONTENT
+          - 206 PARTIAL_CONTENT
+          - 207 MULTI_STATUS
+          - 208 ALREADY_REPORTED
+          - 226 IM_USED
+          - 300 MULTIPLE_CHOICES
+          - 301 MOVED_PERMANENTLY
+          - 302 FOUND
+          - 302 MOVED_TEMPORARILY
+          - 303 SEE_OTHER
+          - 304 NOT_MODIFIED
+          - 305 USE_PROXY
+          - 307 TEMPORARY_REDIRECT
+          - 308 PERMANENT_REDIRECT
+          - 400 BAD_REQUEST
+          - 401 UNAUTHORIZED
+          - 402 PAYMENT_REQUIRED
+          - 403 FORBIDDEN
+          - 404 NOT_FOUND
+          - 405 METHOD_NOT_ALLOWED
+          - 406 NOT_ACCEPTABLE
+          - 407 PROXY_AUTHENTICATION_REQUIRED
+          - 408 REQUEST_TIMEOUT
+          - 409 CONFLICT
+          - 410 GONE
+          - 411 LENGTH_REQUIRED
+          - 412 PRECONDITION_FAILED
+          - 413 PAYLOAD_TOO_LARGE
+          - 413 REQUEST_ENTITY_TOO_LARGE
+          - 414 URI_TOO_LONG
+          - 414 REQUEST_URI_TOO_LONG
+          - 415 UNSUPPORTED_MEDIA_TYPE
+          - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+          - 417 EXPECTATION_FAILED
+          - 418 I_AM_A_TEAPOT
+          - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+          - 420 METHOD_FAILURE
+          - 421 DESTINATION_LOCKED
+          - 422 UNPROCESSABLE_ENTITY
+          - 423 LOCKED
+          - 424 FAILED_DEPENDENCY
+          - 426 UPGRADE_REQUIRED
+          - 428 PRECONDITION_REQUIRED
+          - 429 TOO_MANY_REQUESTS
+          - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+          - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+          - 500 INTERNAL_SERVER_ERROR
+          - 501 NOT_IMPLEMENTED
+          - 502 BAD_GATEWAY
+          - 503 SERVICE_UNAVAILABLE
+          - 504 GATEWAY_TIMEOUT
+          - 505 HTTP_VERSION_NOT_SUPPORTED
+          - 506 VARIANT_ALSO_NEGOTIATES
+          - 507 INSUFFICIENT_STORAGE
+          - 508 LOOP_DETECTED
+          - 509 BANDWIDTH_LIMIT_EXCEEDED
+          - 510 NOT_EXTENDED
+          - 511 NETWORK_AUTHENTICATION_REQUIRED
+        view:
+          $ref: '#/components/schemas/View'
+        viewName:
+          type: string
     DFARResponses:
       type: object
       properties:
         listOfProvisions:
           type: array
           items:
-            $ref: "#/components/schemas/Provisions"
+            $ref: '#/components/schemas/Provisions'
         listOfAnswers:
           type: array
           items:
-            $ref: "#/components/schemas/AnswersForDFAR"
+            $ref: '#/components/schemas/AnswersForDFAR'
     ElectronicBusinessPOC:
       type: object
       properties:
@@ -456,11 +804,11 @@ components:
         listOfProvisions:
           type: array
           items:
-            $ref: "#/components/schemas/Provisions"
+            $ref: '#/components/schemas/Provisions'
         listOfAnswers:
           type: array
           items:
-            $ref: "#/components/schemas/Answers"
+            $ref: '#/components/schemas/Answers'
     GoodsAndServices:
       type: object
       properties:
@@ -469,11 +817,11 @@ components:
         naicsList:
           type: array
           items:
-            $ref: "#/components/schemas/NAICS"
+            $ref: '#/components/schemas/NAICS'
         pscList:
           type: array
           items:
-            $ref: "#/components/schemas/PSC"
+            $ref: '#/components/schemas/PSC'
         ediInformationFlag:
           type: string
     GeneralInformation:
@@ -509,48 +857,11 @@ components:
         listOfProvisions:
           type: array
           items:
-            $ref: "#/components/schemas/Provisions"
+            $ref: '#/components/schemas/Provisions'
         listOfAnswers:
           type: array
           items:
-            $ref: "#/components/schemas/AnswersForArch"
-    EntityRegistration:
-      type: object
-      properties:
-        ueiSAM:
-          type: string
-        ueiDUNS:
-          type: string
-        entityEFTIndicator:
-          type: string
-        cageCode:
-          type: string
-        nCageCode:
-          type: string
-        dodaac:
-          type: string
-        legalBusinessName:
-          type: string
-        dbaName:
-          type: string
-        purposeOfRegistration:
-          type: string
-        registrationStatus:
-          type: string
-        registrationDate:
-          type: string
-        lastUpdateDate:
-          type: string
-        expirationDate:
-          type: string
-        activationDate:
-          type: string
-        noPublicDisplayFlag:
-          type: string
-        exclusionStatusFlag:
-          type: string
-        exclusionURL:
-          type: string
+            $ref: '#/components/schemas/AnswersForArch'
     PSC:
       type: object
       properties:
@@ -767,24 +1078,29 @@ components:
           type: string
         congressionalDistrict:
           type: string
+    View:
+      type: object
+      properties:
+        contentType:
+          type: string
     Assertions:
       type: object
       properties:
         goodsAndServices:
-          $ref: "#/components/schemas/GoodsAndServices"
+          $ref: '#/components/schemas/GoodsAndServices'
         disasterReliefData:
-          $ref: "#/components/schemas/DisasterReliefData"
+          $ref: '#/components/schemas/DisasterReliefData'
     BusinessTypes:
       type: object
       properties:
         businessTypeList:
           type: array
           items:
-            $ref: "#/components/schemas/BusinessType"
+            $ref: '#/components/schemas/BusinessType'
         sbaBusinessTypeList:
           type: array
           items:
-            $ref: "#/components/schemas/SBABusinessType"
+            $ref: '#/components/schemas/SBABusinessType'
     GovernmentBusinessAlternatePOC:
       type: object
       properties:
@@ -859,11 +1175,11 @@ components:
       type: object
       properties:
         certifications:
-          $ref: "#/components/schemas/Certifications"
+          $ref: '#/components/schemas/Certifications'
         qualifications:
-          $ref: "#/components/schemas/Qualifications"
+          $ref: '#/components/schemas/Qualifications'
         financialAssistanceCertifications:
-          $ref: "#/components/schemas/FinancialAssistanceCertifications"
+          $ref: '#/components/schemas/FinancialAssistanceCertifications'
     DisasterReliefData:
       type: object
       properties:
@@ -874,37 +1190,37 @@ components:
         geographicalAreaServed:
           type: array
           items:
-            $ref: "#/components/schemas/GeographicalAreas"
+            $ref: '#/components/schemas/GeographicalAreas'
     CoreData:
       type: object
       properties:
         businessInformation:
-          $ref: "#/components/schemas/BusinessInformation"
+          $ref: '#/components/schemas/BusinessInformation'
         physicalAddress:
-          $ref: "#/components/schemas/PhysicalAddress"
+          $ref: '#/components/schemas/PhysicalAddress'
         mailingAddress:
-          $ref: "#/components/schemas/MailingAddress"
+          $ref: '#/components/schemas/MailingAddress'
         generalInformation:
-          $ref: "#/components/schemas/GeneralInformation"
+          $ref: '#/components/schemas/GeneralInformation'
         businessTypes:
-          $ref: "#/components/schemas/BusinessTypes"
+          $ref: '#/components/schemas/BusinessTypes'
         financialInformation:
-          $ref: "#/components/schemas/FinancialInformation"
+          $ref: '#/components/schemas/FinancialInformation'
     PointOfContact:
       type: object
       properties:
         electronicBusinessAlternatePOC:
-          $ref: "#/components/schemas/ElectronicBusinessAlternatePOC"
+          $ref: '#/components/schemas/ElectronicBusinessAlternatePOC'
         electronicBusinessPOC:
-          $ref: "#/components/schemas/ElectronicBusinessPOC"
+          $ref: '#/components/schemas/ElectronicBusinessPOC'
         governmentBusinessAlternatePOC:
-          $ref: "#/components/schemas/GovernmentBusinessAlternatePOC"
+          $ref: '#/components/schemas/GovernmentBusinessAlternatePOC'
         governmentBusinessPOC:
-          $ref: "#/components/schemas/GovernmentBusinessPOC"
+          $ref: '#/components/schemas/GovernmentBusinessPOC'
         pastPerformanceAlternatePOC:
-          $ref: "#/components/schemas/PastPerformanceAlternatePOC"
+          $ref: '#/components/schemas/PastPerformanceAlternatePOC'
         pastPerformancePOC:
-          $ref: "#/components/schemas/PastPerformancePOC"
+          $ref: '#/components/schemas/PastPerformancePOC'
     GovernmentBusinessPOC:
       type: object
       properties:
@@ -944,15 +1260,15 @@ components:
       type: object
       properties:
         entityRegistration:
-          $ref: "#/components/schemas/EntityRegistration"
+          $ref: '#/components/schemas/EntityRegistration'
         coreData:
-          $ref: "#/components/schemas/CoreData"
+          $ref: '#/components/schemas/CoreData'
         assertions:
-          $ref: "#/components/schemas/Assertions"
+          $ref: '#/components/schemas/Assertions'
         repsAndCerts:
-          $ref: "#/components/schemas/RepsAndCerts"
+          $ref: '#/components/schemas/RepsAndCerts'
         pointsOfContact:
-          $ref: "#/components/schemas/PointOfContact"
+          $ref: '#/components/schemas/PointOfContact'
     ElectronicBusinessAlternatePOC:
       type: object
       properties:
@@ -1021,6 +1337,41 @@ components:
           type: string
         title:
           type: string
+    EntityRegistration:
+      type: object
+      properties:
+        ueiSAM:
+          type: string
+        ueiDUNS:
+          type: string
+        entityEFTIndicator:
+          type: string
+        cageCode:
+          type: string
+        dodaac:
+          type: string
+        legalBusinessName:
+          type: string
+        dbaName:
+          type: string
+        purposeOfRegistration:
+          type: string
+        registrationStatus:
+          type: string
+        registrationDate:
+          type: string
+        lastUpdateDate:
+          type: string
+        expirationDate:
+          type: string
+        activationDate:
+          type: string
+        noPublicDisplayFlag:
+          type: string
+        exclusionStatusFlag:
+          type: string
+        exclusionURL:
+          type: string
     AnswersForDFAR:
       type: object
       properties:
@@ -1067,4 +1418,4 @@ components:
       type: object
       properties:
         architectEngineerResponses:
-          $ref: "#/components/schemas/ArchitectEngineerResponses"
+          $ref: '#/components/schemas/ArchitectEngineerResponses'
