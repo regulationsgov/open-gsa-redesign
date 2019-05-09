@@ -3,10 +3,6 @@ title: Entity Management  API
 banner-heading: Entity Management API
 ---
 
-<link rel="stylesheet" type="text/css" href="../../assets/swaggerui-dist/swagger-ui.css" >
-<link rel="stylesheet" type="text/css" href="../../assets/swaggerui-dist/custom.css" >
-
-
 This content is currently not Firefox compliant.  Please access via Chrome or Internet Explorer.
 ## Overview
 **Important Note:** The specifications on this page are for a soon to be released API.  Check back here or be in contact with IAE for the release date and testing sessions.<br/><br/>
@@ -9894,14 +9890,6 @@ First Name</td>
 
 </details><br>
 </details>
-
-<p><small><a href="#">Back to top</a></small></p>
-
-## API Calls
-
-{% include swagger-section-header.html %}
-    url: "v1/entity_api.yaml", 
-{% include swagger-section-footer.html %}
 
 <p><small><a href="#">Back to top</a></small></p>
 
