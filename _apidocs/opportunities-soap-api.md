@@ -4092,13 +4092,42 @@ zip|	No|	5 digits|	NA|	NA
 classcod|	Yes|	Valid classification code (FAR, Section 5.207(g))|	1. This required field should be validated 2. If a wrong classification code is given, then the service throws an error.  |1. PSC code is required 2. This opportunity cannot be published. Classification Code provided did not match expected codes.
 naics	|No	|Valid NAICS Code  NAICS Reference|	NA|	NA
 offadd|	No|	65535 characters|	NA|	NA
-officeid	Yes	20 characters	1. This field is required 2. If an invalid officeid is given, then service throws an error. 3. If contracting officer does not have access to an office but is trying to make a submission to that office, then the service throws an error. 4. Officeid must be associated with user account	1. Contracting Office is required 2. Invalid officeid provided 3. UnAuthorized Credentials. This may be the JWT issue or Role management issue. 
+officeid|	Yes	|20 characters|	1. This field is required 2. If an invalid officeid is given, then service throws an error. 3. If contracting officer does not have access to an office but is trying to make a submission to that office, then the service throws an error. 4. Officeid must be associated with user account|	1. Contracting Office is required 2. Invalid officeid provided 3. UnAuthorized Credentials. This may be the JWT issue or Role management issue.
+subject|	Yes	|255 characters	|1. This required field should be validated	|1. $.data.title: is missing but it is required
+solnbr	|Yes|	128 characters from the set: a-z A-Z 0-9 - _ ( ) {}. Note for statutory authority FAR 6.302- 1(c) - Brand name, this is required	|1. This required field should be validated. 2. If a space is given along with numbers in this field, then service throws an error. |1. Notice Id is required 2. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces
+archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be current or in past; has to be in future |	1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	This opportunity cannot be published. Archive date provided is in the past.
+contact	|Yes|	65535 characters Default value = Primary Other types are: Secondary, Owner|	1. This required field should be validated.	|1. Primary Contact is Required
+desc|	Yes|	65535 characters	|1. This required field should be validated	|1. Description is required
+link|	No|	255 characters, consist of a restricted set of characters (see URL specification - RFC 2396)|	NA|	NA
+links|	No|	| 	1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error|	1. Links and/or files are not complete
+files|	No|	| 	1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error	|1. Links and/or files are not complete
+email|	No|	128 characters|	NA|	NA
+recovery_act|	No|	true or false|	NA|	NA
 
+#### *deleteNoticeOrDocumentPackage*
 
+Individual business rules per field are listed across each of the fields in below table.  
 
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+solnbr|	Yes if non-award|	128 characters from the set: a-z A-Z 0-9 - _ ( ) { }| 1. This required field should be validated. If no value is provided, then service throws an error 2. If invalid combination of ntype and solnbr is provided, then system throws an error.  3. If a space is given along with numbers in this field, then service throws an error.	|1. Multiple notices found. Pelase input more details.  2. Notice not found.  3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces
+awdnbr|	Yes if award|	255 characters| If neither solnbr or awdnbr is provided, then the system throws an error|	Solicitation Number or Award Number is required.
+ntype|	Yes if non-award|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice |	1. If an invalid ntype is provided, then service throws an error. |  	1. NTYPE value provided is not valid
+deletetype|	no|	Valid values: “notice” to delete the notice, “attachment” to delete attachments from the notice|	1. If an invalid deletetype is provided, then service throws an error.  |	Delete type provided is not “notice” or “attachment”
+deletemethod|	no|	Valid Values: “all” to delete all versions or “latest” to delete latest version	|1. If an invalid deletemethod is provided, then service throws an error.  |	Delete method provided is not “latest” or “all”
 
+#### *deleteNoticeOrDocumentPackage*
 
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: : If a user tries to archive a notice that is already archived, then the service throws an error -  Opportunity already archived
 
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+date|	No|	YYYYMMDD|	Date field should meet the expected format.	|DATE field in unexpected format. Expects YYYYMMDD
+solnbr|	Yes|	128 characters from the set: a-z A-Z 0-9 - _ ( ) { }|	1a. This required field if not given, service throws an error 1b. If multiple notices are found with solicitation number given, then provide ntype and solictiion number combination. 2. If invalid combination of ntype and solnbr is provided, then system throws an error.  3. If a space is given along with numbers in this field, then service throws an error.|	1. Multiple notices found. Pelase input more details.  2. Notice not found for correction. 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces
+officeid	|Yes|	20 characters|	Officeid must be associated with user account	|NA
+ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice|	1. If an invalid ntype is provided, then service throws an error.    2. If a valid ntype but a wrong ntype is not provided for the solnbrthen service throws an error. | 1. NTYPE value provided is not valid 2. Notice not found for correction.
+archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be current or in past; has to be in future	|1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	This opportunity cannot be published. Archive date provided is in the past.
 
 
 
