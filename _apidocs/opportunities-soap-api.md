@@ -4116,7 +4116,7 @@ ntype|	Yes if non-award|	Valid values: "PRESOL" - for Presolicitation, "COMBINE"
 deletetype|	no|	Valid values: “notice” to delete the notice, “attachment” to delete attachments from the notice|	1. If an invalid deletetype is provided, then service throws an error.  |	Delete type provided is not “notice” or “attachment”
 deletemethod|	no|	Valid Values: “all” to delete all versions or “latest” to delete latest version	|1. If an invalid deletemethod is provided, then service throws an error.  |	Delete method provided is not “latest” or “all”
 
-#### *deleteNoticeOrDocumentPackage*
+#### *archiveNotice*
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: : If a user tries to archive a notice that is already archived, then the service throws an error -  Opportunity already archived
@@ -4129,16 +4129,102 @@ officeid	|Yes|	20 characters|	Officeid must be associated with user account	|NA
 ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice|	1. If an invalid ntype is provided, then service throws an error.    2. If a valid ntype but a wrong ntype is not provided for the solnbrthen service throws an error. | 1. NTYPE value provided is not valid 2. Notice not found for correction.
 archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be current or in past; has to be in future	|1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	This opportunity cannot be published. Archive date provided is in the past.
 
+#### *unarchiveNotice*
 
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: : If a user tries to unarchive a notice that is already unarchived, then the service throws an error - Opportunity is not archived.
+* Note: If a user tries to unarchive an active notice, then the service throws an error - Opportunity is active
 
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+solnbr|	Yes|	128 characters from the set: a-z A-Z 0-9 - _ ( ) { }|	1a. This required field if not given, service throws an error 1b. If multiple notices are found with solicitation number given, then provide ntype and solictiion number combination. 2. If solicitation & ntype combination is not matched, then service throws an error.	|1. Multiple notices found. Pelase input more details.  2. Notice not found for correction.
+officeid|	Yes	|20 characters|	Officeid must be associated with user account	|NA
+ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice|	1. If all the required field is given and this field is not given OR a wrong ntype is provided, then service throws an error. |  	1. NTYPE value provided is not valid
+awdnbr	|No|	255 characters|	NA|	NA
+archdate|	No|	YYYYMMDD|	1.	If this value is available, this field should meet the character limit/restrictions 2.	If current date or a past date is provided, then the system throws an error.  3.	If no archive date is given, then the system throws an error.| 1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	New archive date provided is in the past. 3.	$.reason: null found, string expected. Unable to process request. Please try again.
 
+#### *cancelNotice*
 
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: : If user tries to cancel already cancelled opportunity, service throws an error - This opportunity cannot be cancelled. This opportunity is already cancelled. Unable to process request. Please try again.
+* Note: -	When user tries to cancel a notice without giving any input, then the service throws an error ‘Unable to process request. Please try again’
 
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+date|	No|	YYYYMMDD	|Date field should meet the expected format.	|DATE field in unexpected format. Expects YYYYMMDD
+officeid|	Yes	|20 characters|	Officeid must be associated with user account	|NA
+subject|	No|	255 characters|	NA|	NA
+solnbr|	Yes	|128 characters from the set: a-z A-Z 0-9 - _ ( ) { }	|1a. This required field if not given, service throws an error 1b. If multiple notices are found with solicitation number given, then provide ntype and solictiion number combination. 2. If valid solnbr is given with a different ntype, then service throws an error. 3. If a space is given along with numbers in this field, then service throws an error.	|1. Multiple Notices found. Please input more details.  2. Notice not found for correction.  3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces
+ntype	|No	|Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice|	1. If all the required field is given and this field is not given OR a wrong ntype is provided, then service throws an error.   | 1. Notice Type value provided is not valid
+awdnbr|	No|	255 characters|	NA|	NA
+archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be in past; has to be in future|	1.	DATE field in unexpected format. Expects YYYYMMDD.  2.	This opportunity cannot be cencelled.
+contact|	Yes|	65535 characters Default value = Primary Other types are: Secondary, Owner|	1. This required field should be validated.	|1. Unable to process request. Please try again
+desc|	Yes|	65535 characters|	1. This required field should be validated. |	1. Unable to process request. Please try again
 
+#### *getNoticeData*
 
+Individual business rules per field are listed across each of the fields in below table.  
 
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+notice_id	|Yes|	Unique ID found from getList call or ID’s for changes found in getNoticeData call.|	Notice_id is required|	notice_id from getList is required.
+Get_changes|	No	|true or false. Pass in true to get the full notice history with all changes.|	NA|	NA
+get_changes_from_date|	No|	If maintaining a sync of changes, can specify a date so that only changes that have occurred since provided date will be returned.|	Date field should meet the expected format.|	DATE field in unexpected format. Expects YYYYMMDD
+get_file_data	|No	|True or false. Pass in true and the method will return any file content stored in Contract Opportunities (attachment data will be retuned as Base64Encoding Format). If false, the meta details/links will still be provided.	|NA	|NA
 
+#### *getNoticeData*
 
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: Although none of the individual elements are mandatory, at least one filter should be given to perform the operation. If no filters are entered, then system throws an error - Insufficient Search Criteria.
+
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+notice_type	|No|	Solicitation type   Valid Values: PRESOL, COMBINE, AWARD, JA, SRCSGT, SSALE, SNOTE, ITB,   Note: Searches for awards, ja and itb’s will return both standalone notices AND base notices that contain one of these type	|Notice_type if given should be valid |	Notice Type is not recognized. Expects one of the following: PRESOL, COMBINE, AWARD, JA, SRCSGT, SSALE, SNOTE,  ITB
+solnbr|	No|	Solicitation #|	NA|	NA
+awdnbr|	No|	Award #|	NA|	NA
+posted_from	|No	|Posted From Date. YYYYMMDD.|	Date field should meet the expected format.|	DATE field in unexpected format. Expects YYYYMMDD
+posted_to|	No	|Posted To Date. YYYYMMDD	|Date field should meet the expected format.	|DATE field in unexpected format. Expects YYYYMMDD
+documents_to_search|	No	|Valid Values: ‘active’ or ‘archived’. Default is ALL if nothing provided.|	NA|	NA
+
+#### *getFileData*
+
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: If a wrong combination of file_id and notice_id is given, then the service throws a success message without any data.
+
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+file_id	|Yes|	Unique ID of a file found from getNoticeData call (i.e. file_id element) |This required field should be validated |	file_id is required.
+notice_id|	Yes|	Unique identifier for a notice	|This required field should be validated|	notice_id from getList is required.
+
+#### *getIVLListResponse*
+
+Individual business rules per field are listed across each of the fields in below table.  
+
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+solnbr|	Yes|	Solicitation Number|	1. If an incorrect solicitation number and ntype combination is given, the service throws an error.   2a. If this required field if not given, service throws an error 2b. If multiple notices are found with solicitation number given, then provide ntype and solictiion number combination. |1. Notice not found 2a. Notice not found. 2b. Multiple Notices found. Please input more details.
+ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice, “ITB” – for Intent to Bundle Requirements (DoD- Funded)|	NA	|NA
+
+#### *getAuthorizedPartyList*
+
+Individual business rules per field are listed across each of the fields in below table.  
+
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+solnbr|	Yes| 	128 characters from the set: a-z A-Z 0-9 - _ ( ) { }| 1. This required field should be validated. If no value is provided, then service throws an error 2. If invalid combination of ntype and solnbr is provided, then system throws an error.  3. If a space is given along with numbers in this field, then service throws an error. 4. If ntype value is not provided and the solnbr is not unique or if multiple notices are found with same solnbr and ntype, then the system throws an error. |	1. Solicitation Number is required. 2. Notice not found. 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces 4. Multiple notices found. Please input more details.
+ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice|	If an invalid ntype is provided, then service throws an error.  | 1. NTYPE value provided is not valid
+nonfbo_solbr |	No|	|	1.	If both solnbr and nonfbo_solbr are provided, then the service throws an error. 2.	If only nonfbo_solbr is provided, then the service throws an error.| 1.	Solicitation Number and Non-FBO Solicitation Number cannot be specified together 2.	addAuthoizedParty service is deprecated for Non-FBO Solicitations.
+status|	No|	Valid Options: approved, pending, rejected, “empty value”. If empty, all status will be returned. Note, use “pending” to pull the pending explicit access requests. |1.	If the status value is inputed and doesn’t match approved, pending, rejected.|	1.	Status value is invalid.
+
+#### *approveExplicitAccessRequestByID*
+
+Individual business rules per field are listed across each of the fields in below table.  
+
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+solnbr	|Yes |	128 characters from the set: a-z A-Z 0-9 - _ ( ) { }|	1. This required field should be validated. If no value is provided, then service throws an error 2. If invalid combination of ntype and solnbr is provided, then system throws an error.  3. If a space is given along with numbers in this field, then service throws an error. 4. If ntype value is not provided and the solnbr is not unique, then the system throws an error. 	|1. Solicitation Number is required. 2. Notice not found. 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces 4. Multiple notices found. Please input more details.
+ntype	|No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice	|If an invalid ntype is provided, then service throws an error.  | 1. NTYPE value provided is not valid
+nonfbo_solbr |	No|	|	1.	If both solnbr and nonfbo_solbr are provided, then the service throws an error. 2.	If only nonfbo_solbr is provided, then the service throws an error.| 1.	Solicitation Number and Non-FBO Solicitation Number cannot be specified together. 2.	approveExplicitAccessRequestByID service is deprecated for Non-FBO Solicitations.
 
 
 
