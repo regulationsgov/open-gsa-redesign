@@ -3867,6 +3867,82 @@ popzip|	No|	5 digits|	NA|	NA
 popcountry	|No|	32 characters|	NA|	NA
 recovery_act|	No	|true or false|	NA|	NA
 
+#### *submitCombined*
+
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: When none of the fields are given, then the service throws an error - $.data.title: is missing but it is required
+
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+date|	No|	YYYYMMDD|	1. This field should meet the character limit/restrictions Note: Date field allows current date and also any date in past/future	|1. DATE field in unexpected format. Expects YYYYMMDD.
+zip	|No	|5 digits|	NA|	NA
+classcod	|Yes|	Valid classification code (FAR, Section 5.207(g))|	1. This required field should be validated 2. If a wrong classification code is given, then the service throws an error. | 1. PSC code is required 2. This opportunity cannot be published. Classification Code provided did not match expected codes.
+naics	|Yes |Valid NAICS Code  NAICS Reference|	1. This required field should be validated |1. NAICS code is required
+officeid	|Yes|	20 characters|	1. This field is required 2. If an invalid officeid is given, then service throws an error.  3. If contracting officer does not have access to an office but is trying to make a submission to that office, then the service throws an error. 4. Officeid must be associated with user account	|1. Contracting Office is required 2. Invalid officeid provided 3. UnAuthorized Credentials. This may be the JWT issue or Role management issue. Please check
+offadd|	No|	65535 characters|	NA|	NA
+subject	|Yes|	255 characters|	1. This required field should be validated|	1. $.data.title: is missing but it is required
+solnbr	|Yes|	128 characters from the set: a-z A-Z 0-9 - _ ( ) { }|	1. This required field should be validated.  2. If submitting a notice with same solnbr number, then system throws an error 3. If a space is given along with numbers in this field, then service throws an error.	|1. Notice Id is required 2. Notice Id for the selected opportunity type already exists 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces
+respdate|	Yes	|YYYYMMDD	|1.	This required field should be validated.  2.	This field should meet the character limit/restrictions 3.	This date cannot be in past; has to be in future 4.	When giving future date, response date cannot exceed 5 years from the current date.|	1.	This opportunity cannot be published. Response date is required.  2.	DATE field in unexpected format. Expects YYYYMMDD. 3.	This opportunity cannot be published. Response date provided is in the past. 4.	This opportunity cannot be published. Response Date cannot exceed 5 years from current date
+archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be current or in past; has to be in future	|1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	This opportunity cannot be published. Archive date provided is in the past.
+contact|	Yes|	65535 characters Default value = Primary Other types are: Secondary, Owner|	1. This required field should be validated.|	1. Primary Contact is Required
+desc|	Yes |	65535 characters|	1. This required field should be validated.|	1. Description is required
+link	|No|	255 characters, consist of a restricted set of characters (see URL specification - RFC 2396)|	NA|	NA
+email	|No	|128 characters	|NA	| NA
+links|	No	|Array of links|	1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error	|1. Links and/or files are not complete
+files	|No	|Array of files|	1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error|	1. Links and/or files are not complete
+setaside|	No|	See SetAside section for valid values|	NA|	NA
+popaddress|	No|	65535 characters|	This is a free Text. No validation is performed on this field	 |
+popzip|	No|	5 digits|	NA|	NA
+popcountry|	No|	32 characters	|NA	|NA
+recovery_act	|No|	true or false|	NA|	NA
+
+#### *submitITB*
+
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: When none of the fields are given, then the service throws an error - $.data.title: is missing but it is required
+
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+date|	No|	YYYYMMDD	|1. This field should meet the character limit/restrictions Note: Date field allows current date and also any date in past/future	|1. DATE field in unexpected format. Expects YYYYMMDD.
+zip|	No|	5 digits|	NA|	NA
+classcod	|Yes |	Valid classification code (FAR, Section 5.207(g))|	1. This required field should be validated 2. If a wrong classification code is given, then the service throws an error. | 1. PSC code is required. 2. This opportunity cannot be published. Classification Code provided did not match expected codes.
+naics	|No	|Valid NAICS Code  NAICS Reference| 	NA|	NA
+officeid|	Yes|	20 characters|	1. This field is required 2. If an invalid officeid is given, then service throws an error. 3. If contracting officer does not have access to an office but is trying to make a submission to that office, then the service throws an error.4. Officeid must be associated with user account|	1. Contracting Office is required 2. Invalid officeid provided 3. UnAuthorized Credentials. This may be the JWT issue or Role management issue. Please check
+offadd|	No|	65535 characters|	NA|	NA
+subject	|Yes|	255 characters|	1. This required field should be validated|	1. $.data.title: is missing but it is required
+solnbr	|Yes|	128 characters from the set: a-z A-Z 0-9 - _ ( ) { }|	1. This required field should be validated.  2. If submitting a notice with same solnbr number, then system throws an error 3. If a space is given along with numbers in this field, then service throws an error. 4. If solicitation & ntype combination is not matched, then service throws an error.|	1. Notice Id is required 2. Notice Id for the selected opportunity type already exists 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces 4.	Opportunity not found with given solicitation number and ntype
+ntype|	no|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice |1. When user tries to convert a notice to ITB and the solicitation number and ntype do not match the notice, then the service throws an error.  2. This field accepts only valid values mentioned. If invalid values are provided, then system throws an error. Also, if all the required field is given and this field is not given then service throws an error.     |1. Opportunity not found with given solicitation number and ntype. 2. Invalid NTYPE value provided.
+awdnbr|	Yes|	255 characters from the set: a-z A-Z 0-9 - _ ( ) {}	|1. This required field should be validated. 2. This field accepts only valid characters as mentioned under character limit/restrictions column. |	1. Award Details Section - Contract Award Number is a required field. 2. Award Details Section - Contract Award Number - Please enter a valid number.
+donbr|	No|	255 characters from the set: a-z A-Z 0-9 - _ ( ) {}|	NA|	NA
+archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be current or in past; has to be in future	|1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	This opportunity cannot be published. Archive date provided is in the past.
+contact|	Yes	|65535 characters 65535 characters Default value = Primary Other types are: Secondary, Owner|	1. This required field should be validated.	| 1. Primary Contact is Required
+desc|	Yes|	65535 characters|	1. This required field should be validated	|1. Description is required
+link|	No	|255 characters, consist of a restricted set of characters (see URL specification - RFC 2396)	|NA	|NA
+link	|No	| |	1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error	|1. Links and/or files are not complete
+files|	No	| |	1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error|	1. Links and/or files are not complete
+email|	No|	128 characters|	NA	 |
+recovery_act|	No|	true or false|	NA|	 NA
+correction|	No|	true or false. If correcting a previously submitted itb notice, specify true and the system will lookup the itb by award number, delivery number and sol number if applicable.|	1. When user tries to convert a notice to ITB and the solicitation number and ntype do not match the notice and correction = true, then the service throws an error. 2. If correction = True and the system cannot return a single record for the same delivery number/ award number / sol-number or combination of all three, then the service throws an error. 3. If correction = True and the system returns more than one record for the same delivery number/ award number / sol-number or combination of all three, then service throws an error|	1. Notice could not be found for correction. 2. Notice could not be found for correction. 3. Multiple Notices found. Please input more details.
+
+#### *submitMod*
+
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: If none of the fields are given, then service throws an error – ntype provided is not valid.
+* Note: If ntype value is provided and then submitted, then service throws an error - Multiple Notices found. Please input more details
+
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+
+
+
+
+
+
+
+
+
+
+
 
 
 
