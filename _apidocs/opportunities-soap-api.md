@@ -3818,19 +3818,30 @@ donbr|	Yes – For JA; No – For rest	|255 characters	|1. This is required fiel
 awdamt	|Yes – For Award; No – For rest|	64 chracters|	1. This required field should be validated	|1. Award Details Section – Amount is a required field.
 linenbr|	No|	255 characters|	NA	|NA
 awddate	|Yes – For award; No – for rest	|YYYYMMDD|	1. This field should meet the character limit/restrictions (Note: Date field allows current date and also any date in past/future); 2. This required field should be validated|	1. DATE field in unexpected format. Expects YYYYMMDD; 2. Award Details Section - Contract Award Date is required field.
+stauth|	Yes – For JA; No – for rest	| Valid values: 1, 2, 3, 4, 5, brand, far1, far2, far3, far4, far5, far6, far7  Description of each of these stauth values is captured in Sauth Values Section; Foja values are: Valid values: 'Urgency’, ‘Only One Source (except brand name)’, ‘Follow-on Delivery Order Following Competitive Initial Order’, ‘Minimum Guarantee’, ‘Other Statutory Authority’ | Both foja & stauth values will be given under stauth in legacy |	NA
+respdate|	Yes – For SubmitCombined No- For rest|	YYYYMMDD |	1.	No validation is performed on this field for all services except submitCombined. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be in past; has to be in future. If the given date is in past, then system throws 2 errors (#2&#3) 3.	For submitCombined this field is required	| 1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	This opportunity cannot be published. Response date provided is in the past. 3.	This opportunity cannot be published. Inactive date provided is in the past 4.	Response Date is required.
+archdate|	No|	YYYYMMDD	|1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restriction2.	This date cannot be current or in past; has to be in future|	1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	This opportunity cannot be published. Archive date provided is in the past.
+awardee	|Yes – for award No – for Rest|	6553 characters|	NA|	NA
+awardee_duns|	No	|9 digits with optional plus 4|	NA|	NA
+contact	|Yes – For presol, submitSourcesSought, combined, ITB, JA, award and submitSaleofSurplus No – For rest	|65535 characters Default value = Primary Other types are: Secondary, Owner|	1. This required field should be validated.	|1. Primary Contact is Required
+desc|	Yes – For presol, submitSourcesSought , combined, ITB, special and surplus No – For rest 	|65535 characters|	1. This required field should be validated.|	1. Description is required
+link|	No|	255 characters, consist of a restricted set of characters (see URL specification - RFC 2396)|	NA	| NA
+email|	No|	128 characters|	NA	 |NA
+links	|No	|Array of links	|NA	|NA
+files|	No|	Array of files|	NA|	NA
+setaside|	No|	See SetAside Section for valid values|	NA	|NA
+popaddress|	No|	65535 characters|	This is a free Text. No validation is performed on this field	 |
+popzip	|No	|5 digits|	NA|	NA
+popcountry|	Yes – Only Award type No – For rest	|32 characters|	1. This required field should be validated for Award type only.|	1. Award Details Section - Country is a required field.
+city	|No	|NA	|NA|	NA
+state	|No	|NA|	NA|	NA
+recovery_act|	No|	true or false|	NA	|NA
+correction|	No|	true or false. If correcting a previously submitted J&A notice, specify true and the system will lookup the j&a by award number and sol number if applicable.	|If correction = true, system checks if an opportunity exists or not. If exists, then a new modified record will be posted of the same type and will be set as the latest. If No, then the request will be rejected.|
 
+#### *submitPresol and submitSourcesSought*
 
-
-
-
-
-
-
-
-
-
-
-
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: When none of the fields are given, then the service throws an error - $.data.title: is missing but it is required
 
 
 
