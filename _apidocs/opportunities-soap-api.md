@@ -3932,7 +3932,9 @@ Individual business rules per field are listed across each of the fields in belo
 
 Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
 ------ | ------- | ------- | ------- | --------
-
+date|	No|	YYYYMMDD|	1. This field should meet the character limit/restrictions Note: Date field allows current date and also any date in past/future|	1. DATE field in unexpected format. Expects YYYYMMDD
+zip|	No|	5 digits|	NA|	NA
+classcod	|Yes – For combined type, presol type, Sale of surplus  No – For test	|Valid classification code (FAR, Section 5.207(g))	|1. This field is required and should be validated. 2. If a wrong classification code is given, then service throws an error. |1. PSC code is required 2. This opportunity cannot be published. Classification Code provided did not match expected codes
 
 
 
