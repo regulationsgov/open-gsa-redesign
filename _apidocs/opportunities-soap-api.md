@@ -4225,66 +4225,95 @@ Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Erro
 solnbr	|Yes |	128 characters from the set: a-z A-Z 0-9 - _ ( ) { }|	1. This required field should be validated. If no value is provided, then service throws an error 2. If invalid combination of ntype and solnbr is provided, then system throws an error.  3. If a space is given along with numbers in this field, then service throws an error. 4. If ntype value is not provided and the solnbr is not unique, then the system throws an error. 	|1. Solicitation Number is required. 2. Notice not found. 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces 4. Multiple notices found. Please input more details.
 ntype	|No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice	|If an invalid ntype is provided, then service throws an error.  | 1. NTYPE value provided is not valid
 nonfbo_solbr |	No|	|	1.	If both solnbr and nonfbo_solbr are provided, then the service throws an error. 2.	If only nonfbo_solbr is provided, then the service throws an error.| 1.	Solicitation Number and Non-FBO Solicitation Number cannot be specified together. 2.	approveExplicitAccessRequestByID service is deprecated for Non-FBO Solicitations.
+id|	Yes|	|	1.	If the request Id is not provided, then the system throws an error. 2.	If the request Id provided is already approved, then the service throws an error. 3.	If the solicitation number provided does not match the solicitation number of the request Id, then the service throws an error. 4.	If the solicitation number provided matches with the solicitation number of the  request Id  but does not match with the provided N type, then the service throws an error.	|1.	Internal ID is required. Use getAuthorizedPartyList to retrieve this information. 2.	Request with Request ID: #id already approved. 3.	You have request that is tied to different solicitation number. 4.	You have request that is tied to the same solicitation number but different notice type.
 
+#### *approveExplicitAccessRequestByVendorData*
 
+Details will be added in future.
 
+#### *addAuthorizedParty*
 
+Individual business rules per field are listed across each of the fields in below table.  
 
-
-
-
-
-
-
-
-
-
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+solnbr|	Yes |	128 characters from the set: a-z A-Z 0-9 - _ ( ) { }|1. This required field should be validated. If no value is provided, then service throws an error 2. If invalid combination of ntype and solnbr is provided, then system throws an error.  3. If a space is given along with numbers in this field, then service throws an error. 4. If ntype value is not provided and the solnbr is not unique or if multiple notices are found with same solnbr and ntype, then the system throws an error. |	1. Solicitation Number is required. 2. Notice not found. 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces 4. Multiple notices found. Please input more details.
+ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice	|If an invalid ntype is provided, then service throws an error. |  1. NTYPE value provided is not valid
+nonfbo_solbr 	|No|	|	1.	If both solnbr and nonfbo_solbr are provided, then the service throws an error. 2.	If only nonfbo_solbr is provided, then the service throws an error.| 1.	Solicitation Number and Non-FBO Solicitation Number cannot be specified together. 2.	addAuthoizedParty service is deprecated for Non-FBO Solicitations.
+vendor|	Yes|	Vendor Data|	1.	If all the elements in the Vendor Data complex definition are not provided, then the system throws an error. 2.	If no match is found in the system for the vendor data provided, then the system throws an error.|	1.	This method requires all fields from complex type VendorData to find a match in the system; if vendor data not fully provided this error will be thrown. 2.	No contact match on vendor data provided.
 
 
 #### *rejectExplicitAccessRequestByID*
-			Details will be added in future.
+
+Individual business rules per field are listed across each of the fields in below table.  
+
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+solnbr|	Yes |	128 characters from the set: a-z A-Z 0-9 - _ ( ) { } |1. This required field should be validated. If no value is provided, then service throws an error 2. If invalid combination of ntype and solnbr is provided, then system throws an error.  3. If a space is given along with numbers in this field, then service throws an error. 4. If ntype value is not provided and the solnbr is not unique, then the system throws an error.|	1. Solicitation Number is required. 2. Notice not found. 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces 4. Multiple notices found. Please input more details.
+ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice|	1.	If an invalid ntype is provided, then service throws an error.   |	1. NTYPE value provided is not valid
+nonfbo_solbr |	No|	|	1.	If both solnbr and nonfbo_solbr are provided, then the service throws an error. 2.	If only nonfbo_solbr is provided, then the service throws an error.| 1.	Solicitation Number and Non-FBO Solicitation Number cannot be specified together. 2.	rejectExplicitAccessRequestByID service is deprecated for Non-FBO Solicitations.
+id|	Yes	||	1.	If the request Id is not provided, then the system throws an error. 2.	If the request Id provided is already rejected, then the service throws an error. 3.	If the solicitation number provided does not match the solicitation number of the request Id, then the service throws an error. 4.	If the solicitation number provided matches with the solicitation number of the  request Id  but does not match with the provided N type, then the service throws an error.|	1.	Internal ID is required. Use getAuthorizedPartyList to retrieve this information. 2.	Request with Request ID: #id already rejected. 3.	You have request that is tied to different solicitation number. 4.	You have request that is tied to the same solicitation number but different notice type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### *rejectExplicitAccessRequestByVendorData*
-			Details will be added in future.
+Details will be added in future.
 
 #### *setBidModuleOptions*
-				Details will be added in future.
+Details will be added in future.
 
 #### *getBidModuleResponses*
-			Details will be added in future.
+Details will be added in future.
 
 #### *createSecureDocumentPackage*
-				Details will be added in future.
+Details will be added in future.
 
 #### *addFilesToSecureDocumentPackage*
-				Details will be added in future.
+Details will be added in future.
 
 #### *deleteFilesFromSecureDocumentPackage*
-				Details will be added in future.
+Details will be added in future.
 
 #### *deleteSecureDocumentPackage*
-		Details will be added in future.
+Details will be added in future.
 
 #### *releaseSecureDocumentPackage*
-				Details will be added in future.
+Details will be added in future.
 
 #### *attachSecureDocumentPackagesToNotice*
-				Details will be added in future.
+Details will be added in future.
 
 #### *createNonFBOSolicitation*
-				Details will be added in future.
+Details will be added in future.
 
 #### *attachSecureDocumentPackagesToNonFBOSolicitation*
-				Details will be added in future.
+Details will be added in future.
 
 #### *removeSecureDocumentPackagesFromNonFBOSolicitation*
-				Details will be added in future.
+Details will be added in future.
 
 #### *releaseNonFBOSolicitation*
-				Details will be added in future.
+Details will be added in future.
 
 #### *unreleaseNonFBOSolicitation*
-        Details will be added in future.
+Details will be added in future.
 
 
 
@@ -4303,6 +4332,6 @@ _NA_
 
 Date | Version | Description
 ------|---------------|---------
-4/29/2019 | v1.0 | Base Version
+5/10/2019 | v1.0 | Base Version
 
 <p><small><a href="#">Back to top</a></small></p>
