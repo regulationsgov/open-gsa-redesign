@@ -19,7 +19,7 @@ WSDL attached below can be downloaded:
 
 ## Authentication
 
-### *User Accounts*
+### User Accounts
 To call any of the available web services, a valid government user account must exist in the beta.sam.gov system registered at the Office Location Level in the hierarchy. To perform an operation, user who is registered with beta.sam.gov should have either Contracting Officer role OR Contracting Specialist role. Note that to perform an operation, user must have only one role.
 Refer to section 5 and 6 for role specific methods.
 
@@ -27,7 +27,7 @@ Refer to section 5 and 6 for role specific methods.
 * On beta.sam.gov, please log in and click on the profile and go to Account Details. AAC is listed under 'Organization Information' section.
 * On alpha.sam.gov, please log in and click on the profile and go to Account Details. AAC is listed under 'Organization Information' section.
 
-### *Authentication Methods*
+### Authentication Methods
 beta.SAM.gov Web Services supports SOAP header authentication. Configure your client to send a specific SOAP header with every method call which contains the authentication data. Below is the example of header included before the body:
    <soapenv:Header>
       <AuthenticationData xsi:type="sam:AuthenticationData">
@@ -49,7 +49,7 @@ When the given officeId is valid but does not fall under the approved Federal Hi
 **Note**:
 The complex type definition for this object (AuthenticationData) is located in the WSDL. It contains three string elements named “username”, “password” and “emailid”. Refer the WSDL attached below:
 
-### *Namespace Guidance*
+### Namespace Guidance
 The authentication namespace must match for a web service call to be successful.
 This is due to core settings for the web services internals where the authorization header validates the namespace against the WSDL. So, when the namespace for your authentication header in soap xml does not match the namespace defined in the WSDL at the endpoint (in this case sam), it does not pass on the credentials (username/password/emailid). Therefore, the Contract Opportunities service is not able to authenticate the user and returns an authentication error.
 
@@ -75,7 +75,7 @@ messages | string [] - array of strings
 
 **Note**: Some methods will have a different response value format due to the nature of the data being returned. These custom cases will be outlined below.
 
-### *Set-Aside Values*
+### Set-Aside Values
 Several methods pertaining to submitting Contract Opportunities involve the Set-Aside Type field.
 
 Refer below table for mapping between legacy SetAside Values to modern SetAside Value:
@@ -96,10 +96,10 @@ Economically Disadvantaged WOSB (EDWOSB) Program Set-Aside (FAR 19.15) |	Economi
 Economically Disadvantaged WOSB (EDWOSB) Program Sole Source (FAR 19.15) |	Economically Disadvantaged Women-Owned Small Business
 Local Area Set-Aside (FAR 26.2)	|
 
-### *Notice Types*
+### Notice Types
 The web service API includes specific methods to submit each of the base notice types (i.e. presolicitation, combined/synopsis, award, etc.). You will find these outlined in the sections below.
 
-### *Stauth Valid Values*
+### Stauth Valid Values
 Below table captures stauth values to use while making requests as needed.
 
 Code | Description
@@ -119,7 +119,8 @@ far6 | FAR 6.302-6  - National security
 far7 | FAR 6.302-7 - Public interest
 
 ## Contracting Officer Method Details
-### *Award Notice (submitAward)*
+
+### Award Notice (submitAward)
 This method is used to submit an award notice.
 
 Input parameters:
@@ -195,7 +196,7 @@ desc |	string |	No |	Description |	255 characters
 explicit_access |	boolean |	No |	Explicit Access |
 export_controlled |	boolean	No |	Export Controlled |
 
-### *Delete Notice/ Document Package (deleteNoticeOrDocumentPackage)*
+### Delete Notice/ Document Package (deleteNoticeOrDocumentPackage)
 
 This method is used to permanently delete an entire notice or delete attachments across all versions of the notice. Modifications/Amendments are recommended instead of using this method. Specify the solicitation number or award number to delete a notice. To delete attachments, also specify the attachment deletetype.
 
@@ -225,7 +226,7 @@ awdnbr |  string | no | Award # |	255 characters
 deletetype |	string |	no |	Notice or Attachment delete operation type |	Valid Values: “notice” for notice, “attachment” for attachment. Defaults to “notice” if not provided
 deletemethod |	string | no | Delete latest or all versions |	Valid Values: “latest” for latest version, “all” for all versions. Defaults to “all” if not provided
 
-### *Archive Notice (ArchiveNotice)*
+### Archive Notice (ArchiveNotice)
 
 This method is used to update the archive date on an existing notice.  If a past date is provided or no date provided at all, the notice will be immediately archived.
 
@@ -251,7 +252,7 @@ ntype |	string | no |	Base Notice Type | Valid values: "PRESOL" - for Presolicit
 archdate | date |	no | New Archive Date – If none provided, notice will archive immediately | YYYYMMDD
 officeid | string |	Yes |	Office id of the office where an opportunity is being submitted. Officeid must be associated with user account |	20 characters
 
-### *Cancel Notice (CancelNotice)*
+### Cancel Notice (CancelNotice)
 
 This method is used to post a cancellation notice to any base notice type already in the Opportunities system. Provide a Solicitation Number or an Award Number (for stand- alone awards) and other data outlined below for the cancellation notice.
 
@@ -284,7 +285,7 @@ desc | string | Yes |	Cancellation Description | 65535 characters
 
 ## Contracting Officer/Contracting Specialist Method Details
 
-### *Presolicitation (submitPresol)*
+### Presolicitation (submitPresol)
 
 This method is used to submit a Pre-solicitation Notice.
 
@@ -356,7 +357,7 @@ filedata | base64binary |	No | File Data | 100 MB
 desc | string |	No | Description | 255 characters
 
 
-### *Combined/Synopsis (submitCombined)*
+### Combined/Synopsis (submitCombined)
 
 This method is used to submit a Combined/Synopsis Notice.
 
@@ -426,7 +427,7 @@ filedata | base64binary |	No | File Data | 100 MB
 desc | string |	No | Description | 255 characters
 
 
-### *Modification/Amendment (submitMod)*
+### Modification/Amendment (submitMod)
 
 This method is used to submit a Modification/Amendment to any base notice.
 
@@ -496,7 +497,7 @@ filename |	string	| No | 	File Name |	255 characters
 filedata |	base64binary |	No |	File Data	| 100 MB
 desc |	string |	No |	Description |	255 characters
 
-### *Justification and Authorization (J&A) Notice (submitJA)*
+### Justification and Authorization (J&A) Notice (submitJA)
 
 This method is used to submit a J&A Notice.
 
@@ -568,7 +569,7 @@ filename |	string	| No |	File Name	| 255 characters
 filedata |	base64binary |	No |	File Data	| 100 MB
 desc	| string |	No |	Description |	255 characters
 
-### *Sources Sought Notice (submitSourcesSought)*
+### Sources Sought Notice (submitSourcesSought)
 
 This method is used to submit a Sources Sought Notice.
 
@@ -637,11 +638,11 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### *Foreign Government Standard (submitForeignGovernment)*
+### Foreign Government Standard (submitForeignGovernment)
 
 This service is now deprecated. Hence no longer available.
 
-### *Special Notice (submitSpecialNotice)*
+### Special Notice (submitSpecialNotice)
 
 This method is used to submit a Special Notice.
 
@@ -705,7 +706,7 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### *Sale of Surplus Property Notice (submitSaleOfSurplus)*
+### Sale of Surplus Property Notice (submitSaleOfSurplus)
 
 This method is used to submit a Sale of Surplus Property Notice.
 
@@ -769,7 +770,7 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### *Intent to Bundle Requirements (DoD- Funded) (submitITB)*
+### Intent to Bundle Requirements (DoD- Funded) (submitITB)
 
 This method is used to submit an Intent to Bundle Requirements (DoD-Funded) Notice.
 
@@ -835,11 +836,11 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### *Fair Opportunity / Limited Sources Justification (submitFairOpp)*
+### Fair Opportunity / Limited Sources Justification (submitFairOpp)
 
 This service is now deprecated. Instead, please use submitJA to perform the operation.
 
-### *General Notice (submitNotice)*
+### General Notice (submitNotice)
 
 This is a general method that supports submitting all of the above notice types. The complex type for the input data consists of all possible data elements across all notice types. Users may setup their web service client to use this general method instead of calling the specific methods outlined above.  The functionality is the same regardless of whether you use this general method, or the specific methods above. The valid options for this field are:
 
@@ -929,7 +930,7 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### *Document Packages (submitDocumentsAndLinksToNotice)*
+### Document Packages (submitDocumentsAndLinksToNotice)
 
 This method is used to attach document packages (non sensitive) to a notice modification.  This is similar to the EPSUPLOAD or DocumentUpload function currently found in the ftp/email electronic interface. The web service method now supports transmitting actual file data along with external links. Note: A base notice must already exist in the system.
 
@@ -971,7 +972,7 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### *Unarchive Notice (unarchiveNotice)*
+### Unarchive Notice (unarchiveNotice)
 
 This method is used to unarchive a notice or stand-alone award. Note: Provide a Solicitation Number or an Award Number to unarchive the related opportunity.
 
@@ -994,49 +995,49 @@ ntype	|string	|no	|Base Notice Type	|Valid values: "PRESOL" - for Presolicitatio
 awdnbr	|string|	No|	Award #|	255 characters
 archdate	|date|	No|	New Archive Date|	YYYYMMDD
 
-### *Secure Document Package (attachSecureDocumentPackagesToNotice)*
+### Secure Document Package (attachSecureDocumentPackagesToNotice)
 
 Details will be added in future.
 
-### *Non-FBO Solicitation (createNonFBOSolicitation)*
+### Non-FBO Solicitation (createNonFBOSolicitation)
 
 Details will be added in future.
 
-### *Secure Document Packages (attachSecureDocumentPackagesToNonFBOSolicitation)*
+### Secure Document Packages (attachSecureDocumentPackagesToNonFBOSolicitation)
 
 Details will be added in future.
 
-### *Remove Secure Document Package (removeSecureDocumentPackagesFromNonFBOSolicitation)*
+### Remove Secure Document Package (removeSecureDocumentPackagesFromNonFBOSolicitation)
 
 Details will be added in future.
 
-### *Non-FBO Solicitation Release (releaseNonFBOSolicitation)*
+### Non-FBO Solicitation Release (releaseNonFBOSolicitation)
 
 Details will be added in future.
 
-### *Un-Release-Non-FBO-Solicitation (unreleaseNonFBOSolicitation)*
+### Un-Release-Non-FBO-Solicitation (unreleaseNonFBOSolicitation)
 
 Details will be added in future.
 
-### *Secure Technical Document Package (createSecureDocumentPackage)*
+### Secure Technical Document Package (createSecureDocumentPackage)
 
 Details will be added in future.
 
-### *Add Files to Secure Document Package (addFilesToSecureDocumentPackage)*
+### Add Files to Secure Document Package (addFilesToSecureDocumentPackage)
 
 Details will be added in future.
 
-### *Delete Files from Secure Document Package (deleteFilesFromSecureDocumentPackage)*
+### Delete Files from Secure Document Package (deleteFilesFromSecureDocumentPackage)
 
 Details will be added in future.
 
-### *Delete Secure Document Package (deleteSecureDocumentPackage)*
+### Delete Secure Document Package (deleteSecureDocumentPackage)
 
 Details will be added in future.
 
 ## Methods Available To All Office Location Users
 
-### *getIVLList*
+### getIVLList
 
 This method is used to retrieve the Interested Vendors List (IVL) for a given solicitation.
 
@@ -1081,7 +1082,7 @@ address	|string	|Address
 bus_types|	string|	Business Types
 naics_codes|	string	|Naics Codes
 
-### *Authorized Parties List (getAuthorizedPartyList)*
+### Authorized Parties List (getAuthorizedPartyList)
 
 This method is used to retrieve the Authorized Party lists for an FBO Solicitation or a Non-FBO Solicitation. A third argument - ‘status’ - can be provided to retrieve pending Explicit Access requests, rejected requests, approved vendors, or all. Specify the first parameter to the web service method for FBO Solicitations and leave the second parameter blank. If retrieving lists for Non-FBO Solicitations, leave the first parameter blank and specify the second parameter. Valid options for status field: approved, rejected, pending, or leave blank for all.
 
@@ -1129,7 +1130,7 @@ dba_name|	string|	DBA Name
 duns|	string|	DUNS #
 cage_code	|string|	Cage Code
 
-### *Approve Explicit Access Requests (approveExplicitAccessRequestByID)*
+### Approve Explicit Access Requests (approveExplicitAccessRequestByID)
 
 This method is used to approve an Explicit Access request that is either in pending or rejected status. This method requires the internal ID which can be retrieved by first calling the getAuthorizedPartyList method. Specify an FBO Solicitation Number as the first argument.
 
@@ -1156,19 +1157,19 @@ Output Parameter |	Type |	Description
 ------- | ------ | -------
 Response | PostingResponse | Complex type
 
-### *Approve Explicit Access Requests (approveExplicitAccessRequestByVendorData)*
+### Approve Explicit Access Requests (approveExplicitAccessRequestByVendorData)
 
 Details will be added in future
 
-### *Reject Explicit Access Requests (rejectExplicitAccessRequestByID)*
+### Reject Explicit Access Requests (rejectExplicitAccessRequestByID)
 
 Details will be added in future
 
-### *Reject Explicit Access Requests (rejectExplicitAccessRequestByVendorData)*
+### Reject Explicit Access Requests (rejectExplicitAccessRequestByVendorData)
 
 Details will be added in future
 
-### *Add Authorized Party (addAuthorizedParty)*
+### Add Authorized Party (addAuthorizedParty)
 
 This method is used to arbitrarily add vendor users to the Authorized Party list for a given FBO Solicitation. This method accepts an FBO Solicitation Number and a set of vendor data. The method attempts to lookup the vendor in the system based on the data provided and adds an Authorized Party record if the match is successful.  This method has been deprecated for Non-FBO Solicitation Number.
 
@@ -1206,7 +1207,7 @@ cage_code|	string|	Cage Code
 
 ## Method Available for Data Export
 
-### *Get List of Notices (getList)*
+### Get List of Notices (getList)
 
 This method is used to retrieve a list of base notices. For each record returned, an internal identifier/unique key is provided that must be used in subsequent getNoticeData calls to get the complete notice data (and any of its changes or awards posted). The method will return a maximum of 1000 records and allows filtering the results by specifying the notice type, solicitation number, award number, posted date range and documents to search (active or archive).   For performance reasons, at least one filter must be provided.
 
@@ -1256,7 +1257,7 @@ solnbr	|string	|Solicitation Number
 awdnbr|	string	|Award Number
 archived|	boolean	|True or false
 
-### *Get Notice Data (getNoticeData)*
+### Get Notice Data (getNoticeData)
 
 This method is used to retrieve notice data and any changes/awards that were made. The notice_id from getList calls should be used in this call.   If document package data is requested, the total aggregate size for any request is 100MB. If a certain file pushes the total past this threshold, the data will not be returned for that file and any others encountered for the request; instead, links to the data will be provided and one can call the separate getFileData to cut down the size and to pull a specific document.
 
@@ -1359,11 +1360,11 @@ link|	string|	Link to file – used for files not stored on notices
 desc|	string|	Description
 size_limit_error|	boolean	|This element will be true if its size or aggregate file data for the request exceeds the max return size.
 
-### *Get Document Package Data (getDocumentPackageData)*
+### Get Document Package Data (getDocumentPackageData)
 
 This service is now deprecated
 
-### *Get File Data (getFileData)*
+### Get File Data (getFileData)
 
 This method provides the ability to pull in file data for a single file of a document package. The primary use of this method is if a single file’s size exceeds the 100MB max– when using this method for a single file, the file limit check does not occur.
 
@@ -1410,9 +1411,9 @@ size_limit_error|	boolean	|This element will be true if its size or aggregate fi
 
 Please note that variances may exist between SOAP requests generated by different XML tools and the samples below. The web service should still operate as expected as long as the syntax is CONSISTENT throughout the submission.
 
-### *submitPresol*
+### submitPresol
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitPresol:</summary>
@@ -1497,7 +1498,7 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitPresol:</summary>
@@ -1522,7 +1523,7 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-#### *Response Sample - Failure*
+#### Response Sample - Failure
 
 <details>
 <summary>submitPresol:</summary>
@@ -1549,9 +1550,9 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-### *submitCombined*
+### submitCombined
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitCombined:</summary>
@@ -1619,7 +1620,7 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitCombined:</summary>
@@ -1644,7 +1645,7 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-#### *Response Sample - Failure*
+#### Response Sample - Failure
 
 <details>
 <summary>submitCombined:</summary>
@@ -1677,9 +1678,9 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-### *submitSourcesSought*
+### submitSourcesSought
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitSourcesSought:</summary>
@@ -1747,7 +1748,7 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitSourcesSought:</summary>
@@ -1772,7 +1773,7 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-#### *Response Sample - Failure*
+#### Response Sample - Failure
 
 <details>
 <summary>submitSourcesSought:</summary>
@@ -1842,7 +1843,7 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>getList:</summary>
@@ -1951,7 +1952,7 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>getList:</summary>
@@ -1978,9 +1979,9 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-### *getNoticeData*
+### getNoticeData
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>getNoticeData:</summary>
@@ -2015,7 +2016,7 @@ Please note that variances may exist between SOAP requests generated by differen
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>getNoticeData:</summary>
@@ -2099,7 +2100,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>getNoticeData:</summary>
@@ -2126,9 +2127,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *submitAward*
+### submitAward
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitAward:</summary>
@@ -2202,7 +2203,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitAward:</summary>
@@ -2227,7 +2228,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>submitAward:</summary>
@@ -2260,9 +2261,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *submitJA*
+### submitJA
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitJA:</summary>
@@ -2329,7 +2330,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitJA:</summary>
@@ -2354,7 +2355,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>submitJA:</summary>
@@ -2387,9 +2388,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *submitITB*
+### submitITB
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitITB:</summary>
@@ -2459,7 +2460,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitITB:</summary>
@@ -2484,7 +2485,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>submitITB:</summary>
@@ -2516,9 +2517,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *submitSpecialNotice*
+### submitSpecialNotice
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitSpecialNotice:</summary>
@@ -2577,7 +2578,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitSpecialNotice:</summary>
@@ -2602,7 +2603,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>submitSpecialNotice:</summary>
@@ -2631,9 +2632,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *submitSaleOfSurplus*
+### submitSaleOfSurplus
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitSaleOfSurplus:</summary>
@@ -2691,7 +2692,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitSaleOfSurplus:</summary>
@@ -2717,7 +2718,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>submitSaleOfSurplus:</summary>
@@ -2748,9 +2749,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *archiveNotice*
+### archiveNotice
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>archiveNotice:</summary>
@@ -2785,7 +2786,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>archiveNotice:</summary>
@@ -2810,7 +2811,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>archiveNotice:</summary>
@@ -2837,9 +2838,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *submitMod*
+### submitMod
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitMod:</summary>
@@ -2907,7 +2908,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitMod:</summary>
@@ -2932,7 +2933,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>submitMod:</summary>
@@ -2964,9 +2965,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *unarchiveNotice*
+### unarchiveNotice
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>unarchiveNotice:</summary>
@@ -3001,7 +3002,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>unarchiveNotice:</summary>
@@ -3026,7 +3027,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>unarchiveNotice:</summary>
@@ -3053,9 +3054,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *submitNotice*
+### submitNotice
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitNotice:</summary>
@@ -3149,7 +3150,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitNotice:</summary>
@@ -3174,7 +3175,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>submitNotice:</summary>
@@ -3204,9 +3205,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *CancelNotice*
+### CancelNotice
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>CancelNotice:</summary>
@@ -3271,7 +3272,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>CancelNotice:</summary>
@@ -3296,7 +3297,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>CancelNotice:</summary>
@@ -3323,9 +3324,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *submitDocumentsAndLinksToNotice*
+### submitDocumentsAndLinksToNotice
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>submitDocumentsAndLinksToNotice:</summary>
@@ -3390,7 +3391,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>submitDocumentsAndLinksToNotice:</summary>
@@ -3415,7 +3416,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Error*
+#### Response Sample - Error
 
 <details>
 <summary>submitDocumentsAndLinksToNotice:</summary>
@@ -3442,9 +3443,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *getFileData*
+### getFileData
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>getFileData:</summary>
@@ -3475,7 +3476,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>getFileData:</summary>
@@ -3510,7 +3511,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Failure*
+#### Response Sample - Failure
 
 <details>
 <summary>getFileData:</summary>
@@ -3538,9 +3539,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *getIVLList*
+### getIVLList
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>getIVLList:</summary>
@@ -3571,7 +3572,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>getIVLList:</summary>
@@ -3612,7 +3613,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Failure*
+#### Response Sample - Failure
 
 <details>
 <summary>getIVLList:</summary>
@@ -3639,9 +3640,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *addAuthorizedParty*
+### addAuthorizedParty
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>addAuthorizedParty:</summary>
@@ -3682,7 +3683,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>addAuthorizedParty:</summary>
@@ -3707,7 +3708,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Failure*
+#### Response Sample - Failure
 
 <details>
 <summary>addAuthorizedParty:</summary>
@@ -3735,9 +3736,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *deleteNoticeorDocumentPackage*
+### deleteNoticeorDocumentPackage
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>deleteNoticeorDocumentPackage:</summary>
@@ -3772,7 +3773,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>deleteNoticeorDocumentPackage:</summary>
@@ -3797,7 +3798,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Failure*
+#### Response Sample - Failure
 
 <details>
 <summary>deleteNoticeorDocumentPackage:</summary>
@@ -3824,9 +3825,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *getAuthorizedPartyList*
+### getAuthorizedPartyList
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>getAuthorizedPartyList:</summary>
@@ -3863,7 +3864,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>getAuthorizedPartyList:</summary>
@@ -3904,7 +3905,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Failure*
+#### Response Sample - Failure
 
 <details>
 <summary>getAuthorizedPartyList:</summary>
@@ -3932,9 +3933,9 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-### *approveExplicitAccessRequestbyID*
+### approveExplicitAccessRequestbyID
 
-#### *Request Sample*
+#### Request Sample
 
 <details>
 <summary>approveExplicitAccessRequestbyID:</summary>
@@ -3980,7 +3981,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Success*
+#### Response Sample - Success
 
 <details>
 <summary>approveExplicitAccessRequestbyID:</summary>
@@ -4005,7 +4006,7 @@ Note: This service gets a list of all notices
 </p>
 </details>
 
-#### *Response Sample - Failure*
+#### Response Sample - Failure
 
 <details>
 <summary>approveExplicitAccessRequestbyID:</summary>
@@ -4034,7 +4035,7 @@ Note: This service gets a list of all notices
 
 ## Business Rules and Error Messages
 
-### *General Error Messages*
+### General Error Messages
 
 The following error messages may be returned as part of the response to various web service calls; these errors are not specific to one method and may apply to more than one.
 
@@ -4044,11 +4045,11 @@ The following error messages may be returned as part of the response to various 
 * Office Location cannot be determined; user found not setup correctly, the office location cannot be determined.
 * DATE field in unexpected format. Expects YYYYMMDD; all dates expected in this format unless otherwise noted.
 
-### *Specific Business Rulles and Error Messages*
+### Specific Business Rulles and Error Messages
 
 This section details possible error messages for specific methods. Note that these rules are reflective of time of implementation and are subject to change in future.
 
-#### *submitNotice*
+#### submitNotice
 
 Individual business rules per field are listed across each of the fields in below table.  
 Note:
@@ -4092,7 +4093,7 @@ state	|No	|NA|	NA|	NA
 recovery_act|	No|	true or false|	NA	|NA
 correction|	No|	true or false. If correcting a previously submitted J&A notice, specify true and the system will lookup the j&a by award number and sol number if applicable.	|If correction = true, system checks if an opportunity exists or not. If exists, then a new modified record will be posted of the same type and will be set as the latest. If No, then the request will be rejected.|
 
-#### *submitPresol and submitSourcesSought*
+#### submitPresol and submitSourcesSought
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: When none of the fields are given, then the service throws an error - $.data.title: is missing but it is required
@@ -4121,7 +4122,7 @@ popzip|	No|	5 digits|	NA|	NA
 popcountry	|No|	32 characters|	NA|	NA
 recovery_act|	No	|true or false|	NA|	NA
 
-#### *submitCombined*
+#### submitCombined
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: When none of the fields are given, then the service throws an error - $.data.title: is missing but it is required
@@ -4150,7 +4151,7 @@ popzip|	No|	5 digits|	NA|	NA
 popcountry|	No|	32 characters	|NA	|NA
 recovery_act	|No|	true or false|	NA|	NA
 
-#### *submitITB*
+#### submitITB
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: When none of the fields are given, then the service throws an error - $.data.title: is missing but it is required
@@ -4178,7 +4179,7 @@ email|	No|	128 characters|	NA	 |
 recovery_act|	No|	true or false|	NA|	 NA
 correction|	No|	true or false. If correcting a previously submitted itb notice, specify true and the system will lookup the itb by award number, delivery number and sol number if applicable.|	1. When user tries to convert a notice to ITB and the solicitation number and ntype do not match the notice and correction = true, then the service throws an error. 2. If correction = True and the system cannot return a single record for the same delivery number/ award number / sol-number or combination of all three, then the service throws an error. 3. If correction = True and the system returns more than one record for the same delivery number/ award number / sol-number or combination of all three, then service throws an error|	1. Notice could not be found for correction. 2. Notice could not be found for correction. 3. Multiple Notices found. Please input more details.
 
-#### *submitMod*
+#### submitMod
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: If none of the fields are given, then service throws an error – ntype provided is not valid.
@@ -4210,7 +4211,7 @@ popzip	|No	|5 digit	|NA |	NA
 popcountry|	No	|32 characters|	NA|	NA
 recovery_act|	No|	true or false|	NA|	NA
 
-#### *submitJA*
+#### submitJA
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: If none of the fields are given, then service throws an error – $.data.title: is missing but it is required.
@@ -4251,7 +4252,7 @@ recovery_act	|No	|true or false|	NA	|NA
 correction	|No	|true or false. If correcting a previously submitted J&A notice, specify true and the system will lookup the j&a by award number and sol number if applicable.|	If correction = true, system checks if an opportunity exists or not. If exists, then a new modified record will be posted of the same type and will be set as the latest. If No, then the request will be rejected. |	 NA
 donbr	|Yes|	255 characters from the set: a-z A-Z 0-9 - _ ( ) {}	|1. This field is required. 2. In value provided for this field does not meet the character limit/restrictions mentioned, then service throws an error|	1. Award Details Section - Task/Delivery Order Number is required field. 2. Award Details Section - Task/Delivery Order Number - Please enter a valid number
 
-#### *submitMod*
+#### submitMod
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: If none of the fields are given, then service throws an error – ntype provided is not valid.
@@ -4284,7 +4285,7 @@ setaside|	No|	See SetAside section for valid values|	NA|	NA
 recovery_act	|No	|true or false|	NA|	NA
 correction|	No|	true or false. If correcting a previously submitted award notice, specify true and the system will lookup the award by award number and sol number if applicable.|	If correction = true, system checks if an opportunity exists or not. If exists, then a new modified record will be posted of the same type and will be set as the latest. If No, then the request will be rejected. 	 |
 
-#### *submitDocumentsAndLinksToNotice*
+#### submitDocumentsAndLinksToNotice
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: Users cannot verify the attachments/links on front end (UI.)
@@ -4302,15 +4303,15 @@ respdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if
 links|	No|	Array of files|	1.	This field is not required but if url & description fields within the links and files are empty, then the service throws an error. 2.	If a link with same name already exists on the notice, then the system throws an error. 3.	If the Url is empty for a link, then the system throws an error. 4.	If the description is missing for a link, then the system throws an error.| 1.	Links and/or files are not complete. 2.	Resource with the same name already exists. 3.	Link Resource must have a link. 4.	Link Resource must have a description.
 files	|No|	Array of files|	1.	This field is not required but if url & description fields within the links and files are empty, then the service throws an error. 2.	If the filename is not provided for a file, then the system throws an error. 3.	If the filedata is empty for a file, then the system throws an error. 4.	If the filename provided has either no type specified or is an unsupported type, then the system throws an error. 5.	If the file size exceeds 250MB, then the system throws an error. |1.	Links and/or files are not complete 2.	Attachment must have a name. 3.	Attachment must have content 4.	The file type that you are trying to upload is not supported. 5.	The file type that you are trying to upload is not supported. 6.	Resource with the same name already exists.
 
-#### *submitFairOpps*
+#### submitFairOpps
 
 This service is now deprectated. Instead, please use submitJA to perform the operation.
 
-#### *submitForeignGovernment*
+#### submitForeignGovernment
 
 This service is now deprectated.
 
-#### *submitSpecialNotice*
+#### submitSpecialNotice
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: When none of the fields are given, then the service throws an error - $.data.title: is missing but it is required
@@ -4334,7 +4335,7 @@ files|	No|	 |	1. This field is not required but if url & description fields with
 email|	No|	128 characters|	NA|	NA
 recovery_act|	No|	true or false|	NA|	NA
 
-#### *submitSaleofSurplus*
+#### submitSaleofSurplus
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: When none of the fields are given, then the service throws an error - $.data.title: is missing but it is required
@@ -4358,7 +4359,7 @@ files|	No|	| 	1. This field is not required but if url & description fields with
 email|	No|	128 characters|	NA|	NA
 recovery_act|	No|	true or false|	NA|	NA
 
-#### *deleteNoticeOrDocumentPackage*
+#### deleteNoticeOrDocumentPackage
 
 Individual business rules per field are listed across each of the fields in below table.  
 
@@ -4370,7 +4371,7 @@ ntype|	Yes if non-award|	Valid values: "PRESOL" - for Presolicitation, "COMBINE"
 deletetype|	no|	Valid values: “notice” to delete the notice, “attachment” to delete attachments from the notice|	1. If an invalid deletetype is provided, then service throws an error.  |	Delete type provided is not “notice” or “attachment”
 deletemethod|	no|	Valid Values: “all” to delete all versions or “latest” to delete latest version	|1. If an invalid deletemethod is provided, then service throws an error.  |	Delete method provided is not “latest” or “all”
 
-#### *archiveNotice*
+#### archiveNotice
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: : If a user tries to archive a notice that is already archived, then the service throws an error -  Opportunity already archived
@@ -4383,7 +4384,7 @@ officeid	|Yes|	20 characters|	Officeid must be associated with user account	|NA
 ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice|	1. If an invalid ntype is provided, then service throws an error.    2. If a valid ntype but a wrong ntype is not provided for the solnbrthen service throws an error. | 1. NTYPE value provided is not valid 2. Notice not found for correction.
 archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be current or in past; has to be in future	|1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	This opportunity cannot be published. Archive date provided is in the past.
 
-#### *unarchiveNotice*
+#### unarchiveNotice
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: : If a user tries to unarchive a notice that is already unarchived, then the service throws an error - Opportunity is not archived.
@@ -4397,7 +4398,7 @@ ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combine
 awdnbr	|No|	255 characters|	NA|	NA
 archdate|	No|	YYYYMMDD|	1.	If this value is available, this field should meet the character limit/restrictions 2.	If current date or a past date is provided, then the system throws an error.  3.	If no archive date is given, then the system throws an error.| 1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	New archive date provided is in the past. 3.	$.reason: null found, string expected. Unable to process request. Please try again.
 
-#### *cancelNotice*
+#### cancelNotice
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: : If user tries to cancel already cancelled opportunity, service throws an error - This opportunity cannot be cancelled. This opportunity is already cancelled. Unable to process request. Please try again.
@@ -4415,7 +4416,7 @@ archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if
 contact|	Yes|	65535 characters Default value = Primary Other types are: Secondary, Owner|	1. This required field should be validated.	|1. Unable to process request. Please try again
 desc|	Yes|	65535 characters|	1. This required field should be validated. |	1. Unable to process request. Please try again
 
-#### *getNoticeData*
+#### getNoticeData
 
 Individual business rules per field are listed across each of the fields in below table.  
 
@@ -4426,7 +4427,7 @@ Get_changes|	No	|true or false. Pass in true to get the full notice history with
 get_changes_from_date|	No|	If maintaining a sync of changes, can specify a date so that only changes that have occurred since provided date will be returned.|	Date field should meet the expected format.|	DATE field in unexpected format. Expects YYYYMMDD
 get_file_data	|No	|True or false. Pass in true and the method will return any file content stored in Contract Opportunities (attachment data will be retuned as Base64Encoding Format). If false, the meta details/links will still be provided.	|NA	|NA
 
-#### *getNoticeData*
+#### getNoticeData
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: Although none of the individual elements are mandatory, at least one filter should be given to perform the operation. If no filters are entered, then system throws an error - Insufficient Search Criteria.
@@ -4440,7 +4441,7 @@ posted_from	|No	|Posted From Date. YYYYMMDD.|	Date field should meet the expecte
 posted_to|	No	|Posted To Date. YYYYMMDD	|Date field should meet the expected format.	|DATE field in unexpected format. Expects YYYYMMDD
 documents_to_search|	No	|Valid Values: ‘active’ or ‘archived’. Default is ALL if nothing provided.|	NA|	NA
 
-#### *getFileData*
+#### getFileData
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: If a wrong combination of file_id and notice_id is given, then the service throws a success message without any data.
@@ -4450,7 +4451,7 @@ Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Erro
 file_id	|Yes|	Unique ID of a file found from getNoticeData call (i.e. file_id element) |This required field should be validated |	file_id is required.
 notice_id|	Yes|	Unique identifier for a notice	|This required field should be validated|	notice_id from getList is required.
 
-#### *getIVLListResponse*
+#### getIVLListResponse
 
 Individual business rules per field are listed across each of the fields in below table.  
 
@@ -4459,7 +4460,7 @@ Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Erro
 solnbr|	Yes|	Solicitation Number|	1. If an incorrect solicitation number and ntype combination is given, the service throws an error.   2a. If this required field if not given, service throws an error 2b. If multiple notices are found with solicitation number given, then provide ntype and solictiion number combination. |1. Notice not found 2a. Notice not found. 2b. Multiple Notices found. Please input more details.
 ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice, “ITB” – for Intent to Bundle Requirements (DoD- Funded)|	NA	|NA
 
-#### *getAuthorizedPartyList*
+#### getAuthorizedPartyList
 
 Individual business rules per field are listed across each of the fields in below table.  
 
@@ -4470,7 +4471,7 @@ ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combine
 nonfbo_solbr |	No|	|	1.	If both solnbr and nonfbo_solbr are provided, then the service throws an error. 2.	If only nonfbo_solbr is provided, then the service throws an error.| 1.	Solicitation Number and Non-FBO Solicitation Number cannot be specified together 2.	addAuthoizedParty service is deprecated for Non-FBO Solicitations.
 status|	No|	Valid Options: approved, pending, rejected, “empty value”. If empty, all status will be returned. Note, use “pending” to pull the pending explicit access requests. |1.	If the status value is inputed and doesn’t match approved, pending, rejected.|	1.	Status value is invalid.
 
-#### *approveExplicitAccessRequestByID*
+#### approveExplicitAccessRequestByID
 
 Individual business rules per field are listed across each of the fields in below table.  
 
@@ -4481,11 +4482,11 @@ ntype	|No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combine
 nonfbo_solbr |	No|	|	1.	If both solnbr and nonfbo_solbr are provided, then the service throws an error. 2.	If only nonfbo_solbr is provided, then the service throws an error.| 1.	Solicitation Number and Non-FBO Solicitation Number cannot be specified together. 2.	approveExplicitAccessRequestByID service is deprecated for Non-FBO Solicitations.
 id|	Yes|	|	1.	If the request Id is not provided, then the system throws an error. 2.	If the request Id provided is already approved, then the service throws an error. 3.	If the solicitation number provided does not match the solicitation number of the request Id, then the service throws an error. 4.	If the solicitation number provided matches with the solicitation number of the  request Id  but does not match with the provided N type, then the service throws an error.	|1.	Internal ID is required. Use getAuthorizedPartyList to retrieve this information. 2.	Request with Request ID: #id already approved. 3.	You have request that is tied to different solicitation number. 4.	You have request that is tied to the same solicitation number but different notice type.
 
-#### *approveExplicitAccessRequestByVendorData*
+#### approveExplicitAccessRequestByVendorData
 
 Details will be added in future.
 
-#### *addAuthorizedParty*
+#### addAuthorizedParty
 
 Individual business rules per field are listed across each of the fields in below table.  
 
@@ -4497,13 +4498,13 @@ nonfbo_solbr 	|No|	|	1.	If both solnbr and nonfbo_solbr are provided, then the s
 vendor|	Yes|	Vendor Data|	1.	If all the elements in the Vendor Data complex definition are not provided, then the system throws an error. 2.	If no match is found in the system for the vendor data provided, then the system throws an error.|	1.	This method requires all fields from complex type VendorData to find a match in the system; if vendor data not fully provided this error will be thrown. 2.	No contact match on vendor data provided.
 
 
-#### *rejectExplicitAccessRequestByID*
+#### rejectExplicitAccessRequestByID
 
 Individual business rules per field are listed across each of the fields in below table.  
 
 Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
 ------ | ------- | ------- | ------- | --------
-solnbr|	Yes |	128 characters from the set: a-z A-Z 0-9 - _ ( ) { } |1. This required field should be validated. If no value is provided, then service throws an error 2. If invalid combination of ntype and solnbr is provided, then system throws an error.  3. If a space is given along with numbers in this field, then service throws an error. 4. If ntype value is not provided and the solnbr is not unique, then the system throws an error.|	1. Solicitation Number is required. 2. Notice not found. 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces 4. Multiple notices found. Please input more details.
+solnbr|	Yes |	128 characters from the set: a-z A-Z 0-9 - _ ( ) { } |1. This required field should be validated. If no value is provided, then service throws an error <br/> 2. If invalid combination of ntype and solnbr is provided, then system throws an error.<br/>  3. If a space is given along with numbers in this field, then service throws an error. 4. If ntype value is not provided and the solnbr is not unique, then the system throws an error.|	1. Solicitation Number is required. <br/> 2. Notice not found.<br/> 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces <br/> 4. Multiple notices found. Please input more details.
 ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice|	1.	If an invalid ntype is provided, then service throws an error.   |	1. NTYPE value provided is not valid
 nonfbo_solbr |	No|	|	1.	If both solnbr and nonfbo_solbr are provided, then the service throws an error. 2.	If only nonfbo_solbr is provided, then the service throws an error.| 1.	Solicitation Number and Non-FBO Solicitation Number cannot be specified together. 2.	rejectExplicitAccessRequestByID service is deprecated for Non-FBO Solicitations.
 id|	Yes	||	1.	If the request Id is not provided, then the system throws an error. 2.	If the request Id provided is already rejected, then the service throws an error. 3.	If the solicitation number provided does not match the solicitation number of the request Id, then the service throws an error. 4.	If the solicitation number provided matches with the solicitation number of the  request Id  but does not match with the provided N type, then the service throws an error.|	1.	Internal ID is required. Use getAuthorizedPartyList to retrieve this information. 2.	Request with Request ID: #id already rejected. 3.	You have request that is tied to different solicitation number. 4.	You have request that is tied to the same solicitation number but different notice type.
@@ -4527,13 +4528,13 @@ id|	Yes	||	1.	If the request Id is not provided, then the system throws an error
 
 
 
-#### *rejectExplicitAccessRequestByVendorData*
+#### rejectExplicitAccessRequestByVendorData
 Details will be added in future.
 
-#### *setBidModuleOptions*
+#### setBidModuleOptions
 Details will be added in future.
 
-#### *getBidModuleResponses*
+#### *getBidModuleResponses
 Details will be added in future.
 
 #### *createSecureDocumentPackage*
