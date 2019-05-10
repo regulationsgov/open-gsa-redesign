@@ -3935,20 +3935,67 @@ Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Erro
 date|	No|	YYYYMMDD|	1. This field should meet the character limit/restrictions Note: Date field allows current date and also any date in past/future|	1. DATE field in unexpected format. Expects YYYYMMDD
 zip|	No|	5 digits|	NA|	NA
 classcod	|Yes – For combined type, presol type, Sale of surplus  No – For test	|Valid classification code (FAR, Section 5.207(g))	|1. This field is required and should be validated. 2. If a wrong classification code is given, then service throws an error. |1. PSC code is required 2. This opportunity cannot be published. Classification Code provided did not match expected codes
+naics	|Yes – For combined type No – For rest|	Valid NAICS Code  NAICS Reference	|1. For combined, this field is required and should be validated|	1. NAICS code is required
+officeid|	Yes|	20 characters|	1. This field is required 2. If an invalid officeid is given, then service throws an error. 3. If contracting officer does not have access to an office but is trying to make modifications to an opportunity associated to that office, then the service throws an error. 4. Officeid must be associated with user account|	1. Contracting Office is required 2. Invalid officeid provided 3. UnAuthorized Credentials. This may be the JWT issue or Role management issue. Please check
+offadd|	No	|65535 characters|	NA|	NA
+subject	|Yes|	255 characters|	1. This required field should be validated	|1. $.data.title: is missing but it is required
+solnbr|	Yes|	128 characters from the set: a-z A-Z 0-9 - _ ( ) {}. Note for statutory authority FAR 6.302- 1(c) - Brand name, this is required	|1a. This required field if not given, service will throws an error
+1b. If multiple notices are found with solicitation number given, then provide ntype and solictiion number combination. 2. If a space is given along with numbers in this field, then service throws an error. 3. If solicitation & ntype combination is not matched, then service throws an error.|	1. Multiple notices found. Please input more details.  2. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces 3.	Notice not found for correction
+ntype|	No|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice	1.|	1. If all the required field is given and this field is not given OR a wrong ntype is provided, then service throws an error.   |	1.	NTYPE value provided is not valid
+respdate	|Yes – Combined No – For rest	|YYYYMMDD	|1.	This required field is validated for combined type. 2.	No validation is performed on this field for rest of the types. However, if this value is available, this field should meet the character limit/restriction 3.	This date cannot be in past; has to be in future|	1.	This opportunity cannot be published. Response date is required. 2.	DATE field in unexpected format. Expects YYYYMMDD. 3.	This opportunity cannot be published. Response date provided is in the past.
+archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be current or in past; has to be in future	|1.	DATE field in unexpected format. Expects YYYYMMDD. 2.	This opportunity cannot be published. Archive date provided is in the past.
+contac|	No – For Special notice Yes – For rest	|65535 characters Default value = Primary Other types are: Secondary, Owner	|1. This required field should be validated.|	1. Primary Contact is Required
+desc	|Yes|	65535 characters|	1. This required field should be validated.	|1. Description is required
+link|	No	|255 characters, consist of a restricted set of characters (see URL specification - RFC 2396)|	NA	|NA
+links	|No	|Collection	|1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error	|1. Links and/or files are not complete
+files|	No|	 |	1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error	|1. Links and/or files are not complete
+email	|No|128 characters|	NA|NA
+setaside|	No|	See SetAside section for valid values|	NA|	NA
+popaddress|	No	|65535 characters|	NA|	NA
+popzip	|No	|5 digit	|NA |	NA
+popcountry|	No	|32 characters|	NA|	NA
+recovery_act|	No|	true or false|	NA|	NA
+
+#### *submitJA*
+
+Individual business rules per field are listed across each of the fields in below table.  
+* Note: If none of the fields are given, then service throws an error – $.data.title: is missing but it is required.
+* Note: If only subject is given, then service throws multiple errors:
+      Award Details Section - Task/Delivery Order Number is required field.  
+      Contracting office is required
+      PSC code is required
+      Award Details Section - Contract Award Number is a required field.
+      This opportunity cannot be published. Authority is required
+      Primary Contact is required
+      Notice Id is required
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+Element Name	| Required |	Character Limit / Restrictions |	Business Rules |	Error Messages with respect to business rules (If any)
+------ | ------- | ------- | ------- | --------
+date|	No	|YYYYMMDD	|1. This field should meet the character limit/restrictions Note: Date field allows current date and also any date in past/future	|1. DATE field in unexpected format. Expects YYYYMMDD
+zip	|No	|5 digits|	NA|	NA
+classcod|	Yes|	Valid classification code (FAR, Section 5.207(g))|	1. This required field should be validated 2. If a wrong classification code is given, then the service throws an error.	|1. PSC code is required 2. This opportunity cannot be published. Classification Code provided did not match expected codes.
+naics|	No – this may change in future	|Valid NAICS Code  NAICS Reference|	NA|	NA
+offadd|	No|	65535 characters|	NA|	NA
+officeid|	Yes|	20 characters	|1. This field is required 2. If an invalid officeid is given, then service throws an error. 3. If contracting officer does not have access to an office but is trying to make a submission to that office, then the service throws an error. 4. Officeid must be associated with user account	|1. Contracting Office is required 2. Invalid officeid provided. 3. UnAuthorized Credentials. This may be the JWT issue or Role management issue.
+subject	|Yes|	255 characters	|1. This required field should be validated	|1. $.data.title: is missing but it is required
+solnbr|	Yes|	128 characters from the set: a-z A-Z 0-9 - _ ( ) {}. Note for statutory authority FAR 6.302- 1(c) - Brand name, this is required|	1. This required field if not given will throw an error  2. Duplicate solicitation number cannot be submitted. (Refer error #2) 3. If a space is given along with numbers in this field, then service throws an error. 4. If solicitation & ntype combination is not matched, then service throws an error.	|1. Notice Id is required 2. Notice ID for the selected opportunity type already exits 3. Notice Id can only contain 128 characters from the following set: a-z A-Z 0-9 - _ ( ) { } with no spaces 4. Opportunity not found with given solicitation number and ntype
+ntype	|No	|Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice|1. If all the required field is given and this field is not given OR a wrong ntype is provided, then service throws an error. |   1. Invalid NTYPE value provided
+stauth	|Yes|	Valid values: 1, 2, 3, 4, 5, brand, far1, far2, far3, far4, far5, far6, far7  Description of each of these stauth values is captured in Stauth Value section. Foja values are: Valid values: 'Urgency’, ‘Only One Source (except brand name)’, ‘Follow-on Delivery Order Following Competitive Initial Order’, ‘Minimum Guarantee’, ‘Other Statutory Authority’|	1. This required field should be validated Note: Both foja & stauth values will be given under stauth in legacy	|1. This opportunity cannot be published. Authority is required
+awdnbr	|Yes|	255 characters|	1. This required field should be validated.	|1. Award Details Section - Contract Award Number is a required field.
+modnbr|	No	|32 characters|	NA|	NA
+awddate	|No – May change in future|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions| 	1.	DATE field in unexpected format. Expects YYYYMMDD.
+awdamt|	No|	64 characters|	NA|	NA
+archdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions 2.	This date cannot be current or in past; has to be in future|	1.	DATE field in unexpected format. Expects YYYYMMDD.  2.	This opportunity cannot be published. Archive date provided is in the past.
+contact|	Yes |	65535 characters Default value = Primary Other types are: Secondary, Owner	|1. This required field should be validated.|	1. Primary Contact is Required
+desc|	No|	65535 characters|	NA	|NA
+link|	No	|255 characters, consist of a restricted set of characters (see URL specification - RFC 2396)|	NA|	NA
+links	|No	| |	1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error	|1. Links and/or files are not complete
+files	|No|	 |	1. This field is not required but if url & description fields within the links and files are empty, then the service throws an error|	1. Links and/or files are not complete
+email	|No – This may change in future|	128 characters|	NA|	NA
+recovery_act	|No	|true or false|	NA	|NA
+correction	|No	|true or false. If correcting a previously submitted J&A notice, specify true and the system will lookup the j&a by award number and sol number if applicable.|	If correction = true, system checks if an opportunity exists or not. If exists, then a new modified record will be posted of the same type and will be set as the latest. If No, then the request will be rejected. |	 NA
+donbr	|Yes|	255 characters from the set: a-z A-Z 0-9 - _ ( ) {}	|1. This field is required. 2. In value provided for this field does not meet the character limit/restrictions mentioned, then service throws an error|	1. Award Details Section - Task/Delivery Order Number is required field. 2. Award Details Section - Task/Delivery Order Number - Please enter a valid number
 
 
 
