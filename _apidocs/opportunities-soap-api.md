@@ -4534,40 +4534,40 @@ Details will be added in future.
 #### setBidModuleOptions
 Details will be added in future.
 
-#### *getBidModuleResponses
+#### getBidModuleResponses
 Details will be added in future.
 
-#### *createSecureDocumentPackage*
+#### createSecureDocumentPackage
 Details will be added in future.
 
-#### *addFilesToSecureDocumentPackage*
+#### addFilesToSecureDocumentPackage
 Details will be added in future.
 
-#### *deleteFilesFromSecureDocumentPackage*
+#### deleteFilesFromSecureDocumentPackage
 Details will be added in future.
 
-#### *deleteSecureDocumentPackage*
+#### deleteSecureDocumentPackage
 Details will be added in future.
 
-#### *releaseSecureDocumentPackage*
+#### releaseSecureDocumentPackage
 Details will be added in future.
 
-#### *attachSecureDocumentPackagesToNotice*
+#### attachSecureDocumentPackagesToNotice
 Details will be added in future.
 
-#### *createNonFBOSolicitation*
+#### createNonFBOSolicitation
 Details will be added in future.
 
-#### *attachSecureDocumentPackagesToNonFBOSolicitation*
+#### attachSecureDocumentPackagesToNonFBOSolicitation
 Details will be added in future.
 
-#### *removeSecureDocumentPackagesFromNonFBOSolicitation*
+#### removeSecureDocumentPackagesFromNonFBOSolicitation
 Details will be added in future.
 
-#### *releaseNonFBOSolicitation*
+#### releaseNonFBOSolicitation
 Details will be added in future.
 
-#### *unreleaseNonFBOSolicitation*
+#### unreleaseNonFBOSolicitation
 Details will be added in future.
 
 
