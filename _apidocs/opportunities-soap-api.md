@@ -11,7 +11,7 @@ The Opportunity Management SOAP APIs will allow authorized users to submit and r
 
 ## Getting Started
 
-## Web Services Description Language (WSDL)
+## Web Services <br> Description Language (WSDL)
 To view the WSDL for all available methods and object definitions, refer below links:
 * Alpha WSDL Link: https://api-alpha.sam.gov/prodlike/ws/services.WSDL
 * Beta WSDL Link: TBD
@@ -118,7 +118,7 @@ far5 | FAR 6.302-5 - Authorized or required by statute
 far6 | FAR 6.302-6  - National security
 far7 | FAR 6.302-7 - Public interest
 
-## Contracting Officer Method Details
+## Contracting Officer<br> Method Details
 
 ### Award Notice (submitAward)
 This method is used to submit an award notice.
@@ -196,7 +196,7 @@ desc |	string |	No |	Description |	255 characters
 explicit_access |	boolean |	No |	Explicit Access |
 export_controlled |	boolean	|No |	Export Controlled |
 
-### Delete Notice/ Document Package (deleteNoticeOrDocumentPackage)
+### Delete Notice/ Document Package <br>(deleteNoticeOrDocumentPackage)
 
 This method is used to permanently delete an entire notice or delete attachments across all versions of the notice. Modifications/Amendments are recommended instead of using this method. Specify the solicitation number or award number to delete a notice. To delete attachments, also specify the attachment deletetype.
 
@@ -222,7 +222,7 @@ awdnbr |  string | no | Award # |	255 characters
 deletetype |	string |	no |	Notice or Attachment delete operation type |	Valid Values: “notice” for notice, “attachment” for attachment. Defaults to “notice” if not provided
 deletemethod |	string | no | Delete latest or all versions |	Valid Values: “latest” for latest version, “all” for all versions. Defaults to “all” if not provided
 
-### Archive Notice (ArchiveNotice)
+### Archive Notice <br>(ArchiveNotice)
 
 This method is used to update the archive date on an existing notice.  If a past date is provided or no date provided at all, the notice will be immediately archived.
 
@@ -248,7 +248,7 @@ ntype |	string | no |	Base Notice Type | Valid values: "PRESOL" - for Presolicit
 archdate | date |	no | New Archive Date – If none provided, notice will archive immediately | YYYYMMDD
 officeid | string |	Yes |	Office id of the office where an opportunity is being submitted. Officeid must be associated with user account |	20 characters
 
-### Cancel Notice (CancelNotice)
+### Cancel Notice<br> (CancelNotice)
 
 This method is used to post a cancellation notice to any base notice type already in the Opportunities system. Provide a Solicitation Number or an Award Number (for stand- alone awards) and other data outlined below for the cancellation notice.
 
@@ -279,9 +279,9 @@ archdate | date |	No | Archive Date | YYYYMMDD
 contact | string | Yes | Contact Info | 65535 characters
 desc | string | Yes |	Cancellation Description | 65535 characters
 
-## Contracting Officer/Contracting Specialist Method Details
+## Contracting Officer/Contracting <br>Specialist Method Details
 
-### Presolicitation (submitPresol)
+### Presolicitation <br>(submitPresol)
 
 This method is used to submit a Pre-solicitation Notice.
 
@@ -353,7 +353,7 @@ filedata | base64binary |	No | File Data | 100 MB
 desc | string |	No | Description | 255 characters
 
 
-### Combined/Synopsis (submitCombined)
+### Combined/Synopsis<br> (submitCombined)
 
 This method is used to submit a Combined/Synopsis Notice.
 
@@ -423,7 +423,7 @@ filedata | base64binary |	No | File Data | 100 MB
 desc | string |	No | Description | 255 characters
 
 
-### Modification/Amendment (submitMod)
+### Modification/Amendment <br> (submitMod)
 
 This method is used to submit a Modification/Amendment to any base notice.
 
@@ -493,7 +493,7 @@ filename |	string	| No | 	File Name |	255 characters
 filedata |	base64binary |	No |	File Data	| 100 MB
 desc |	string |	No |	Description |	255 characters
 
-### Justification and Authorization (J&A) Notice (submitJA)
+### Justification and Authorization <br> (J&A) Notice (submitJA)
 
 This method is used to submit a J&A Notice.
 
@@ -565,7 +565,7 @@ filename |	string	| No |	File Name	| 255 characters
 filedata |	base64binary |	No |	File Data	| 100 MB
 desc	| string |	No |	Description |	255 characters
 
-### Sources Sought Notice (submitSourcesSought)
+### Sources Sought Notice <br> (submitSourcesSought)
 
 This method is used to submit a Sources Sought Notice.
 
@@ -634,11 +634,11 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### Foreign Government Standard (submitForeignGovernment)
+### Foreign Government Standard <br> (submitForeignGovernment)
 
 This service is now deprecated. Hence no longer available.
 
-### Special Notice (submitSpecialNotice)
+### Special Notice <br> (submitSpecialNotice)
 
 This method is used to submit a Special Notice.
 
@@ -702,7 +702,7 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### Sale of Surplus Property Notice (submitSaleOfSurplus)
+### Sale of Surplus Property Notice <br> (submitSaleOfSurplus)
 
 This method is used to submit a Sale of Surplus Property Notice.
 
@@ -766,7 +766,7 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### Intent to Bundle Requirements (DoD- Funded) (submitITB)
+### Intent to Bundle Requirements <br> (DoD- Funded) (submitITB)
 
 This method is used to submit an Intent to Bundle Requirements (DoD-Funded) Notice.
 
@@ -832,11 +832,11 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### Fair Opportunity / Limited Sources Justification (submitFairOpp)
+### Fair Opportunity / Limited Sources <br> Justification (submitFairOpp)
 
 This service is now deprecated. Instead, please use submitJA to perform the operation.
 
-### General Notice (submitNotice)
+### General Notice <br> (submitNotice)
 
 This is a general method that supports submitting all of the above notice types. The complex type for the input data consists of all possible data elements across all notice types. Users may setup their web service client to use this general method instead of calling the specific methods outlined above.  The functionality is the same regardless of whether you use this general method, or the specific methods above. The valid options for this field are:
 
@@ -926,7 +926,7 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### Document Packages (submitDocumentsAndLinksToNotice)
+### Document Packages <br> (submitDocumentsAndLinksToNotice)
 
 This method is used to attach document packages (non sensitive) to a notice modification.  This is similar to the EPSUPLOAD or DocumentUpload function currently found in the ftp/email electronic interface. The web service method now supports transmitting actual file data along with external links. Note: A base notice must already exist in the system.
 
@@ -968,7 +968,7 @@ filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
 
-### Unarchive Notice (unarchiveNotice)
+### Unarchive Notice <br> (unarchiveNotice)
 
 This method is used to unarchive a notice or stand-alone award. Note: Provide a Solicitation Number or an Award Number to unarchive the related opportunity.
 
@@ -991,47 +991,47 @@ ntype	|string	|no	|Base Notice Type	|Valid values: "PRESOL" - for Presolicitatio
 awdnbr	|string|	No|	Award #|	255 characters
 archdate	|date|	No|	New Archive Date|	YYYYMMDD
 
-### Secure Document Package (attachSecureDocumentPackagesToNotice)
+### Secure Document Package <br> (attachSecureDocumentPackagesToNotice)
 
 Details will be added in future.
 
-### Non-FBO Solicitation (createNonFBOSolicitation)
+### Non-FBO Solicitation <br> (createNonFBOSolicitation)
 
 Details will be added in future.
 
-### Secure Document Packages (attachSecureDocumentPackagesToNonFBOSolicitation)
+### Secure Document Packages <br> (attachSecureDocumentPackagesToNonFBOSolicitation)
 
 Details will be added in future.
 
-### Remove Secure Document Package (removeSecureDocumentPackagesFromNonFBOSolicitation)
+### Remove Secure Document Package <br> (removeSecureDocumentPackagesFromNonFBOSolicitation)
 
 Details will be added in future.
 
-### Non-FBO Solicitation Release (releaseNonFBOSolicitation)
+### Non-FBO Solicitation Release <br> (releaseNonFBOSolicitation)
 
 Details will be added in future.
 
-### Un-Release-Non-FBO-Solicitation (unreleaseNonFBOSolicitation)
+### Un-Release-Non-FBO-Solicitation <br> (unreleaseNonFBOSolicitation)
 
 Details will be added in future.
 
-### Secure Technical Document Package (createSecureDocumentPackage)
+### Secure Technical Document Package <br> (createSecureDocumentPackage)
 
 Details will be added in future.
 
-### Add Files to Secure Document Package (addFilesToSecureDocumentPackage)
+### Add Files to Secure Document Package <br> (addFilesToSecureDocumentPackage)
 
 Details will be added in future.
 
-### Delete Files from Secure Document Package (deleteFilesFromSecureDocumentPackage)
+### Delete Files from Secure Document Package <br> (deleteFilesFromSecureDocumentPackage)
 
 Details will be added in future.
 
-### Delete Secure Document Package (deleteSecureDocumentPackage)
+### Delete Secure Document Package <br> (deleteSecureDocumentPackage)
 
 Details will be added in future.
 
-## Methods Available To All Office Location Users
+## Methods Available <br> to All Office Location Users
 
 ### getIVLList
 
@@ -1078,7 +1078,7 @@ address	|string	|Address
 bus_types|	string|	Business Types
 naics_codes|	string	|Naics Codes
 
-### Authorized Parties List (getAuthorizedPartyList)
+### Authorized Parties List <br> (getAuthorizedPartyList)
 
 This method is used to retrieve the Authorized Party lists for an FBO Solicitation or a Non-FBO Solicitation. A third argument - ‘status’ - can be provided to retrieve pending Explicit Access requests, rejected requests, approved vendors, or all. Specify the first parameter to the web service method for FBO Solicitations and leave the second parameter blank. If retrieving lists for Non-FBO Solicitations, leave the first parameter blank and specify the second parameter. Valid options for status field: approved, rejected, pending, or leave blank for all.
 
@@ -1126,7 +1126,7 @@ dba_name|	string|	DBA Name
 duns|	string|	DUNS #
 cage_code	|string|	Cage Code
 
-### Approve Explicit Access Requests (approveExplicitAccessRequestByID)
+### Approve Explicit Access Requests <br> (approveExplicitAccessRequestByID)
 
 This method is used to approve an Explicit Access request that is either in pending or rejected status. This method requires the internal ID which can be retrieved by first calling the getAuthorizedPartyList method. Specify an FBO Solicitation Number as the first argument.
 
@@ -1153,19 +1153,19 @@ Output Parameter |	Type |	Description
 ------- | ------ | -------
 Response | PostingResponse | Complex type
 
-### Approve Explicit Access Requests (approveExplicitAccessRequestByVendorData)
+### Approve Explicit Access Requests <br> (approveExplicitAccessRequestByVendorData)
 
 Details will be added in future
 
-### Reject Explicit Access Requests (rejectExplicitAccessRequestByID)
+### Reject Explicit Access Requests <br> (rejectExplicitAccessRequestByID)
 
 Details will be added in future
 
-### Reject Explicit Access Requests (rejectExplicitAccessRequestByVendorData)
+### Reject Explicit Access Requests <br> (rejectExplicitAccessRequestByVendorData)
 
 Details will be added in future
 
-### Add Authorized Party (addAuthorizedParty)
+### Add Authorized Party <br> (addAuthorizedParty)
 
 This method is used to arbitrarily add vendor users to the Authorized Party list for a given FBO Solicitation. This method accepts an FBO Solicitation Number and a set of vendor data. The method attempts to lookup the vendor in the system based on the data provided and adds an Authorized Party record if the match is successful.  This method has been deprecated for Non-FBO Solicitation Number.
 
@@ -1203,7 +1203,7 @@ cage_code|	string|	Cage Code
 
 ## Method Available for Data Export
 
-### Get List of Notices (getList)
+### Get List of Notices <br> (getList)
 
 This method is used to retrieve a list of base notices. For each record returned, an internal identifier/unique key is provided that must be used in subsequent getNoticeData calls to get the complete notice data (and any of its changes or awards posted). The method will return a maximum of 1000 records and allows filtering the results by specifying the notice type, solicitation number, award number, posted date range and documents to search (active or archive).   For performance reasons, at least one filter must be provided.
 
@@ -1253,7 +1253,7 @@ solnbr	|string	|Solicitation Number
 awdnbr|	string	|Award Number
 archived|	boolean	|True or false
 
-### Get Notice Data (getNoticeData)
+### Get Notice Data <br> (getNoticeData)
 
 This method is used to retrieve notice data and any changes/awards that were made. The notice_id from getList calls should be used in this call.   If document package data is requested, the total aggregate size for any request is 100MB. If a certain file pushes the total past this threshold, the data will not be returned for that file and any others encountered for the request; instead, links to the data will be provided and one can call the separate getFileData to cut down the size and to pull a specific document.
 
@@ -1356,11 +1356,11 @@ link|	string|	Link to file – used for files not stored on notices
 desc|	string|	Description
 size_limit_error|	boolean	|This element will be true if its size or aggregate file data for the request exceeds the max return size.
 
-### Get Document Package Data (getDocumentPackageData)
+### Get Document Package Data <br> (getDocumentPackageData)
 
 This service is now deprecated
 
-### Get File Data (getFileData)
+### Get File Data <br> (getFileData)
 
 This method provides the ability to pull in file data for a single file of a document package. The primary use of this method is if a single file’s size exceeds the 100MB max– when using this method for a single file, the file limit check does not occur.
 
@@ -4041,7 +4041,7 @@ The following error messages may be returned as part of the response to various 
 * Office Location cannot be determined; user found not setup correctly, the office location cannot be determined.
 * DATE field in unexpected format. Expects YYYYMMDD; all dates expected in this format unless otherwise noted.
 
-### Specific Business Rulles and Error Messages
+### Specific Business Rules and Error Messages
 
 This section details possible error messages for specific methods. Note that these rules are reflective of time of implementation and are subject to change in future.
 
