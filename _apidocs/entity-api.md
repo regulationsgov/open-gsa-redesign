@@ -54,7 +54,6 @@ Generating a System Account API Key:
 * The user must enter their password again to retrieve the key.
 * NOTE:  To obtain access to the FOUO/Sensitive Entity API data with a system account the user must be registered with a government email address.
 
-
 Utilizing the Entity API as an extract:
 * To utilize this API as an Extract an additional parameter called 'format' has been implemented.
 * To retrieve Entity data in a CSV format, the parameter '&format=csv' must be provided in the request.
