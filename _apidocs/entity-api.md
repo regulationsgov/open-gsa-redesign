@@ -2877,7 +2877,7 @@ First Name</td>
 
 <tr>
 <td>intermediateParentEntities</td>
-<td>object</td>
+<td>List</td>
 <td>
 <details>
 <summary>intermediateParentEntities contains below fields</summary>
@@ -2888,6 +2888,10 @@ First Name</td>
 <th style="background-color: #f1f1f1;"><b>Description</b></th>
 </tr>
 
+<tr>
+<td>domesticParent</td>
+<td>object</td>
+<td>
 <details>
 <summary>domesticParent contains below fields</summary>
 <table>
@@ -2988,13 +2992,15 @@ First Name</td>
 <td>Phone Number</td>
 </tr>
 
-
 </table>
 </details>
 </td>
-</td>
 </tr>
 
+<tr>
+<td>hqParent</td>
+<td>object</td>
+<td>
 <details>
 <summary>hqParent contains below fields</summary>
 <table>
@@ -3095,13 +3101,10 @@ First Name</td>
 <td>Phone Number</td>
 </tr>
 
-
 </table>
 </details>
 </td>
-</td>
 </tr>
-
 
 
 </table>
