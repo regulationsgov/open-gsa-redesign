@@ -4422,7 +4422,7 @@ Get_changes|	No	|True or False<br><br> Pass in true to get the full notice histo
 get_changes_from_date|	No|	If maintaining a sync of changes, can specify a date so that only changes that have occurred since provided date will be returned|	Date field should meet the expected format.|	DATE field in unexpected format. Expects YYYYMMDD
 get_file_data	|No	|True or False<br><br> Pass in true and the method will return any file content stored in Contract Opportunities (attachment data will be retuned as Base64Encoding Format). If false, the meta details/links will still be provided	|NA	|NA
 
-#### getNoticeData
+#### getList
 
 Individual business rules per field are listed across each of the fields in below table.  
 * Note: Although none of the individual elements are mandatory, at least one filter should be given to perform the operation. If no filters are entered, then system throws an error - Insufficient Search Criteria.
