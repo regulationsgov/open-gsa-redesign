@@ -3110,7 +3110,6 @@ First Name</td>
 </table>
 </details>
 </td>
-</td>
 </tr>
 
 <tr>
@@ -3316,6 +3315,7 @@ dnbMonitoring
 </details>
 </td>
 </tr>
+
 <tr>
 <td>
 samMonitoring
