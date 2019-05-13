@@ -271,6 +271,41 @@ paths:
         description: record limit per page
         schema:
           type: string
+      - name: edi
+          in: query
+          description: Acceptable EDI values are Yes/No
+          required: false
+          type: string
+      - name: companySecurityLevel
+              in: query
+              description: Company Security Level code
+              required: false
+              type: string
+      - name: highestEmployeeSecurityLevel
+              in: query
+              description: Highest Employee Security Level Code
+              required: false
+              type: string
+      - name: ultimateParentUEIDUNS
+              in: query
+              description: Ultimate Parent Unique Entity Identifier DUNS- 9 digit value
+              required: false
+              type: string
+      - name: ultimateParentUEISAM
+              in: query
+              description: Ultimate Parent Unique Entity Identifier SAM- 9 digit value (This will replace ultimateParentUEIDUNS)
+              required: false
+              type: string
+      - name: sensitivity
+              in: query
+              description: Determines Sensitivity Level of Data
+              required: false
+              type: string
+      - name: api_key
+              in: query
+              description: api_key
+              required: true
+              type: string
       responses:
         200:
           description: Successfully retrieved list
@@ -538,6 +573,41 @@ paths:
         in: query
         schema:
           type: string
+      - name: edi
+          in: query
+          description: Acceptable EDI values are Yes/No
+          required: false
+          type: string
+      - name: companySecurityLevel
+              in: query
+              description: Company Security Level code
+              required: false
+              type: string
+      - name: highestEmployeeSecurityLevel
+              in: query
+              description: Highest Employee Security Level Code
+              required: false
+              type: string
+      - name: ultimateParentUEIDUNS
+              in: query
+              description: Ultimate Parent Unique Entity Identifier DUNS- 9 digit value
+              required: false
+              type: string
+      - name: ultimateParentUEISAM
+              in: query
+              description: Ultimate Parent Unique Entity Identifier SAM- 9 digit value (This will replace ultimateParentUEIDUNS)
+              required: false
+              type: string
+      - name: sensitivity
+              in: query
+              description: Determines Sensitivity Level of Data
+              required: false
+              type: string
+      - name: api_key
+              in: query
+              description: api_key
+              required: true
+              type: string
       - name: format
         in: query
         description: Acceptable values JSON and CSV

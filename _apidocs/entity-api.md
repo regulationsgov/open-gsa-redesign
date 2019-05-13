@@ -346,6 +346,42 @@ If you are using Chrome, subsections that can be expanded are denoted with an ar
 <br>Example: emailId=test@gsa.gov</td>
 </tr>
 
+<tr>
+<td>edi</td>
+<td>Allows text.
+<br>Example: edi=YES/NO</td>
+</tr>
+
+<tr>
+<td>companySecurityLevel</td>
+<td>Allows 2 character code.
+<br>Example: companySecurityLevel=92</td>
+</tr>
+
+<tr>
+<td>highestEmployeeSecurityLevel</td>
+<td>Allows 2 character code .
+<br>Example: highestEmployeeSecurityLevel=90</td>
+</tr>
+
+<tr>
+<td>ultimateParentUEIDUNS</td>
+<td>Allows text.
+<br>Example: ultimateParentUEIDUNS=090123451</td>
+</tr>
+
+<tr>
+<td>ultimateParentUEISAM</td>
+<td>Allows text.
+<br>Example: ultimateParentUEISAM=090123451</td>
+</tr>
+
+<tr>
+<td>sensitivity</td>
+<td>Allows text, Determines Sensitivity Level of Data.
+<br>Example: sensitivity=fouo</td>
+</tr>
+
 </table>
 </details><br>
 
@@ -843,11 +879,6 @@ If you are using Chrome, subsections that can be expanded are denoted with an ar
 </td>
 </tr>
 
-<tr>
-<td>ediInformationFlag</td>
-<td>string</td>
-<td>EDI Information Flag</td>
-</tr>
 </table>
 
 <summary>disasterReliefData Sub Section</summary>
@@ -1625,6 +1656,41 @@ First Name</td>
 <td>companyIsReference</td>
 <td>string</td>
 <td>Company Is Reference</td>
+</tr>
+<tr>
+<td>firmNumOfEmployees</td>
+<td>string</td>
+<td>Number of Employees in the Firm</td>
+</tr>
+<tr>
+<td>branchNumOfEmployees</td>
+<td>string</td>
+<td>Number of Employees in the Branch</td>
+</tr>
+<tr>
+<td>experienceCode</td>
+<td>string</td>
+<td>Experience Code</td>
+</tr>
+<tr>
+<td>annualAvgRevenueCode	</td>
+<td>string</td>
+<td>Annual Average Revenue Code</td>
+</tr>
+<tr>
+<td>federalRevenueCode</td>
+<td>string</td>	
+<td>Federal Revenue Code</td>
+</tr>
+<tr>
+<td>nonFedRevenueCode</td>	
+<td>string</td>	
+<td>Non-Federal Revenue Code</td>
+</tr>
+<tr>
+<td>totalRevenueCode	</td>
+<td>string</td>
+<td>Total Revenue Code</td>
 </tr>
 <tr>
 <td>qualificationURLPDF</td>
@@ -2810,11 +2876,20 @@ First Name</td>
 </tr>
 
 <tr>
-<td>intermediateParentEntites</td>
+<td>intermediateParentEntities</td>
 <td>object</td>
 <td>
 <details>
-<summary>ultimateDomesticParent contains below fields</summary>
+<summary>intermediateParentEntities contains below fields</summary>
+<table>
+<tr>
+<th style="background-color: #f1f1f1;"><b>Field Name</b></th>
+<th style="background-color: #f1f1f1;"><b>Type</b></th>
+<th style="background-color: #f1f1f1;"><b>Description</b></th>
+</tr>
+
+<details>
+<summary>domesticParent contains below fields</summary>
 <table>
 <tr>
 <th style="background-color: #f1f1f1;"><b>Field Name</b></th>
@@ -2916,6 +2991,122 @@ First Name</td>
 
 </table>
 </details>
+</td>
+</td>
+</tr>
+
+<details>
+<summary>hqParent contains below fields</summary>
+<table>
+<tr>
+<th style="background-color: #f1f1f1;"><b>Field Name</b></th>
+<th style="background-color: #f1f1f1;"><b>Type</b></th>
+<th style="background-color: #f1f1f1;"><b>Description</b></th>
+</tr>
+
+<tr>
+<td>ueiSAM</td>
+<td>string</td>
+<td>Unique Entity Identifier SAM</td>
+</tr>
+
+<tr>
+<td>ueiDUNS</td>
+<td>string</td>
+<td>Unique Entity Identifier DUNS</td>
+</tr>
+
+<tr>
+<td>legalBusinessName</td>
+<td>string</td>
+<td>Legal Business Name</td>
+</tr>
+
+<tr>
+<div style="width: 20px">
+<td>physicalAddress</td>
+<td>object</td>
+<td>
+<details>
+<summary>physicalAddress contains below fields</summary>
+<table>
+<tr>
+<th style="background-color: #f1f1f1;"><b>Field Name</b></th>
+<th style="background-color: #f1f1f1;"><b>Type</b></th>
+<th style="background-color: #f1f1f1;"><b>Description</b></th>
+</tr>
+
+<tr>
+<td>address1</td>
+<td>string</td>
+<td>Physical Address 1</td>
+</tr>
+
+<tr>
+<td>address2</td>
+<td>string</td>
+<td>Physical Address 2</td>
+</tr>
+
+<tr>
+<td>city</td>
+<td>string</td>
+<td>Physical Address City</td>
+</tr>
+
+<tr>
+<td>state</td>
+<td>string</td>
+<td>Physical Address State</td>
+</tr>
+
+<tr>
+<td>zipCode</td>
+<td>string</td>
+<td>Physical Address Zip</td>
+</tr>
+
+<tr>
+<td>zipCodePlus4</td>
+<td>string</td>
+<td>Physical Address Zip Plus4</td>
+</tr>
+
+<tr>
+<td>country</td>
+<td>string</td>
+<td>Physical Address Country</td>
+</tr>
+
+<tr>
+<td>congressionalDistrict</td>
+<td>string</td>
+<td>Physical Address Congressional District</td>
+</tr>
+</table>
+</details>
+</td>
+</div>
+</tr>
+
+<tr>
+<td>phoneNumber</td>
+<td>string</td>
+<td>Phone Number</td>
+</tr>
+
+
+</table>
+</details>
+</td>
+</td>
+</tr>
+
+
+
+</table>
+</details>
+</td>
 </td>
 </tr>
 
@@ -3258,26 +3449,6 @@ samMonitoring
 </tr>
 </table>
 
-<summary>tinInformation Sub Section</summary>
-<table>
-<tr>
-<th style="background-color: #f1f1f1;"><b>Field Name</b></th>
-<th style="background-color: #f1f1f1;"><b>Type</b></th>
-<th style="background-color: #f1f1f1;"><b>Description</b></th>
-</tr>
-
-<tr>
-<td>taxpayerIdentificationType</td>
-<td>string</td>
-<td>Taxpayer Identification Type</td>
-</tr>
-
-<tr>
-<td>taxpayerIdentificationNumber</td>
-<td>string</td>
-<td>Taxpayer Identification Number</td>
-</tr>
-</table>
 
 <summary>entityInformation Sub Section</summary>
 <table>
@@ -3465,6 +3636,18 @@ samMonitoring
 <td>countryOfIncorporationDesc</td>
 <td>string</td>
 <td>Country Of IncorporationDescription</td>
+</tr>
+
+<tr>
+<td>companySecurityLevel</td>
+<td>string</td>
+<td>Company Security Level</td>
+</tr>
+
+<tr>
+<td>highestEmployeeSecurityLevel</td>
+<td>string</td>
+<td>Highest Employee Security Level</td>
 </tr>
 </table>
 
