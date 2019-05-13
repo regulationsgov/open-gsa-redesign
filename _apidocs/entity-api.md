@@ -345,42 +345,6 @@ If you are using Chrome, subsections that can be expanded are denoted with an ar
 <br>Example: emailId=test@gsa.gov</td>
 </tr>
 
-<tr>
-<td>edi</td>
-<td>Allows text.
-<br>Example: edi=YES/NO</td>
-</tr>
-
-<tr>
-<td>companySecurityLevel</td>
-<td>Allows 2 character code.
-<br>Example: companySecurityLevel=92</td>
-</tr>
-
-<tr>
-<td>highestEmployeeSecurityLevel</td>
-<td>Allows 2 character code .
-<br>Example: highestEmployeeSecurityLevel=90</td>
-</tr>
-
-<tr>
-<td>ultimateParentUEIDUNS</td>
-<td>Allows text.
-<br>Example: ultimateParentUEIDUNS=090123451</td>
-</tr>
-
-<tr>
-<td>ultimateParentUEISAM</td>
-<td>Allows text.
-<br>Example: ultimateParentUEISAM=090123451</td>
-</tr>
-
-<tr>
-<td>sensitivity</td>
-<td>Allows text, Determines Sensitivity Level of Data.
-<br>Example: sensitivity=fouo</td>
-</tr>
-
 </table>
 </details><br>
 
@@ -2633,6 +2597,43 @@ First Name</td>
 <td>Allows user to get file download links to email. Email Id should be provided in conjunction with format.
 <br>Example: emailId=test@gsa.gov</td>
 </tr>
+
+<tr>
+<td>edi</td>
+<td>Allows text.
+<br>Example: edi=YES/NO</td>
+</tr>
+
+<tr>
+<td>companySecurityLevel</td>
+<td>Allows 2 character code.
+<br>Example: companySecurityLevel=92</td>
+</tr>
+
+<tr>
+<td>highestEmployeeSecurityLevel</td>
+<td>Allows 2 character code .
+<br>Example: highestEmployeeSecurityLevel=90</td>
+</tr>
+
+<tr>
+<td>ultimateParentUEIDUNS</td>
+<td>Allows text.
+<br>Example: ultimateParentUEIDUNS=090123451</td>
+</tr>
+
+<tr>
+<td>ultimateParentUEISAM</td>
+<td>Allows text.
+<br>Example: ultimateParentUEISAM=090123451</td>
+</tr>
+
+<tr>
+<td>sensitivity</td>
+<td>Allows text, Determines Sensitivity Level of Data.
+<br>Example: sensitivity=fouo</td>
+</tr>
+
 </table>
 </details><br>
 
@@ -2871,7 +2872,6 @@ First Name</td>
 
 </table>
 </details>
-</td>
 </tr>
 
 <tr>
