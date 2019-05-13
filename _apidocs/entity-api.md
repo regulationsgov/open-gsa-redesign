@@ -2872,6 +2872,7 @@ First Name</td>
 
 </table>
 </details>
+</td>
 </tr>
 
 <tr>
