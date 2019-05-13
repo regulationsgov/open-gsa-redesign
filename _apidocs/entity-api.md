@@ -6693,7 +6693,7 @@ First Name</td>
 </tr>
 
 <tr>
-<td>intermediateParentEntites</td>
+<td>intermediateParentEntities</td>
 <td>object</td>
 <td>
 <details>
