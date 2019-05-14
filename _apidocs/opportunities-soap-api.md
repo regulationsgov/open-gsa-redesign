@@ -283,8 +283,7 @@ desc | string | Yes |	Cancellation Description | 65535 characters
 
 ## Contracting Officer/Contracting <br>Specialist Method Details
 
-<details>
-<summary> <h3>Presolicitation <br>(submitPresol)</h3> </summary>
+<details> <summary> <h3>Presolicitation <br>(submitPresol)</h3> </summary>
 
 This method is used to submit a Pre-solicitation Notice.
 
