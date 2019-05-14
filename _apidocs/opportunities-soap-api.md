@@ -193,7 +193,7 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No |	File Data |	100 MB
 desc |	string |	No |	Description |	255 characters
-explicit_access |	boolean |	No |	Explicit Access |
+explicit_access |	boolean |	No |	Explicit Access | Defaults to 'false'
 export_controlled |	boolean	|No |	Export Controlled |
 
 ### Delete Notice/ Document Package <br>(deleteNoticeOrDocumentPackage)
@@ -351,6 +351,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename | string |	No | File Name | 255 characters
 filedata | base64binary |	No | File Data | 100 MB
 desc | string |	No | Description | 255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 
 ### Combined/Synopsis<br> (submitCombined)
@@ -421,6 +423,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename | string | No | File Name | 255 characters
 filedata | base64binary |	No | File Data | 100 MB
 desc | string |	No | Description | 255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 
 ### Modification/Amendment <br> (submitMod)
@@ -492,6 +496,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename |	string	| No | 	File Name |	255 characters
 filedata |	base64binary |	No |	File Data	| 100 MB
 desc |	string |	No |	Description |	255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 ### Justification and Authorization <br> (J&A) Notice (submitJA)
 
@@ -564,6 +570,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename |	string	| No |	File Name	| 255 characters
 filedata |	base64binary |	No |	File Data	| 100 MB
 desc	| string |	No |	Description |	255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 ### Sources Sought Notice <br> (submitSourcesSought)
 
@@ -633,6 +641,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 ### Foreign Government Standard <br> (submitForeignGovernment)
 
@@ -701,6 +711,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 ### Sale of Surplus Property Notice <br> (submitSaleOfSurplus)
 
@@ -765,6 +777,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 ### Intent to Bundle Requirements <br> (DoD- Funded) (submitITB)
 
@@ -831,6 +845,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 ### Fair Opportunity / Limited Sources <br> Justification (submitFairOpp)
 
@@ -925,6 +941,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 ### Document Packages <br> (submitDocumentsAndLinksToNotice)
 
@@ -967,6 +985,8 @@ Element Name | Type | Required | Description | Character Limit / Restrictions
 filename |	string |	No |	File Name |	255 characters
 filedata |	base64binary |	No	| File Data |	100 MB
 desc	| string |	No	 | Description |	255 characters
+explicit_access | boolean |	No |	Explicit Access| 	Defaults to ‘false’
+export_controlled	| boolean	| No	| Export Controlled	|
 
 ### Unarchive Notice <br> (unarchiveNotice)
 
@@ -1136,7 +1156,7 @@ Input Parameter |	Type |	Description
 ------- | ------ | -------
 data	|ExplicitAccessRequest|	Complex type defined below
 
-IVLListRequest Complex Type Definition:
+ExplicitAccessRequestComplex Type Definition:
 
 Element Name | Type | Required | Description
 ------ | ------- | ------- | -------
@@ -1159,7 +1179,31 @@ Details will be added in future
 
 ### Reject Explicit Access Requests <br> (rejectExplicitAccessRequestByID)
 
-Details will be added in future
+This method is used to reject an Explicit Access request or Authorized Party record that is either in pending or approved status. This method requires the internal ID which can be retrieved by first calling the getAuthorizedPartyList method. Specify an FBO Solicitation Number as the first argument. 
+
+Input Parameters:
+
+Input Parameter |	Type |	Description
+------- | ------ | -------
+data	|ExplicitAccessRequest|	Complex type defined below
+
+ExplicitAccessRequestComplex Type Definition:
+
+Element Name | Type | Required | Description
+------ | ------- | ------- | -------
+solnbr|	string	|yes|	Solicitation #
+ntype	|string	|no|	Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice,  “ITB” – for Intent to Bundle Requirements (DoD- Funded)
+nonfbo_solbr	|string|	no|	Non-fbo Solicitation #.  Not supported for this method
+Id|	string|	yes|	Matches internal record ID. This is retrieved from getAuthorizedPartyList method above.
+vendor|	VendorData|	no|	Complex type not used in this method
+reason	|string|	no|	rejection reason not used in this method
+
+Response:
+
+Output Parameter |	Type |	Description
+------- | ------ | -------
+Response | PostingResponse | Complex type
+
 
 ### Reject Explicit Access Requests <br> (rejectExplicitAccessRequestByVendorData)
 
@@ -1419,7 +1463,6 @@ Please note that variances may exist between SOAP requests generated by differen
 
 
 ```
-
 <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sam="https://www.sam.gov/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header>
      <AuthenticationData xsi:type="sam:AuthenticationData">
@@ -1471,11 +1514,16 @@ Please note that variances may exist between SOAP requests generated by differen
               <filename xsi:type="xsd:string">test_document1.pdf</filename>
               <filedata xsi:type="xsd:base64Binary">SnVzdCBhIHNtYWxsIHRlc3Q</filedata>
               <desc xsi:type="xsd:string">test doc 1</desc>
+     <explicit_access xsi:type="xsd:boolean">true</explicit_access>
+               <export_controlled xsi:type="xsd:boolean"> </export_controlled>               
               </DocumentFile>
               <DocumentFile>
                <filename xsi:type="xsd:string">test_document2.pdf</filename>
               <filedata xsi:type="xsd:base64Binary">SnVzdCBhIHNtYWxsIHRlc3Q22</filedata>
               <desc xsi:type="xsd:string">test doc 2</desc>
+     <explicit_access xsi:type="xsd:boolean">false</explicit_access>
+              <export_controlled xsi:type="xsd:boolean"> </export_controlled>               
+
               </DocumentFile>
             </files>
             <setaside xsi:type="xsd:string"></setaside>
@@ -1491,7 +1539,6 @@ Please note that variances may exist between SOAP requests generated by differen
       </sam:submitPresol>
    </soapenv:Body>
 </soapenv:Envelope>
-
 ```
 
 
@@ -2845,24 +2892,40 @@ Note: This service gets a list of all notices
 ```
 <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sam="https://www.sam.gov/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header>
-  <AuthenticationData xsi:type="sam:AuthenticationData">
+<AuthenticationData xsi:type="sam:AuthenticationData">
         <username xsi:type="xsd:string">system account user name</username>
         <password xsi:type="xsd:string">system account password</password>
-      	  <emailid xsi:type="xsd:string">Email of the contracting officer/specialist who can submit opportunities</emailid>
-     		</AuthenticationData>
+        <emailid xsi:type="xsd:string">Email of the contracting officer/specialist who can submit opportunities</emailid>
+     </AuthenticationData>
    </soapenv:Header>
    <soapenv:Body>
-      <sam:submitDocumentsAndLinksToNotice soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-         <data xsi:type="sam:DocumentUpload">
-            <date xsi:type="xsd:date"></date>
-            <officeid xsi:type="xsd:string"></officeid>
-            <solnbr xsi:type="xsd:string">AD_ST01</solnbr>
+      <sam:submitPresol soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+         <data xsi:type="sam:Presol">
+            <officeid xsi:type="xsd:string">100525144</officeid>
+            <date xsi:type="xsd:date">20180101</date>
+            <zip xsi:type="xsd:string">2017</zip>
+            <classcod xsi:type="xsd:string">13</classcod>
+            <naics xsi:type="xsd:string">11150</naics>
             <!--Optional:-->
-            <ntype xsi:type="xsd:string">COMBINE</ntype>
-            <uploadtype xsi:type="xsd:string"></uploadtype>
+            <offadd xsi:type="xsd:string"></offadd>
+            <subject xsi:type="xsd:string">title</subject>
+            <solnbr xsi:type="xsd:string">testDm14</solnbr>
             <!--Optional:-->
             <respdate xsi:type="xsd:date"></respdate>
             <!--Optional:-->
+            <archdate xsi:type="xsd:date">20300101</archdate>
+            <contact xsi:type="xsd:string">Veera</contact>
+            <desc xsi:type="xsd:string">test</desc>
+            <!--Optional:-->
+            <link xsi:type="sam:GovURL">
+               <url xsi:type="xsd:string"></url>
+               <desc xsi:type="xsd:string"></desc>
+            </link>
+            <!--Optional:-->
+            <email xsi:type="sam:GovEmail">
+               <address xsi:type="xsd:string"></address>
+               <desc xsi:type="xsd:string"></desc>
+            </email>
             <links xsi:type="sam:ArrayOfDocumentLink" soapenc:arrayType="sam:DocumentLink[]">
               <DocumentLink>
               <url xsi:type="xsd:string">http://beta.sam.gov</url>
@@ -2873,43 +2936,35 @@ Note: This service gets a list of all notices
               <desc xsi:type="xsd:string">test attachment pdf link</desc>
               </DocumentLink>
             </links>
-            <!--Optional:-->
             <files xsi:type="sam:ArrayOfDocumentFile" soapenc:arrayType="sam:DocumentFile[]">
               <DocumentFile>       
-              <filename xsi:type="xsd:string">test_document3.pdf</filename>
+              <filename xsi:type="xsd:string">test_document1.pdf</filename>
               <filedata xsi:type="xsd:base64Binary">SnVzdCBhIHNtYWxsIHRlc3Q</filedata>
               <desc xsi:type="xsd:string">test doc 1</desc>
-<explicit_access xsi:type="xsd:boolean">true</explicit_access>
-<export_controlled xsi:type="xsd:boolean"> </export_controlled>
-              </DocumentFile>
+             <explicit_access xsi:type="xsd:boolean">true</explicit_access>
+                       <export_controlled xsi:type="xsd:boolean"> </export_controlled>               
+                       </DocumentFile>
               <DocumentFile>
                <filename xsi:type="xsd:string">test_document2.pdf</filename>
               <filedata xsi:type="xsd:base64Binary">SnVzdCBhIHNtYWxsIHRlc3Q22</filedata>
               <desc xsi:type="xsd:string">test doc 2</desc>
-<explicit_access xsi:type="xsd:boolean">false</explicit_access>
-<export_controlled xsi:type="xsd:boolean"> </export_controlled>
+             <explicit_access xsi:type="xsd:boolean">false</explicit_access>
+                       <export_controlled xsi:type="xsd:boolean"> </export_controlled>               
               </DocumentFile>
             </files>
+            <setaside xsi:type="xsd:string"></setaside>
+            <!--Optional:-->
+            <popaddress xsi:type="xsd:string"></popaddress>
+            <!--Optional:-->
+            <popzip xsi:type="xsd:string"></popzip>
+            <!--Optional:-->
+            <popcountry xsi:type="xsd:string"></popcountry>
+            <!--Optional:-->
+            <recovery_act xsi:type="xsd:boolean"></recovery_act>
          </data>
-      </sam:submitDocumentsAndLinksToNotice>
+      </sam:submitPresol>
    </soapenv:Body>
 </soapenv:Envelope>
-```
-
-#### Response Sample - Success
-
-```
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
-   <SOAP-ENV:Header/>
-   <SOAP-ENV:Body>
-       <ns1:SubmitPresolResponse xmlns:ns1="https://www.sam.gov/">
-           <return xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns1:PostingResponse">
-               <success xsi:type="xsd:boolean">true</success>
-               <messages xsi:nil="true" xsi:type="ns1:ArrayOfstring"/>
-           </return>
-       </ns1:SubmitPresolResponse>
-   </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
 ```
 
 #### Response Sample - Error
@@ -3395,25 +3450,25 @@ Note: This service gets a list of all notices
       	  <emailid xsi:type="xsd:string">Email of the contracting officer/specialist who can submit opportunities</emailid>
     </AuthenticationData>
 	</soapenv:Header>
-<soapenv:Body>
-    	 <sam:approveExplicitAccessRequestByID   soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-          <data xsi:type="sam:ExplicitAccessRequest">
-             <solnbr xsi:type="xsd:string">542345345345235</solnbr>
-            <ntype xsi:type="xsd:string">PRESOL</ntype>
-               <nonfbo_solnbr xsi:type="xsd:string"></nonfbo_solnbr>
-               <id xsi:type="xsd:string">3d2a349415bb4c54b044784091013e69</id>
-              <vendor xsi:type="tns:VendorData">
-                	<lname xsi:type="xsd:string"></lname>
-                	<fname xsi:type="xsd:string"></fname>
-                	<email xsi:type="xsd:string"></email>
-               	<contractor_name xsi:type="xsd:string"></contractor_name>
-                	<duns xsi:type="xsd:string"></duns>
-                	<cage_code xsi:type="xsd:string"></cage_code>
-            	</vendor>
-            	<reason xsi:type="xsd:string">Testing approve by Id</reason>
-       		 	</data>
-    			</sam:approveExplicitAccessRequestByID>
-</soapenv:Body>
+                       <soapenv:Body>
+   <sam:approveExplicitAccessRequestByID soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+            <data xsi:type="sam:ExplicitAccessRequest">
+                <solnbr xsi:type="xsd:string">3278687234687234</solnbr>
+                <ntype xsi:type="xsd:string">ITB</ntype>
+                <nonfbo_solnbr xsi:type="xsd:string"></nonfbo_solnbr>
+                <id xsi:type="xsd:string">0b582b9c27664e4e966047f6833a324f</id>
+                <vendor xsi:type="tns:VendorData">
+                    <lname xsi:type="xsd:string"></lname>
+                    <fname xsi:type="xsd:string"></fname>
+                    <email xsi:type="xsd:string"></email>
+                    <contractor_name xsi:type="xsd:string"></contractor_name>
+                    <duns xsi:type="xsd:string"></duns>
+                    <cage_code xsi:type="xsd:string"></cage_code>
+                </vendor>
+                <reason xsi:type="xsd:string">Testing approve by Id</reason>
+            </data>
+        </sam:approveExplicitAccessRequestByID>
+   </soapenv:Body>
 </soapenv:Envelope>
 ```
 
@@ -3421,15 +3476,15 @@ Note: This service gets a list of all notices
 
 ```
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="https://www.sam.gov" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    		<SOAP-ENV:Header/>
-    		<SOAP-ENV:Body>
-   			<ns1: approveExplicitAccessRequestByID xmlns:ns1="https://www.sam.gov/">
-          			<return xsi:type="ns1:PostingResponse">
-                				<success xsi:type="xsd:boolean">true</success>
-                				<messages xsi:nil="true" xsi:type="ns1:ArrayOfstring"/>
-           			 </return>
-       		 </ns1: approveExplicitAccessRequestByID >
-    		</SOAP-ENV:Body>
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <ns1:approveExplicitAccessRequestByIDResponse xmlns:ns1="https://www.sam.gov/">
+            <return xsi:type="ns1:PostingResponse">
+                <success xsi:type="xsd:boolean">true</success>
+                <messages xsi:nil="true" xsi:type="ns1:ArrayOfstring"/>
+            </return>
+        </ns1:approveExplicitAccessRequestByIDResponse>
+    </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
 ```
 
@@ -3439,14 +3494,82 @@ Note: This service gets a list of all notices
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="https://www.sam.gov" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <SOAP-ENV:Header/>
     <SOAP-ENV:Body>
-        <ns1:addAuthorizedPartyResponse xmlns:ns1="https://www.sam.gov/">
+        <ns1:approveExplicitAccessRequestByIDResponse xmlns:ns1="https://www.sam.gov/">
             <return xsi:type="ns1:PostingResponse">
                 <success xsi:type="xsd:boolean">false</success>
                 <messages SOAP-ENC:arrayType="xsd:string[1]" xsi:type="ns1:ArrayOfstring">
-                    <item xsi:type="xsd:string">Multiple Notices found. Please input more details</item>
+                    <item xsi:type="xsd:string">Internal ID is required. Use getAuthorizedPartyList to retrieve this information.</item>
                 </messages>
             </return>
-        </ns1:addAuthorizedPartyResponse>
+        </ns1:approveExplicitAccessRequestByIDResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+```
+
+### rejectExplicitAccessRequestbyID
+
+#### Request Sample
+
+```
+<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sam="https://www.sam.gov/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+   <soapenv:Header>
+<AuthenticationData xsi:type="sam:AuthenticationData">
+        <username xsi:type="xsd:string">system account user name</username>
+        <password xsi:type="xsd:string">system account password</password>
+      	  <emailid xsi:type="xsd:string">Email of the contracting officer/specialist who can submit opportunities</emailid>
+      </AuthenticationData>
+   </soapenv:Header>
+   <soapenv:Body>
+      <sam:rejectExplicitAccessRequestByID soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+            <data xsi:type="sam:ExplicitAccessRequest">
+                <solnbr xsi:type="xsd:string">TEST-12345678</solnbr>
+                <ntype xsi:type="xsd:string">PRESOL</ntype>
+                <nonfbo_solnbr xsi:type="xsd:string"></nonfbo_solnbr>
+                <id xsi:type="xsd:string">0b582b9c27664e4e966047f6833a324f</id>
+                <vendor xsi:type="tns:VendorData">
+                    <lname xsi:type="xsd:string"></lname>
+                    <fname xsi:type="xsd:string"></fname>
+                    <email xsi:type="xsd:string"></email>
+                    <contractor_name xsi:type="xsd:string"></contractor_name>
+                    <duns xsi:type="xsd:string"></duns>
+                    <cage_code xsi:type="xsd:string"></cage_code>
+                </vendor>
+                <reason xsi:type="xsd:string">Testing REJECT by Id</reason>
+            </data>
+        </sam:rejectExplicitAccessRequestByID>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+#### Response Sample - Success
+
+```
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="https://www.sam.gov" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <ns1:rejectExplicitAccessRequestByIDResponse xmlns:ns1="https://www.sam.gov/">
+            <return xsi:type="ns1:PostingResponse">
+                <success xsi:type="xsd:boolean">true</success>
+                <messages xsi:nil="true" xsi:type="ns1:ArrayOfstring"/>
+            </return>
+        </ns1:rejectExplicitAccessRequestByIDResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+```
+#### Response Sample - Failure
+
+```
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="https://www.sam.gov" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <ns1:rejectExplicitAccessRequestByIDResponse xmlns:ns1="https://www.sam.gov/">
+            <return xsi:type="ns1:PostingResponse">
+                <success xsi:type="xsd:boolean">false</success>
+                <messages SOAP-ENC:arrayType="xsd:string[1]" xsi:type="ns1:ArrayOfstring">
+                    <item xsi:type="xsd:string">A reason must be provided with an explicit access rejection.</item>
+                </messages>
+            </return>
+        </ns1:rejectExplicitAccessRequestByIDResponse>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
 ```
@@ -3717,8 +3840,8 @@ solnbr|	Yes	|128 characters from the set: a-z A-Z 0-9 - _ ( ) { }	|1a. This requ
 ntype	|No	|Valid values: "PRESOL" - for Presolicitation, "COMBINE" - for Combined Synopsis/Solicitation, "SRCSGT" - for Sources Sought, "SSALE" - for Sale of Surplus Property, "SNOTE" - for Special Notice “JA” – For Justification “ITB” – For intend to bundle|	1. If all the required field is given and this field is not given OR a wrong ntype is provided, then service throws an error  |  1. Notice Type value provided is not valid
 uploadtype|	No – May change in future Upload type accepts 2 types – link or file|	A for amendment, S for solicitation or any title for other; 255 characters|	NA|	NA
 respdate|	No|	YYYYMMDD|	1.	No validation is performed on this field. However, if this value is available, this field should meet the character limit/restrictions	|1.	DATE field in unexpected format. Expects YYYYMMDD
-links|	No|	Array of files|	1.	This field is not required but if url & description fields within the links and files are empty, then the service throws an error<br><br> 2.	If a link with same name already exists on the notice, then the system throws an error<br><br> 3.	If the Url is empty for a link, then the system throws an error<br><br> 4.	If the description is missing for a link, then the system throws an error| 1.	Links and/or files are not complete<br><br> 2.	Resource with the same name already exists<br><br> 3.	Link Resource must have a link<br><br> 4.	Link Resource must have a description
-files	|No|	Array of files|	1.	This field is not required but if url & description fields within the links and files are empty, then the service throws an error<br><br> 2.	If the filename is not provided for a file, then the system throws an error<br><br> 3.	If the filedata is empty for a file, then the system throws an error<br><br> 4.	If the filename provided has either no type specified or is an unsupported type, then the system throws an error<br><br> 5.	If the file size exceeds 250MB, then the system throws an error |1.	Links and/or files are not complete <br><br>2.	Attachment must have a name<br><br> 3.	Attachment must have content <br><br>4.	The file type that you are trying to upload is not supported<br><br> 5.	The file type that you are trying to upload is not supported<br><br>6.	Resource with the same name already exists
+links|	No|	Array of files|	1.This field is not required but if url & description fields within the links and files are empty, then the service throws an error.<br><br> 2. If a link with same name already exists on the notice, then the system throws an error.<br><br> 3. If the Url is empty for a link, then the system throws an error.<br><br> 4.	If the description is missing for a link, then the system throws an error.| 1.	Links and/or files are not complete<br><br> 2.	Resource with the same name already exists<br><br> 3.	Link Resource must have a link<br><br> 4. Link Resource must have a description
+files	|No|	Array of files|	1.	This field is not required but if url & description fields within the links and files are empty, then the service throws an error<br><br> 2.	If the filename is not provided for a file, then the system throws an error<br><br> 3.	If the filedata is empty for a file, then the system throws an error<br><br> 4.	If the filename provided has either no type specified or is an unsupported type, then the system throws an error<br><br> 5.	If the file size exceeds 250MB, then the system throws an error <br><br> 6. If a file with same name already exists on the notice, then the system throwns an error |1.	Links and/or files are not complete <br><br>2.	Attachment must have a name<br><br> 3.	Attachment must have content <br><br>4.	The file type that you are trying to upload is not supported<br><br> 5.	The file type that you are trying to upload is not supported<br><br>6.	Resource with the same name already exists
 
 #### submitFairOpps
 
