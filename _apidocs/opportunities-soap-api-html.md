@@ -3,10 +3,9 @@
 <details>
     <summary>Request Sample</summary>
 <textarea>
-``` 
 <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sam="https://www.sam.gov/">
    <soapenv:Header>
-<AuthenticationData xsi:type="sam:AuthenticationData">
+<AuthenticationData xsi:type="sam:AuthenticationData"></AuthenticationData>
         <username xsi:type="xsd:string">system account user name</username>
         <password xsi:type="xsd:string">system account password</password>
         <emailid xsi:type="xsd:string"> Email of the contracting officer/specialist who can submit opportunities </emailid>
@@ -20,12 +19,10 @@
             <!--Optional:-->
             <get_changes_from_date xsi:type="xsd:date"></get_changes_from_date>
             <!--Optional:-->
-            <get_file_data xsi:type="xsd:boolean"></get_file_data>
-         </data>
+            <get_file_data xsi:type="xsd:boolean"></get_file_data></data>
       </sam:getNoticeData>
    </soapenv:Body>
 </soapenv:Envelope>
-```
 </textarea>
 </details>
 
@@ -33,7 +30,6 @@
     <summary>Response sample – success</summary>
 <textarea>
 Note: This service gets a list of all notices
-  ``` 
   <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP-ENV:Header/>
     <SOAP-ENV:Body>
@@ -103,7 +99,6 @@ Note: This service gets a list of all notices
         </ns1:getNoticeDataResponse>
     </SOAP-ENV:Body>
     </SOAP-ENV:Envelope>
-    ```
 
 </textarea>
 </details>
@@ -111,7 +106,6 @@ Note: This service gets a list of all notices
 <details>
     <summary>Response sample – error</summary>
 <textarea>
-   ```
    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
    <SOAP-ENV:Header/>
    <SOAP-ENV:Body>
@@ -125,8 +119,6 @@ Note: This service gets a list of all notices
        </ns1:getNoticeDataResponse>
    </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-```
-
 </textarea>
 </details>
 
@@ -135,7 +127,6 @@ Note: This service gets a list of all notices
 <details>
     <summary>Request Sample</summary>
 <textarea>
-```
 <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sam="https://www.sam.gov/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header>
       <AuthenticationData xsi:type="sam:AuthenticationData">
@@ -180,7 +171,6 @@ Note: This service gets a list of all notices
       </sam:submitSaleOfSurplus>
    </soapenv:Body>
 </soapenv:Envelope>
-```
 
 </textarea>
 </details>
@@ -188,8 +178,6 @@ Note: This service gets a list of all notices
 <details>
     <summary>Response Sample – Success</summary>
 <textarea>
-```
-<SOAP-ENV: xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
    <SOAP-ENV:Header/>
    <SOAP-ENV:Body>
@@ -201,14 +189,12 @@ Note: This service gets a list of all notices
        </ns1:SubmitSaleOfSurplusResponse>
    </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-```
 </textarea>
 </details>
 
 <details>
     <summary>Response Sample – Failure</summary>
 <textarea>
-```
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
    <SOAP-ENV:Header/>
    <SOAP-ENV:Body>
@@ -226,7 +212,6 @@ Note: This service gets a list of all notices
        </ns1:SubmitSaleOfSurplusResponse>
    </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-```
 </textarea>
 </details>
 
@@ -234,7 +219,6 @@ Note: This service gets a list of all notices
 <details>
     <summary>Response Sample</summary>
 <textarea>
-```
 <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sam="https://www.sam.gov/">
    <soapenv:Header>
      <AuthenticationData xsi:type="sam:AuthenticationData">
@@ -252,15 +236,12 @@ Note: This service gets a list of all notices
       </sam:getIVLList>
    </soapenv:Body>
 </soapenv:Envelope>
-```
 </textarea>
 </details>
 
 <details>
     <summary>Response Sample - Success</summary>
 <textarea>
-```
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP-ENV:Header/>
     <SOAP-ENV:Body>
@@ -287,14 +268,12 @@ Note: This service gets a list of all notices
         </ns1:getIVLListResponse>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-```
 </textarea>
 </details>
 
 <details>
     <summary>Response Sample - Failure</summary>
 <textarea>
-```
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
    <SOAP-ENV:Header/>
    <SOAP-ENV:Body>
@@ -308,7 +287,6 @@ Note: This service gets a list of all notices
        </ns1:getIVLListResponse>
    </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-```
 </textarea>
 </details>
 
