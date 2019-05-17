@@ -13,9 +13,8 @@ The Opportunity Management SOAP APIs will allow authorized users to submit and r
 
 ## Web Services <br> Description Language (WSDL)
 To view the WSDL for all available methods and object definitions, refer below links:
-* Alpha WSDL Link: https://api-alpha.sam.gov/prodlike/ws/services.WSDL
+* Alpha WSDL Link: https://api-alpha.sam.gov/prodlike/ws/services.wsdl
 * Beta WSDL Link: TBD
-WSDL attached below can be downloaded:
 
 ## Authentication
 
@@ -55,8 +54,9 @@ The complex type definition for this object (AuthenticationData) is located in t
 The authentication namespace must match for a web service call to be successful.
 This is due to core settings for the web services internals where the authorization header validates the namespace against the WSDL. So, when the namespace for your authentication header in soap xml does not match the namespace defined in the WSDL at the endpoint (in this case sam), it does not pass on the credentials (username/password/emailid). Therefore, the Contract Opportunities service is not able to authenticate the user and returns an authentication error.
 
-Test Server Namespace: https://www.sam.gov
-Production Server Namespace: https://www.sam.gov
+* Test Server Namespace: https://www.sam.gov
+
+* Production Server Namespace: https://www.sam.gov
 
 ## Method Overview
 All methods available can be found in the WSDL and will be listed in this document. Methods will take different parameters ranging from basic types (string/integer/boolean/date and array of these types) or complex data types that are further comprised of these basic types and sometimes other complex data types.  
