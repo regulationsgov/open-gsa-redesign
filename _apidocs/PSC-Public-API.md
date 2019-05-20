@@ -69,6 +69,7 @@ URLs for production and staging:
     <summary>Request URL</summary>
 
  https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}&active=ALL&startDateFrom=1978-01-01&endDateTo=2015-01-01<br>
+ <br>
 
 Note: Request URL for staging is used in this example
 </details>
@@ -154,6 +155,7 @@ Note: By default API brings back only top 100 records. Example below shows only 
     <summary>Request URL</summary>
  
  https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}&q=15&active=ALL<br>
+ <br>
 
 Note: Request URL for staging is used in this example
 
@@ -452,6 +454,7 @@ Note: Request URL for staging is used in this example
     <summary>Request URL</summary>
 
 https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}&searchBy=group&q=product&active=ALL&limit=10<br>
+<br>
 
 Note: Request URL for staging is used in this example
 
@@ -521,6 +524,7 @@ Note: By default API brings back only top 100 records. Example below shows only 
     <summary>Request URL</summary>
 
 https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}& level1Category=12<br>
+<br>
 
 Note: Request URL for staging is used in this example
 
