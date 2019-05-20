@@ -68,15 +68,15 @@ URLs for production and staging:
 <details>
     <summary>Request URL</summary>
 
- https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}&active=ALL&startDateFrom=1978-01-01&endDateTo=2015-01-01
+ https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}&active=ALL&startDateFrom=1978-01-01&endDateTo=2015-01-01<br>
 
-*Note: Request URL for staging is used in this example*
+Note: Request URL for staging is used in this example
 </details>
 
 <details>
     <summary>Response</summary>
 
-*Note: By default API brings back only top 100 records. Example below shows only top few records for reference*
+Note: By default API brings back only top 100 records. Example below shows only top few records for reference <br>
 
 <p>
 <code><pre>
@@ -153,9 +153,9 @@ URLs for production and staging:
 <details>
     <summary>Request URL</summary>
  
- https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}&q=15&active=ALL
+ https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}&q=15&active=ALL<br>
 
-*Note: Request URL for staging is used in this example*
+Note: Request URL for staging is used in this example
 
 </details>
 
@@ -451,16 +451,16 @@ URLs for production and staging:
 <details>
     <summary>Request URL</summary>
 
-https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}&searchBy=group&q=product&active=ALL&limit=10
+https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}&searchBy=group&q=product&active=ALL&limit=10<br>
 
-*Note: Request URL for staging is used in this example*
+Note: Request URL for staging is used in this example
 
 </details>
 
 <details>
     <summary>Response</summary>
 
-*Note: By default API brings back only top 100 records. Example below shows only top few records for reference*
+Note: By default API brings back only top 100 records. Example below shows only top few records for reference<br>
 
 <p>
 <code><pre>
@@ -520,16 +520,16 @@ https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_
 <details>
     <summary>Request URL</summary>
 
-https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}& level1Category=12
+https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails?api_key={User’s Public API Key}& level1Category=12<br>
 
-*Note: Request URL for staging is used in this example*
+Note: Request URL for staging is used in this example
 
 </details>
 
 <details>
     <summary>Response</summary>
 
-*Note: By default API brings back only top 100 records. Example below shows only top few records for reference*
+Note: By default API brings back only top 100 records. Example below shows only top few records for reference<br>
 
 <p>
 <code><pre>
