@@ -600,6 +600,17 @@ Users of this public API must provide an API key to use this PSC public API. Req
 
 ## Error Messages
 
+Scenario | Error Messages
+-----|-----
+User enters an invalid date in startDateFrom. E.g. 201-hh-0j	|"Please pass a valid date for startDateFrom in the format yyyy-mm-dd"
+User enters an invalid date in startDateTo. E.g. 201-hh-0j|	"Please pass a valid date for startDateTo in the format yyyy-mm-dd"
+User enters an invalid date in endDateFrom. E.g. 201-hh-0j|	"Please pass a valid date for endDateFrom in the format yyyy-mm-dd"
+User enters an invalid date in endDateTo. E.g. 201-hh-0j	|"Please pass a valid date for endDateTo in the format yyyy-mm-dd"
+User enters an invalid date in updatedDateFrom. E.g. 201-hh-0j|	"Please pass a valid date for updatedDateFrom in the format yyyy-mm-dd"
+User enters an invalid date in updatedDateTo. E.g. 201-hh-0j	|"Please pass a valid date for  updatedDateTo in the format yyyy-mm-dd"
+User enters a startDateFrom greater than startDateTo	|"startDateFrom cannot be greater than startDateTo"
+User enters a endDateFrom greater than endDateFrom|	"endDateFrom cannot be greater than endDateFrom "
+User enters a updatedDateFrom greater than updatedDateTo|	"updatedDateFrom cannot be greater than updatedDateTo"
 
 
 
