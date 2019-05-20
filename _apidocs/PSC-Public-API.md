@@ -594,9 +594,13 @@ Users of this public API must provide an API key to use this PSC public API. Req
 ## HTTP Response Codes
 
 200 - Success
+
 404 – No Data found 
+
 400 – Bad Request 
+
 500	– Internal Server Error
+
 
 ## Error Messages
 
