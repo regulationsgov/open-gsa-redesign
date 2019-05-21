@@ -514,11 +514,6 @@ If you are using Chrome, subsections that can be expanded are denoted with an ar
 <td>Submission Date</td>
 </tr>
 
-<tr>
-<td>correspondenceFlag</td>
-<td>string</td>
-<td>Correspondence Flag</td>
-</tr>
 </table>
 
 <summary>physicalAddress, mailingAddress Sub Sections </summary>
