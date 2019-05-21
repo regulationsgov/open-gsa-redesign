@@ -681,8 +681,6 @@ components:
           type: string
         submissionDate:
           type: string
-        correspondenceFlag:
-          type: string
     FinancialAssistanceCertifications:
       type: object
       properties:
