@@ -3301,6 +3301,12 @@ dnbMonitoring
 </tr>
 
 <tr>
+<td>zipCodePlus4</td>
+<td>string</td>
+<td>Zip Code Plus 4</td>
+</tr>
+
+<tr>
 <td>stateOrProvince</td>
 <td>string</td>
 <td>State Or Province</td>
@@ -3383,6 +3389,12 @@ samMonitoring
 <td>zipCode</td>
 <td>string</td>
 <td>Zip Code</td>
+</tr>
+
+<tr>
+<td>zipCodePlus4</td>
+<td>string</td>
+<td>Zip Code Plus 4</td>
 </tr>
 
 <tr>
@@ -6986,6 +6998,12 @@ dnbMonitoring
 </tr>
 
 <tr>
+<td>zipCodePlus4</td>
+<td>string</td>
+<td>Zip Code Plus 4</td>
+</tr>
+
+<tr>
 <td>stateOrProvince</td>
 <td>string</td>
 <td>State Or Province</td>
@@ -7067,6 +7085,12 @@ samMonitoring
 <td>zipCode</td>
 <td>string</td>
 <td>Zip Code</td>
+</tr>
+
+<tr>
+<td>zipCodePlus4</td>
+<td>string</td>
+<td>Zip Code Plus 4</td>
 </tr>
 
 <tr>
