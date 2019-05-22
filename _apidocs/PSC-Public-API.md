@@ -11,8 +11,8 @@ This API supports pagination as needed.
 ## Getting Started
 
 PSC API can be accessed from Beta or Alpha via the following endpoints:
-* Beta: Coming Soon
-* Alpha: 
+* Beta: <br> https://api.sam.gov/prod/locationservices/v1/api/publicpscdetails (Coming Soon)
+* Alpha: <br> https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails
 
 ###	Authentication and Authorization
 
@@ -88,8 +88,8 @@ links |	This is an array consisting of: <br>"rel": "self"<br>"href" |	String
 ## Examples
 
 URLs for production and staging:
-* Beta (Production) Production URL: https://api.sam.gov/prod/locationservices/v1/api/publicpscdetails
-* Alpha (Staging) URL: https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails
+* Beta (Production) Production URL: <br> https://api.sam.gov/prod/locationservices/v1/api/publicpscdetails
+* Alpha (Staging) URL: <br> https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails
 
 ### Example 1: Search for PSC Codes with start date between a given date rage
 
