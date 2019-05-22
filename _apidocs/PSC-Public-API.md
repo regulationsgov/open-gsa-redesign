@@ -31,9 +31,11 @@ In order to utilize the Contract Opportunity Management API, the following is re
 
 #### User Account Authorization
 In order to perform an Opportunity Management API operation, the following is required:
-* beta.SAM.GOV user account with either 'Administrator', 'Contracting Officer' role or 'Contracting Specialist' role. Permissions for operations by role are listed in the table below.<br/>
+* beta.SAM.GOV user account with either 'Administrator', 'Contracting Officer' role or 'Contracting Specialist' role. Permissions for operations by role are listed in the table below.<br>
 
-To submit any opportunity notice type (except “Special Notice”) for an office, user should provide Federal Hierarchy (FH) Organization ID or Activity Address Code (AAC) (procurement/non-procurement). To submit Special Notice opportunity, user should provide Federal Hierarchy (FH) Organization ID of office, sub-tier or department or Activity Address Code (AAC) (procurement/non-procurement) or [other codes] for sub-tier and department. <br/>
+To submit any opportunity notice type (except “Special Notice”) for an office, user should provide Federal Hierarchy (FH) Organization ID or Activity Address Code (AAC) (procurement/non-procurement). To submit Special Notice opportunity, user should provide Federal Hierarchy (FH) Organization ID of office, sub-tier or department or Activity Address Code (AAC) (procurement/non-procurement) or [other codes] for sub-tier and department. 
+<br>
+<br>
 **Note:** Permissions marked "Yes" are may not be assigned by default and will require your user administrator to update.
 
 ## PSC API Request Parameters
@@ -621,6 +623,7 @@ Version 1.0
 ## Authentication and API Keys
 
 Users of this public API must provide an API key to use this PSC public API. Request per day are limited based on the federal or non-federal or general roles. 
+<br>
 *Note: Users can request a public API Key in their Account Details page on beta.sam.gov (if on production) or on alpha.sam.gov (if on staging)*
 
 ## HTTP Response Codes
