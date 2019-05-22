@@ -97,6 +97,7 @@ API response consists of Sections, Sub-sections and Tags underneath each of the 
 
 | Section/Sub-section/Tag | Type | Description |
 | ---- | ---- | ----------- |
+| secondaryAddress | string | Secondary Address  |
 | **exclusionDetails** |
 | classificationType | string | Classification Type |
 | exclusionType | string | Exclusion Type  |
@@ -123,10 +124,10 @@ API response consists of Sections, Sub-sections and Tags underneath each of the 
 | terminationType | string | Termination Type   |
 | recordStatus | string | Record Status  |
 | **exclusionAddress** |
-| address1 | string | Address 1  | 
-| address2 | string | Address 2  | 
+| addressLine1 | string | Address Line 1  | 
+| addressLine2 | string | Address Line 2  | 
 | city | string | Address City  | 
-| stateProvince | string | Address State or Province |
+| stateOrProvince | string | Address State or Province |
 | zipCode | string | Address Zip OR Postal Code  |
 | country | string | Country  |
 | **exclusionOtherInformation** |
@@ -144,7 +145,6 @@ API response consists of Sections, Sub-sections and Tags underneath each of the 
 | grt | string | GRT  |
 | flag | string | Flag  |
 | owner | string | Owner |
-| secondaryAddress | string | Secondary Address  |
 
 <p><small><a href="#">Back to top</a></small></p>
 
