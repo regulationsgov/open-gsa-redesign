@@ -129,6 +129,7 @@ API response consists of Sections, Sub-sections and Tags underneath each of the 
 | city | string | Address City  | 
 | stateOrProvince | string | Address State or Province |
 | zipCode | string | Address Zip OR Postal Code  |
+| zipCodePlus4 | string | Address Zip Plus 4  |
 | country | string | Country  |
 | **exclusionOtherInformation** |
 | additionalComments | string | Additional Comments  |
