@@ -363,9 +363,13 @@ Since Opportunities data volume is huge, API works as follows:
 ## HTTP Response Codes
 
 200 - Success
+
 404 – No Data found 
+
 400 – Bad Request 
+
 500	– Internal Server Error
+
 
 ## Error Messages
 
