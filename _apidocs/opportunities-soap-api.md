@@ -1421,7 +1421,6 @@ FileDataRequest Complex Type Definition:
 Element Name|	Type|	Required|	Description
 -----|-----|-----|-----
 file_id	|string|	yes|	Unique ID of a file found from getNoticeData call  (i.e. file_id element)
-notice_id|	string|	Yes	|Unique Identifier for a notice
 
 Response:
 
