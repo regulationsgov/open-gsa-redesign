@@ -14,7 +14,9 @@ PSC API can be accessed from Beta or Alpha via the following endpoints:
 * Beta: <br> https://api.sam.gov/prod/locationservices/v1/api/publicpscdetails
 * Alpha: <br> https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails
 
-
+## Authentication and API Keys
+Users of this public API must provide an API key to use this Opportunities public API. Request per day are limited based on the federal or non-federal or general roles. 
+Note: Users can request a public API Key in their Account Details page on beta.sam.gov (if testing in production) Else on alpha.sam.gov (if testing in prodlike).
 
 #### User Account API Key Creation
 * Registered users can request for a public API on ‘Account Details’ page. This page can be accessed here: Account Details page on beta.sam.gov
