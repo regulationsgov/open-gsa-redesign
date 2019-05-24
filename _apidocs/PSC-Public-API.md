@@ -11,7 +11,7 @@ This API supports pagination as needed.
 ## Getting Started
 
 PSC API can be accessed from Beta or Alpha via the following endpoints:
-* Beta: <br> https://api.sam.gov/prod/locationservices/v1/api/publicpscdetails (Coming Soon)
+* Beta: <br> https://api.sam.gov/prod/locationservices/v1/api/publicpscdetails
 * Alpha: <br> https://api-alpha.sam.gov/prodlike/locationservices/v1/api/publicpscdetails
 
 ###	Authentication and Authorization
