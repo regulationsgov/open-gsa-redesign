@@ -195,7 +195,7 @@ Note: Request URL for staging is used in this example
 <details>
     <summary>Response (JASON Output)</summary>
 
-Note: Note: Response for one record is provided as an example <br>
+Note: Response for one record is provided as an example <br>
 
 <p>
 <code><pre>
@@ -287,7 +287,7 @@ Note: Request URL for staging is used in this example
 <details>
     <summary>Response (JASON Output)</summary>
 
-Note: Note: Response for one record is provided as an example <br>
+Note: Response for one record is provided as an example <br>
 
 <p>
 <code><pre>
