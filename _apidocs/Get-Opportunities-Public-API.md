@@ -92,9 +92,9 @@ links	|Every record in a response has this links array consisting of: <br> rel: 
 <details>
     <summary>Request URL</summary>
 
-* Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018 <br>
+Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018 <br>
  <br>
-* Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018 <br>
+Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018 <br>
  <br>
 
 Note: Request URL for staging is used in this example
@@ -184,9 +184,9 @@ Note: Response for one record is provided as an example <br>
 <details>
     <summary>Request URL</summary>
 
-* Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_key={User’s Public API Key}  &postedFrom=01/01/2018&postedTo=05/10/2018&ptype=p <br>
+Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_key={User’s Public API Key}  &postedFrom=01/01/2018&postedTo=05/10/2018&ptype=p <br>
  <br>
-* Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}  &postedFrom=01/01/2018&postedTo=05/10/2018&ptype=p <br>
+Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}  &postedFrom=01/01/2018&postedTo=05/10/2018&ptype=p <br>
  <br>
 
 Note: Request URL for staging is used in this example
@@ -276,9 +276,9 @@ Note: Note: Response for one record is provided as an example <br>
 <details>
     <summary>Request URL</summary>
 
-* Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018&title=Driving <br>
+Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018&title=Driving <br>
  <br>
-* Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018&title=Driving <br>
+Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018&title=Driving <br>
  <br>
 
 Note: Request URL for staging is used in this example
