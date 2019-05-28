@@ -9,7 +9,7 @@ Get Opportunities API provides all the published opportunity details based on th
 
 ## Getting Started
 
-PSC API can be accessed from Beta or Alpha via the following endpoints:
+Get Opportunities API can be accessed from Beta or Alpha via the following endpoints:
 * Beta: <br> https://api.sam.gov/prod/
 * Alpha: <br> https://api-alpha.sam.gov/prodlike/
 
