@@ -9,7 +9,7 @@ Get Opportunities API provides all the published opportunity details based on th
 
 ## Getting Started
 
-Get Opportunities API can be accessed from Beta or Alpha via the following endpoints:
+Get Opportunities API can be accessed from Beta or Alpha via the following environments:
 * Beta: <br> https://api.sam.gov/prod/
 * Alpha: <br> https://api-alpha.sam.gov/prodlike/
 
@@ -87,16 +87,14 @@ links	|Every record in a response has this links array consisting of: <br> rel: 
 
 ## Examples
 
-URLs for production and staging:
-* Production URL: https://api.sam.gov/prod/
-* Staging URL: https://api-alpha.sam.gov/prodlike/
-
 ### Example 1: Search opportunities for the given date
 
 <details>
     <summary>Request URL</summary>
 
- https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018 <br>
+* Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018 <br>
+ <br>
+* Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018 <br>
  <br>
 
 Note: Request URL for staging is used in this example
@@ -105,7 +103,7 @@ Note: Request URL for staging is used in this example
 <details>
     <summary>Response (JASON Output)</summary>
 
-Note: Note: Response for one record is provided as an example <br>
+Note: Response for one record is provided as an example <br>
 
 <p>
 <code><pre>
@@ -186,7 +184,9 @@ Note: Note: Response for one record is provided as an example <br>
 <details>
     <summary>Request URL</summary>
 
-https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}  &postedFrom=01/01/2018&postedTo=05/10/2018&ptype=p <br>
+* Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_key={User’s Public API Key}  &postedFrom=01/01/2018&postedTo=05/10/2018&ptype=p <br>
+ <br>
+* Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}  &postedFrom=01/01/2018&postedTo=05/10/2018&ptype=p <br>
  <br>
 
 Note: Request URL for staging is used in this example
@@ -276,7 +276,9 @@ Note: Note: Response for one record is provided as an example <br>
 <details>
     <summary>Request URL</summary>
 
-https://api-alpha.sam.gov/prodlike /opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018&title=Driving <br>
+* Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018&title=Driving <br>
+ <br>
+* Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018&title=Driving <br>
  <br>
 
 Note: Request URL for staging is used in this example
