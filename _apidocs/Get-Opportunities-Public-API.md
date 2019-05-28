@@ -7,13 +7,17 @@ banner-heading: Get Opportunities Public API documentation
 
 Get Opportunities API provides all the published opportunity details based on the request parameters. This API supports pagination as needed. If pagination is requested, then the response will be provided to users synchronously else the call will be asynchronous. 
 
-## Getting Started 
+## Getting Started
 
-### Authentication and API Keys
+Get Opportunities API can be accessed from Beta or Alpha via the following environments:
+* Beta: <br>  https://api.sam.gov/prod/opportunities/v1/search
+* Alpha: <br> https://api-alpha.sam.gov/prodlike/opportunities/v1/search
+
+## Authentication and API Keys
 Users of this public API must provide an API key to use this Opportunities public API. Request per day are limited based on the federal or non-federal or general roles. 
 Note: Users can request a public API Key in their Account Details page on beta.sam.gov (if testing in production) Else on alpha.sam.gov (if testing in prodlike).
 
-### User Account API Key Creation
+#### User Account API Key Creation
 * Registered users can request for a public API on ‘Account Details’ page. This page can be accessed here: Account Details page on beta.sam.gov
 * Users must enter their password on ‘Account Details’ page to view the API Key information. If an incorrect password is entered, an error will be returned.
 * After the API Key is generated on ‘Account Details’ page, the API Key can be viewed on the * Account Details page immediately. The API Key is visible until users navigate to a different page.
