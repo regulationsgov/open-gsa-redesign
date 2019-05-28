@@ -97,7 +97,7 @@ Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_ke
 Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018 <br>
  <br>
 
-Note: Request URL for staging is used in this example
+Note: Request URL for alpha is used in this example
 </details>
 
 <details>
@@ -189,7 +189,7 @@ Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_ke
 Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}  &postedFrom=01/01/2018&postedTo=05/10/2018&ptype=p <br>
  <br>
 
-Note: Request URL for staging is used in this example
+Note: Request URL for alpha is used in this example
 </details>
 
 <details>
@@ -281,7 +281,7 @@ Production URL: https://api.sam.gov/prod/opportunities/v1/search?limit=10&api_ke
 Staging URL: https://api-alpha.sam.gov/prodlike/opportunities/v1/search?limit=10&api_key={User’s Public API Key}&postedFrom=01/01/2018&postedTo=05/10/2018&title=Driving <br>
  <br>
 
-Note: Request URL for staging is used in this example
+Note: Request URL for alpha is used in this example
 </details>
 
 <details>
