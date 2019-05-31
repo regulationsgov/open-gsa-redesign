@@ -13,8 +13,8 @@ The Opportunity Management SOAP APIs will allow authorized users to submit and r
 
 ## Web Services <br> Description Language (WSDL)
 To view the WSDL for all available methods and object definitions, refer below links:
-* Alpha WSDL Link: https://api-alpha.sam.gov/prodlike/ws/services.wsdl
-* Beta WSDL Link: <a href="v1/services.wsdl.xml" download="services.wsdl">Download</a>
+* Alpha WSDL Link: <a href="v1/services.wsdl.xml" download="services.wsdl">Download</a>
+* Beta WSDL Link: Coming Soon
 
 ## Authentication
 
@@ -4203,6 +4203,6 @@ _NA_
 
 Date | Version | Description
 ------|---------------|---------
-5/10/2019 | v1.0 | Base Version
+5/10/2019 | v0.1 | Base Version
 
 <p><small><a href="#">Back to top</a></small></p>
