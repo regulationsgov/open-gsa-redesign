@@ -17,6 +17,8 @@ To view the WSDL for all available methods and object definitions, refer below l
 * Beta WSDL Link: <a href="https://github.com/GSA/open-gsa-redesign/blob/apidocs-orangeopportunitiesapi-20190429/services.wsdl.xml" download="services.wsdl.xml">Download</a>
 * Download: [download this](https://github.com/GSA/open-gsa-redesign/blob/apidocs-orangeopportunitiesapi-20190429/services.wsdl.xml)
 
+<a href="https://github.com/GSA/open-gsa-redesign/blob/apidocs-orangeopportunitiesapi-20190429/services.wsdl.xml" download>Click to Download</a>
+
 ## Authentication
 
 ### User Accounts
