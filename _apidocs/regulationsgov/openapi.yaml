@@ -1,0 +1,521 @@
+#------------------
+# Temporary Notes:
+# nullable needs to be revisted.
+# All date formats are part of description. I think we can remove that.
+# TODO:  verify descriptions for attachments and display properties
+#--------------------
+openapi: 3.0.0
+info:
+  title: Regulations.gov API
+  description: >-
+    Public API for Regulations.gov
+  version: "4.0"
+servers:
+  - url: 'https://www.regulation.gov/api/v4'
+    description: Default endpoint for Regulations.gov API
+security: 
+  - ApiKeyAuth: []
+paths:
+  /documents:
+    get:
+      summary: List of documents
+      description: This endpoint returns list of documents 
+      parameters: # we need one more filter added for frDocNum
+        - name: filter[agencyId]
+          in: query
+          description: >-
+            'Filters results for the agency acronym specified in the value. Example: ''EPA'''
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: filter[commentEndDate]
+          in: query
+          description: >- # we might want to update our format here to accept 2017-07-21 format. 
+            Filters results relative to the comment end date.  The value must be formatted as `MM-dd-yyyy`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used: <br/> `ge` - greater than or equal <br/> `le` - less than or equal
+          required: false
+          schema:
+            type: string
+            #format: date - cannot add this format unless we update the format we accept for date.
+        - name: filter[docketId]
+          in: query
+          description: >-
+            Filters results on the specified docket ID.
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: filter[documentType]
+          in: query
+          description: >-
+            Filters results on the specified document type.
+          required: false
+          schema:
+            $ref: '#/components/schemas/DocumentType'
+        - name: filter[searchTerm]
+          in: query
+          description: >-
+            Filters results on the given term.
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: filter[postedDate]
+          in: query
+          description: >- # we might want to update our format here to accept 2017-07-21 format. 
+            Filters results relative to the posted date.  The value must be formatted as `MM-dd-yyyy`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used: <br/> `ge` - greater than or equal <br/> `le` - less than or equal
+          required: false
+          schema:
+            type: string
+            #format: date - cannot add this format unless we update the format we accept for date.
+        - name: filter[subtype]
+          in: query
+          description: >-
+            Filters results on the supplied document subtype
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: filter[withinCommentPeriod]
+          in: query
+          description: >-
+            Filters results for documents that are open for comment by setting the value to `true`. <br/><br/> _`False` is not an acceptable value for this parameter, hence it should be removed when not being used._          
+          required: false
+          schema:
+            type: boolean
+        - name: sort
+          in: query
+          #update description and pull out possible values into an enum
+          description: >-
+            Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> Supported values are `commentEndDate`, `postedDate`, and `title`.          
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: page[number]
+          in: query
+          description: >-
+            Specifies the number for the page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 1 and 20.          
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: size
+          in: query
+          description: >-
+            Specifies the size per page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 5 and 250.           
+          required: false
+          schema:
+            type: string
+            format: string
+      tags:
+        - documents
+      responses:
+        '200':
+          description: An array of documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Document'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 
+  /documents/{documentId}:
+    get:
+      tags:
+        - document details
+      summary: Get detailed information for specified documentId
+      description: Gets the detailed information of a specific document with the passed documentId.
+      parameters:
+        - name: documentId
+          in: path
+          description: ID of document to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentDetail'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    securitySchemes:
+      ApiKeyAuth:        # arbitrary name for the security scheme
+        type: apiKey
+        in: header       # can be "header", "query" or "cookie"
+        name: X-API-KEY  # name of the header, query parameter or cookie
+        default: DEMO_KEY
+    DocumentType:
+      type: string
+      enum:
+        - Notice
+        - Rule
+        - Proposed Rule
+        - Supporting & Related Material
+        - Other
+    FileFormat:
+      type: object
+      properties: 
+        fileUrl:
+          type: string
+          description: URL of the file on S3
+        format:
+          type: string
+          description: The format of the file such as `pdf`
+        size:
+          type: integer
+          description: The file size
+    Attachment:
+      type: object
+      properties:
+        agencyNote:
+          type: string
+          description: The note by agency
+        authors:
+          type: array
+          items:
+            type: string
+          description: The individual, organization, or group of collaborators that contributed to the creation of the attachment.
+        docAbstract:
+          type: string
+          description: The detailed description of the attachment.
+        docOrder:
+          type: integer
+          description: The order of the attachment
+        fileFormats:
+          type: array
+          description: list of file formats
+          schema:
+            $ref: '#/components/schemas/FileFormat'
+        modifyDate:
+          type: string
+          format: date-time
+          description: The date when the attachment was last modified.
+        publication:
+          type: string
+          description: The publication date
+        restrictReason:
+          type: string
+          description: If the attachment is restricted, this field will state the reason.
+        restrictReasonType:
+          type: string
+          description: If the attachment is restricted, this field will state the type of restriction.
+        title:
+          type: string
+          description: The formal title of the attachment
+    DisplayProperty:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the property
+        label: 
+          type: string
+          description: The label of the property
+        tooltip: 
+          type: string
+          description: The tooltip of the property      
+    Document:
+      type: object
+      properties: # we might want to add numberOfCommentReceived here.
+        agencyId:
+          type: string
+          description: The acronym used to abbreviate the name of the agency associated with the document.
+        commentEndDate:
+          type: string
+          nullable: true
+          format: date-time
+          description: The date that closes the period when public comments may be submitted on the document.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+        commentStartDate:
+          type: string
+          nullable: true
+          format: date-time
+          description: The date that begins the period when public comments may be submitted on the document.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+        docketId:
+          type: string
+          description: The ID of the docket to which the document corresponds.
+        documentId:
+          type: string
+          description: The unique identified of the document
+        documentType:
+          type: string
+          description: The document type
+          schema:
+            $ref: '#/components/schemas/DocumentType'
+        highlightedContent:
+          type: string
+          nullable: true
+          description: Content highlighted by the search index for the searchTerm
+        openForComment:
+          type: boolean
+          description: Conveys if the document is open for comment
+        postedDate:
+          type: string
+          description: The date that the document was posted by the agency to the system.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+        subtype:
+          type: string
+          description: An agency-specific attribute to further categorize a document beyond the type (`documentType`).
+        title:
+          type: string
+          description: The formal title of the document.
+        withdrawn:
+          type: boolean
+          description: Conveys if the document is withdrawn
+    BasicDetailModel:
+      type: object
+      properties:
+        address1:
+          type: string
+          nullable: true
+          description: The first line of the submitter's address.
+        address2:
+          type: string
+          nullable: true
+          description: The second line of the submitter's address.
+        agencyId:
+          type: string
+          description: The acronym used to abbreviate the name of the agency associated with the document.
+        attachments:
+          type: array
+          description: list of attachments
+          schema:
+            $ref: '#/components/schemas/Attachment'
+        city:
+          type: string
+          nullable: true
+          description: The city associated with the submitter's address.
+        commentCategory:
+          type: string
+          nullable: true
+          description: An agency-specific category allowing agencies to group comments according to their type.
+        content: # This will be renamed comment and we will add a content field to Document model per RGM-1031
+          type: string
+          nullable: true
+          description: The content of a document that has originated from the [Federal Register](https://www.federalregister.gov/).
+        country:
+          type: string
+          nullable: true
+          description: The country associated with the submitter's address.
+        displayProperties:
+          type: array
+          description: list of display properties
+          schema:
+            $ref: '#/components/schemas/DisplayProperty'
+        docAbstract:
+          type: string
+          description: The detailed description of the document.
+        docketId:
+          type: string
+          description: The ID of the docket to which the document corresponds.
+        documentType:
+          type: string
+          description: The document type
+          schema:
+            $ref: '#/components/schemas/DocumentType'
+        email:
+          type: string
+          nullable: true
+          description: The submitter's e-mail address.
+        fax:
+          type: string
+          nullable: true
+          description: The submitter's fax number.
+        field1:
+          type: string
+          nullable: true
+          description: An agency-specific field used for storing additional data with the document.
+        field2:
+          type: string
+          nullable: true
+          description: An agency-specific field used for storing additional data with the document.
+        fileFormats:
+          type: array
+          description: list of file formats
+          schema:
+            $ref: '#/components/schemas/FileFormat'
+        firstName:
+          type: string
+          nullable: true
+          description: The submitter's first name.
+        govAgency:
+          type: string
+          nullable: true
+          description: The name of the government agency that the submitter represents.
+        govAgencyType:
+          type: string
+          nullable: true
+          description: The type of government agency that the submitter represents.
+        objectId:
+          type: string
+          description: The unique Regulations.gov ID associated with the document.  This value is often expected for internal use only.
+        lastName:
+          type: string
+          nullable: true
+          description: The submitter's last name.
+        legacyId:
+          type: string
+          nullable: true
+          description: An agency-specific identifier that was given to the document in the legacy system.
+        modifyDate:
+          type: string
+          format: date-time
+          description: The date when the document was last modified.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+        organization:
+          type: string
+          nullable: true
+          description: The organization that the submitter represents.
+        originalDocumentId:
+          type: string
+          description: The document ID that was assigned when first entered into the system should a change occur that requires a new document ID to be assigned.
+        pageCount:
+          type: string
+          description: Conveys the number of pages contained in the document.
+        phone:
+          type: string
+          nullable: true
+          description: The submitter's phone number.
+        postedDate:
+          type: string
+          format: date-time
+          description: The date that the document was posted by the agency to the system.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+        postmarkDate:
+          type: string
+          format: date-time
+          description: The postmark date of a document that was sent by mail.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+        reasonWithdrawn:
+          type: string
+          description: If the document is withdrawn, this field will state the reason.
+    DocumentDetail:
+      allOf:     # Combines the BasicDetailModel and the inline model
+        - $ref: '#/components/schemas/BasicDetailModel'
+        - type: object
+          required:
+            - documentId
+          properties: 
+            additionalRins:
+              type: array
+              items:
+                type: string
+              description: One or more Regulatory Information Numbers (RINs) to which the document relates.
+            allowLateComments:
+              type: boolean
+              description: Indicates whether the owning agency will accept comments on the document after the due date.
+            authorDate:
+              type: string
+              format: date-time
+              description: The date that the authors wrote or published the document.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+            authors:
+              type: array
+              items:
+                type: string
+              description: The individual, organization, or group of collaborators that contributed to the creation of the document.
+            cfrPart:
+              type: string
+              description: The Code of Federal Regulations (CFR) Citation applicable to the document.
+            commentEndDate:
+              type: string
+              nullable: true
+              format: date-time
+              description: The date that closes the period when public comments may be submitted on the document.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+            commentStartDate:
+              type: string
+              nullable: true
+              format: date-time
+              description: The date that begins the period when public comments may be submitted on the document.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+            documentId:
+              type: string
+              description: The unique identified of the document
+            effectiveDate:
+              type: string
+              format: date-time
+              description: The date the document is put into effect.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+            exhibitLocation:
+              type: string
+              description: The physical location of an exhibit to which a document refers.
+            exhibitType:
+              type: string
+              description: The type of exhibit to which a document refers.
+            frDocNum:
+              type: string
+              description: The unique identifier of a document originating in the [Federal Register](https://www.federalregister.gov/).
+            frVolNum:
+              type: string
+              description: The [Federal Register](https://www.federalregister.gov/) volume number where the document was published.
+            implementationDate:
+              type: string
+              format: date-time
+              description: The date the document is to be implemented.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+            openForComment:
+              type: boolean
+              description: Conveys if a document is open for comment.
+            media:
+              type: string
+              description: The media in which the document is stored.
+            ombApproval:
+              type: string
+              description: The control number assigned when approval is given by the Office of Management and Budget (OMB) in accordance with the Paperwork Reduction Act (PRA).
+            paperLength:
+              type: integer
+              description: When the document is in paper format, indicates the length of the paper.
+            paperWidth:
+              type: integer
+              description: When the document is in paper format, indicates the width of the paper.
+            regWriterInstruction:
+              type: string
+              description: Additional instructions provided by the writer of the regulation.
+            sourceCitation:
+              type: string
+              description: The citation for the source that published the document.
+            startEndPage:
+              type: string
+              description: The starting and ending pages where the document was published.
+            subject:
+              type: string
+              description: The subject of the document.
+            topics:
+              type: array
+              items:
+                type: string
+              description: The principal topics to which the document pertains.
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer #http status code
+        title:
+          type: string
+        detail:
+          type: string
+
