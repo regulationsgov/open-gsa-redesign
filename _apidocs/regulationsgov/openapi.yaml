@@ -19,8 +19,7 @@ paths:
   /documents:
     get:
       summary: List of documents
-      description: |
-        This endpoint returns list of documents 
+      description: This endpoint returns list of documents 
       parameters: # we need one more filter added for frDocNum
         - name: filter[agencyId]
           in: query
@@ -519,3 +518,4 @@ components:
           type: string
         detail:
           type: string
+
