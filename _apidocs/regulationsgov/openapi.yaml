@@ -10,7 +10,7 @@ info:
   description: >-
     Public API for Regulations.gov
   version: "4.0"
-servers: #do we need test endpoints mentioned here? Doesnt federalRegister uses test endpoint today?
+servers:
   - url: 'https://www.regulation.gov/api/v4'
     description: Default endpoint for Regulations.gov API
 security: 
