@@ -11,8 +11,8 @@ info:
     Public API for Regulations.gov
   version: "4.0"
 servers:
-  - url: 'https://api.regulation.gov/v4'
-    description: Default endpoint for Regulations.gov API
+  - url: 'https://api.regulations.gov/v4'
+    description: Production endpoint for Regulations.gov API
 security: 
   - ApiKeyAuth: []
 paths:
@@ -23,6 +23,12 @@ paths:
       tags:
         - documents
       parameters: # we need one more filter added for frDocNum
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string
         - name: filter[agencyId]
           in: query
           description: >-
@@ -138,6 +144,12 @@ paths:
       summary: Get detailed information for specified documentId
       description: Gets the detailed information of a specific document with the passed documentId.
       parameters:
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string
         - name: documentId
           in: path
           description: ID of document to return
@@ -181,6 +193,12 @@ paths:
       tags:
         - comments
       parameters: 
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string
         - name: filter[agencyId]
           in: query
           description: >-
@@ -265,6 +283,12 @@ paths:
       tags:
         - comments
       parameters:
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string
         - name: documentId
           in: path
           description: ID of document to return
@@ -306,6 +330,12 @@ paths:
       tags:
         - comments
       parameters:
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string
         - name: documentId
           in: path
           description: ID of document the comment is being submitted to
@@ -349,7 +379,13 @@ paths:
       description: This endpoint returns list of dockets 
       tags:
         - dockets
-      parameters: 
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string
         - name: filter[agencyId]
           in: query
           description: >-
@@ -426,6 +462,12 @@ paths:
       summary: Get detailed information for specified docketId
       description: Gets the detailed information of a specific docket with the passed docketId.
       parameters:
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string
         - name: docketId
           in: path
           description: ID of docket to return
@@ -464,7 +506,13 @@ paths:
       description: This endpoint returns list of categories
       tags:
         - comments
-      parameters: 
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string
         - name: filter[agencyId]
           in: query
           description: >-
@@ -498,6 +546,13 @@ paths:
       operationId: GetSubmitterKey
       tags:
         - comments
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string      
       responses:
         201:
           description: Created
@@ -507,13 +562,19 @@ paths:
                 $ref: '#/components/schemas/SubmissionKey'            
   
   /fileUploadUrl:
-    get:
+    post:
       summary: get a presigned url to upload file
       tags:
         - comments
       operationId: getUploadUrl
       description: 'Returns a pre-signed URL to upload a file to the S3 bucket'
       parameters:
+        - name: api_key
+          in: query
+          required: true
+          schema:
+            type: string
+            format: string
         - name: filename
           in: query
           description: The name of the file
@@ -567,8 +628,8 @@ components:
   securitySchemes:
     ApiKeyAuth:        # arbitrary name for the security scheme
         type: apiKey
-        in: header       # can be "header", "query" or "cookie"
-        name: X-API-KEY  # name of the header, query parameter or cookie
+        in: query       # can be "header", "query" or "cookie"
+        name: api_key  # name of the header, query parameter or cookie
   schemas:
     DocumentType:
       type: string
@@ -1307,4 +1368,3 @@ components:
           type: string
         detail:
           type: string
-          
