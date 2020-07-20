@@ -11,8 +11,8 @@ info:
     Public API for Regulations.gov
   version: "4.0"
 servers:
-  - url: 'https://www.regulation.gov/api/v4'
-    description: Default endpoint for Regulations.gov API
+  - url: 'https://api.regulation.gov/v4'
+    description: Production endpoint for Regulations.gov API
 security: 
   - ApiKeyAuth: []
 paths:
@@ -144,13 +144,19 @@ paths:
           required: true
           schema:
             type: string
+        - name: include
+          in: query
+          description: resources to include
+          schema:
+            type: string
+          value: attachment
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DocumentDetail'
+                $ref: '#/components/schemas/DocumentDetail'            
         '400':
           description: Validation error
           content:
@@ -169,6 +175,386 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /comments:
+    get:
+      summary: List of comments
+      description: This endpoint returns list of comments 
+      parameters: 
+        - name: filter[agencyId]
+          in: query
+          description: >-
+            'Filters results for the agency acronym specified in the value. Example: ''EPA'''
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: filter[searchTerm]
+          in: query
+          description: >-
+            Filters results on the given term.
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: filter[postedDate]
+          in: query
+          description: >- # we might want to update our format here to accept 2017-07-21 format. 
+            Filters results relative to the posted date.  The value must be formatted as `MM-dd-yyyy`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used: <br/> `ge` - greater than or equal <br/> `le` - less than or equal
+          required: false
+          schema:
+            type: string
+            #format: date - cannot add this format unless we update the format we accept for date.
+        - name: filter[commentOnId]
+          in: query
+          description: >-
+            Filters results on the supplied commentOnId
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: sort
+          in: query
+          #update description and pull out possible values into an enum
+          description: >-
+            Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> Supported values are `commentEndDate`, `postedDate`, and `title`.          
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: page[number]
+          in: query
+          description: >-
+            Specifies the number for the page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 1 and 20.          
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: size
+          in: query
+          description: >-
+            Specifies the size per page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 5 and 250.           
+          required: false
+          schema:
+            type: string
+            format: string
+      tags:
+        - comments
+      responses:
+        '200':
+          description: An array of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 
+  /comments/{documentId}:
+    get:
+      tags:
+        - comment details
+      summary: Get detailed information for specified documentId
+      description: Gets the detailed information of a specific document with the passed documentId.
+      parameters:
+        - name: documentId
+          in: path
+          description: ID of document to return
+          required: true
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: resources to include
+          schema:
+            type: string
+            value: attachment
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentDetail'            
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates a new comment.
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: comment
+          description: The comment to create.
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/IndividualComment'
+              - $ref: '#/components/schemas/AnonymousComment'
+              - $ref: '#/components/schemas/OrganizationComment'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentResponse'
+          links:
+            GetSubmitterKey:   # <---- arbitrary name for the link
+              operationId: GetSubmitterKey
+              parameters:
+                userId: '$response.body#/submitterKey'
+              description: >
+                The `submitterKey` value returned in the response can be used as
+                the `submitterKey` in `POST /comments/{documentId}`.  
+            GetAgencyCategories:   # <---- arbitrary name for the link
+              operationId: GetAgencyCategories
+              parameters:
+                userId: '$response.body#/category'
+              description: >
+                One of the `agencyCategories` value returned in the response can be used as
+                the `category` in `POST /comments/{documentId}`.          
+  /dockets:
+    get:
+      summary: List of dockets
+      description: This endpoint returns list of dockets 
+      parameters: 
+        - name: filter[agencyId]
+          in: query
+          description: >-
+            'Filters results for the agency acronym specified in the value. Example: ''EPA'''
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: filter[searchTerm]
+          in: query
+          description: >-
+            Filters results on the given term.
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: filter[docketType]
+          in: query
+          description: >-
+            Filters results on the specified docket type.
+          required: false
+          schema:
+            $ref: '#/components/schemas/DocketType'
+        - name: sort
+          in: query
+          #update description and pull out possible values into an enum
+          description: >-
+            Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> Supported values are `commentEndDate`, `postedDate`, and `title`.          
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: page[number]
+          in: query
+          description: >-
+            Specifies the number for the page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 1 and 20.          
+          required: false
+          schema:
+            type: string
+            format: string
+        - name: size
+          in: query
+          description: >-
+            Specifies the size per page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 5 and 250.           
+          required: false
+          schema:
+            type: string
+            format: string
+      tags:
+        - dockets
+      responses:
+        '200':
+          description: An array of dockets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Docket'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 
+  /dockets/{docketId}:
+    get:
+      tags:
+        - docket details
+      summary: Get detailed information for specified docketId
+      description: Gets the detailed information of a specific docket with the passed docketId.
+      parameters:
+        - name: docketId
+          in: path
+          description: ID of docket to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocketDetail'            
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /agencyCategories:
+    get:
+      summary: Returns a list of categories
+      operationId: GetAgencyCategories
+      description: This endpoint returns list of documents 
+      parameters: 
+        - name: filter[agencyId]
+          in: query
+          description: >-
+            'Filters results for the agency acronym specified in the value. Example: ''EPA'''
+          required: true
+          schema:
+            type: string
+            format: string 
+      responses:
+        200:
+          description: List of agency categories
+          content:
+            application/json:
+             schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    default:
+                      type: boolean
+                      description: Defines if its the default category value
+                    acronym:
+                      type: string
+                      description: Agency acronym
+                    categories:
+                      type: string
+                      description: The name of the category
+  /submissionkeys:
+    post:
+      summary: Creates the unique submission key
+      operationId: GetSubmitterKey
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionKey'            
+  
+  /fileupload/presignedurl: #Is this url format ok? It should be POST /api/fileUploadUrl I think. POST does not require an ID
+    get:
+      summary: get a presigned url to upload file
+      tags:
+        - upload
+      operationId: getUploadUrl
+      description: 'Returns a pre-signed URL to upload a file to the S3 bucket'
+      parameters:
+        - name: filename
+          in: query
+          description: The name of the file
+          required: true
+          schema:
+            type: string
+        - name: submissionKey
+          in: query
+          description: the submission key
+          required: true
+          scheme:
+            type: string
+        - name: contentType
+          in: query
+          description: the content type
+          required: true #?
+          scheme:
+            type: string
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  presigned_url:
+                    type: string
+                    format: uri
+        '422':
+          description: Validation error. A filename must be provided.
+        '5XX':
+          description: Unexpected error.
+      callbacks: #do we need to document this?
+        upload:   # Event name
+          '{response.body#/presigned_url}':   # The callback URL,                                            # Refers to the passed URL
+            put:
+              description: >
+                This callback is provided for the client to upload their dataset to 
+                our S3 bucket using presigned_url provided in the response.
+              requestBody:
+                content:
+                  application/octet-stream:
+                  schema:
+                    type: string
+                    format: binary
+              responses:   # Expected responses to the callback message
+                '200':
+                  description: File uploaded successfully
 components:
   schemas:
     securitySchemes:
@@ -185,6 +571,17 @@ components:
         - Proposed Rule
         - Supporting & Related Material
         - Other
+    DocketType:
+      type: string
+      enum:
+        - Rulemaking
+        - Nonrulemaking 
+    SubmitterType:
+      type: string
+      enum:
+        - Anonymous
+        - Individual
+        - Organization
     FileFormat:
       type: object
       properties: 
@@ -293,6 +690,53 @@ components:
         withdrawn:
           type: boolean
           description: Conveys if the document is withdrawn
+    Comment:
+      type: object
+      properties:
+        agencyId:
+          type: string
+          description: The acronym used to abbreviate the name of the agency associated with the document.
+        documentId:
+          type: string
+          description: The unique identified of the document
+        documentType:
+          type: string
+          description: The document type
+          schema:
+            $ref: '#/components/schemas/DocumentType'
+        highlightedContent:
+          type: string
+          nullable: true
+          description: Content highlighted by the search index for the searchTerm
+        postedDate:
+          type: string
+          description: The date that the document was posted by the agency to the system.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+        subtype:
+          type: string
+          description: An agency-specific attribute to further categorize a document beyond the type (`documentType`).
+        title:
+          type: string
+          description: The formal title of the document.
+        withdrawn:
+          type: boolean
+          description: Conveys if the document is withdrawn
+    Docket:
+      type: object
+      properties:
+         docketId:
+          type: string
+          description: The unique identified of the docket
+        documentType:
+          type: string
+          description: The docket type
+          schema:
+            $ref: '#/components/schemas/DocketType'
+        highlightedContent:
+          type: string
+          description: Content highlighted by search engine for the searchTerm. Only returned for searches with searchTerm.
+        title:
+          type: string
+          description: The formal title of the docket.
     BasicDetailModel:
       type: object
       properties:
@@ -417,6 +861,9 @@ components:
         reasonWithdrawn:
           type: string
           description: If the document is withdrawn, this field will state the reason.
+        subtype:
+          type: string
+          description: An agency-specific attribute to further categorize a document beyond the documentType.
     DocumentDetail:
       allOf:     # Combines the BasicDetailModel and the inline model
         - $ref: '#/components/schemas/BasicDetailModel'
@@ -509,6 +956,239 @@ components:
               items:
                 type: string
               description: The principal topics to which the document pertains.
+    CommentDetail: 
+      allOf:     # Combines the BasicDetailModel and the inline model
+        - $ref: '#/components/schemas/BasicDetailModel'
+        - type: object
+          required:
+            - documentId
+          properties: 
+            commentOn: #we may want to hide this - this is used to get the comment counts maybe?
+              type: string
+              description: objectId of the parent document
+            commentOnDocumentId:
+              type: string
+              description: documentId of the parent document
+            documentId:
+              type: string
+              description: The unique identified of the document
+            duplicateComments:
+              type: integer
+              description: Number of duplicate comments
+    DocketDetail:
+      type: object
+      properties:
+        agencyId:
+          type: string
+          description: The acronym used to abbreviate the name of the agency associated with the docket.
+        category:
+          type: string
+          nullable: true
+          description: Agency specific docket category providing regulatory action details, status, and the agency program and or office.
+        displayProperties:
+          type: array
+          description: list of display properties
+          schema:
+            $ref: '#/components/schemas/DisplayProperty'
+        dkAbstract:
+          type: string
+          description: The detailed description of the docket.
+        docketId:
+          type: string
+          description: The ID of the docket.
+        docketType:
+          type: string
+          description: The docket type
+          schema:
+            $ref: '#/components/schemas/DocketType'
+        effectiveDate:
+          type: string
+          format: date-time
+          description: The date the docket is put into effect.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+        field1:
+          type: string
+          description: An agency-specific field used for storing additional data with the docket.
+        field2:
+          type: string
+          nullable: true
+          description: An agency-specific field used for storing additional data with the docket.
+        generic:
+          type: string
+          nullable: true
+          description: An agency-specific field used for storing additional data with the docket.
+        objectId:
+          type: string
+          description: The unique Regulations.gov ID associated with the docket.  This value is often expected for internal use only.
+        keywords:
+          type: array
+          items:
+            type: string
+            description: Agency selected keywords associated with a docket to improve its searchability by the public.
+        legacyId:
+          type: string
+          nullable: true
+          description: An agency-specific identifier that was given to the docket in the legacy system.
+        modifyDate:
+          type: string
+          format: date-time
+          description: The date when the docket was last modified.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
+        organization:
+          type: string
+          description: Identifies docket's (a regulatory action) orginating agency and/or department.
+        petitionNbr:
+          type: string
+          description: Agency specific identifier associated with a docket.
+        program:
+          type: string
+          description: The agency specific program associated with the docket.
+        regulatoryActionInfo: #should this be a relationship with include?
+          type: object
+          ref: '#/components/schemas/RegulatoryActionInfo'
+        rin:
+          type: string
+          description: OMB issued Regulation Identifier Number (RIN) uniquely identifies a docket and its documents.
+        shortTitle:
+          type: string
+          description: A combination of letters and or numbers assigned to an agency's regulatory action for purposes of brevity.
+        subType:
+          type: string
+          description: This agency specific attribute characterizes a docket (regulatory action) beyond its assigned docket type, e.g., Rulemaking.
+        subType2:
+          type: string
+          description: This agency specific attribute characterizes a docket (regulatory action) beyond the designated docket subtype.
+        title:
+          type: string
+          description: A name or descriptive heading given to an agency's docket.
+    IndividualComment:
+      allOf:     # Combines the BasicCommentPayLoad and the inline model
+        - $ref: '#/components/schemas/BaseCommentPayload'
+        - type: object
+          required:
+            - submitterType
+            - firstName
+            - lastName
+          properties:
+            city:
+              type: string
+              description: The city associated with the submitter's address.
+            country:
+              type: string
+              description: The country associated with the submitter's address.
+            firstName:
+              type: string
+              description: The submitter's first name.
+            lastName:
+              type: string
+              description: The submitter's last name.
+            phone:
+              type: string
+              description: The submitter's phone number.
+            stateProvinceRegion:
+              type: boolean
+              description: The email associated with the submitter's address.
+            submitterRep: # we should not have this field
+              type: string
+              description: The submitter representative 
+            submitterType:
+              type: string
+              description: The submitter type
+              schema:
+                $ref: '#/components/schemas/SubmitterType'
+              value: Individual
+            zip:
+              type: string
+              description: The zip associated with the submitter's address.
+    OrganizationComment: 
+      allOf:     # Combines the BasicCommentPayLoad and the inline model
+        - $ref: '#/components/schemas/BaseCommentPayload'
+        - type: object
+          required:
+            - submitterType
+            - organization
+            - organizationType
+          properties:
+            organization:
+              type: string
+              description: The organization that the submitter represents.          
+            organizationType:
+              type: string
+              description: The agency specific organization type that the submitter represents.          
+            submitterType:
+              type: string
+              description: The submitter type
+              schema:
+                $ref: '#/components/schemas/SubmitterType' 
+              value: Organization
+    AnonymousComment: 
+      allOf:     # Combines the BasicCommentPayLoad and the inline model
+        - $ref: '#/components/schemas/BaseCommentPayload'
+        - type: object
+          required:
+            - submitterType
+          properties: 
+            submitterType:
+              type: string
+              description: The submitter type
+              schema:
+                $ref: '#/components/schemas/SubmitterType' 
+              value: Anonymous
+    BaseCommentPayload:
+      type: object
+      required:
+        - comment
+        - submissionKey
+        - commentOnDocumentId
+        - submissionType #user should set submission Type to API
+      properties:
+        category:
+          type: string
+          description: An agency-specific category allowing agencies to group comments according to their type.
+        comment:
+          type: string
+          description: The comment text
+        commentOnDocumentId: #we may want to hide this
+          type: string
+          description: documentId of the parent document
+        email:
+          type: string
+          description: The email address to receive email receipt for the commenrt
+        files:
+          type: array
+          items:
+            type: string
+          description: The names of the files submitted with the submission
+        sendEmailReceipt:
+          type: boolean
+          description: Conveys if the user would like to receive an email receipt for the comment
+        submissionKey:
+          type: string
+          description: The unique identifier associated with the submission
+        submissionType:
+          type: string
+          description: The submitter type - Its always going to be API for comments submitted via API 
+    CommentResponse: 
+      allOf:
+        - oneOf:     # Returns the created comment
+          - $ref: '#/components/schemas/IndividualComment'
+          - $ref: '#/components/schemas/OrganizationComment'
+          - $ref: '#/components/schemas/AnonymousComment'
+        - type: object
+          properties:
+            commentTrackingNumber:
+              type: string
+              description: comment tracking number of the comment #user will not have this. This is recieved by them.
+            numItemsReceived: #Again, look this up - no need to document this maybe?
+              type: integer
+              description: The number of items included in the submission          
+            receiveDate: 
+              type: string
+              description: The date comment was received.          
+    SubmissionKey:
+      type: object
+      properties:
+        submissionKey:
+          type: string
+          description: The unique identifier needed to submit a comment
     Error:
       type: object
       properties:
