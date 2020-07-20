@@ -12,14 +12,16 @@ info:
   version: "4.0"
 servers:
   - url: 'https://api.regulation.gov/v4'
-    description: Production endpoint for Regulations.gov API
+    description: Default endpoint for Regulations.gov API
 security: 
   - ApiKeyAuth: []
 paths:
   /documents:
     get:
       summary: List of documents
-      description: This endpoint returns list of documents 
+      description: This endpoint returns list of documents
+      tags:
+        - documents
       parameters: # we need one more filter added for frDocNum
         - name: filter[agencyId]
           in: query
@@ -108,8 +110,6 @@ paths:
           schema:
             type: string
             format: string
-      tags:
-        - documents
       responses:
         '200':
           description: An array of documents
@@ -134,7 +134,7 @@ paths:
   /documents/{documentId}:
     get:
       tags:
-        - document details
+        - documents
       summary: Get detailed information for specified documentId
       description: Gets the detailed information of a specific document with the passed documentId.
       parameters:
@@ -144,12 +144,11 @@ paths:
           required: true
           schema:
             type: string
-        - name: include
+        - name: include #This must be attachments
           in: query
           description: resources to include
           schema:
             type: string
-          value: attachment
       responses:
         '200':
           description: successful operation
@@ -179,6 +178,8 @@ paths:
     get:
       summary: List of comments
       description: This endpoint returns list of comments 
+      tags:
+        - comments
       parameters: 
         - name: filter[agencyId]
           in: query
@@ -211,7 +212,6 @@ paths:
           required: false
           schema:
             type: string
-            format: string
         - name: sort
           in: query
           #update description and pull out possible values into an enum
@@ -237,8 +237,6 @@ paths:
           schema:
             type: string
             format: string
-      tags:
-        - comments
       responses:
         '200':
           description: An array of comments
@@ -262,10 +260,10 @@ paths:
                 $ref: '#/components/schemas/Error' 
   /comments/{documentId}:
     get:
-      tags:
-        - comment details
       summary: Get detailed information for specified documentId
       description: Gets the detailed information of a specific document with the passed documentId.
+      tags:
+        - comments
       parameters:
         - name: documentId
           in: path
@@ -275,10 +273,9 @@ paths:
             type: string
         - name: include
           in: query
-          description: resources to include
+          description: resources to include #attachments
           schema:
             type: string
-            value: attachment
       responses:
         '200':
           description: successful operation
@@ -306,14 +303,21 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       summary: Creates a new comment.
-      consumes:
-        - application/json
+      tags:
+        - comments
       parameters:
-        - in: body
-          name: comment
-          description: The comment to create.
+        - name: documentId
+          in: path
+          description: ID of document the comment is being submitted to
+          required: true
           schema:
-            oneOf:
+            type: string
+      requestBody:
+        description: A JSON object containing comment information
+        content:
+          application/json:
+            schema:
+              oneOf:
               - $ref: '#/components/schemas/IndividualComment'
               - $ref: '#/components/schemas/AnonymousComment'
               - $ref: '#/components/schemas/OrganizationComment'
@@ -343,6 +347,8 @@ paths:
     get:
       summary: List of dockets
       description: This endpoint returns list of dockets 
+      tags:
+        - dockets
       parameters: 
         - name: filter[agencyId]
           in: query
@@ -392,8 +398,6 @@ paths:
           schema:
             type: string
             format: string
-      tags:
-        - dockets
       responses:
         '200':
           description: An array of dockets
@@ -418,7 +422,7 @@ paths:
   /dockets/{docketId}:
     get:
       tags:
-        - docket details
+        - dockets
       summary: Get detailed information for specified docketId
       description: Gets the detailed information of a specific docket with the passed docketId.
       parameters:
@@ -457,7 +461,9 @@ paths:
     get:
       summary: Returns a list of categories
       operationId: GetAgencyCategories
-      description: This endpoint returns list of documents 
+      description: This endpoint returns list of categories
+      tags:
+        - comments
       parameters: 
         - name: filter[agencyId]
           in: query
@@ -490,6 +496,8 @@ paths:
     post:
       summary: Creates the unique submission key
       operationId: GetSubmitterKey
+      tags:
+        - comments
       responses:
         201:
           description: Created
@@ -498,11 +506,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/SubmissionKey'            
   
-  /fileupload/presignedurl: #Is this url format ok? It should be POST /api/fileUploadUrl I think. POST does not require an ID
+  /fileUploadUrl:
     get:
       summary: get a presigned url to upload file
       tags:
-        - upload
+        - comments
       operationId: getUploadUrl
       description: 'Returns a pre-signed URL to upload a file to the S3 bucket'
       parameters:
@@ -516,13 +524,13 @@ paths:
           in: query
           description: the submission key
           required: true
-          scheme:
+          schema:
             type: string
         - name: contentType
           in: query
           description: the content type
           required: true #?
-          scheme:
+          schema:
             type: string
       responses:
         '200':
@@ -549,22 +557,22 @@ paths:
               requestBody:
                 content:
                   application/octet-stream:
-                  schema:
-                    type: string
-                    format: binary
+                    schema:
+                      type: string
+                      format: binary
               responses:   # Expected responses to the callback message
                 '200':
                   description: File uploaded successfully
 components:
-  schemas:
-    securitySchemes:
-      ApiKeyAuth:        # arbitrary name for the security scheme
+  securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
         type: apiKey
         in: header       # can be "header", "query" or "cookie"
         name: X-API-KEY  # name of the header, query parameter or cookie
-        default: DEMO_KEY
+  schemas:
     DocumentType:
       type: string
+      description: type of document
       enum:
         - Notice
         - Rule
@@ -573,11 +581,13 @@ components:
         - Other
     DocketType:
       type: string
+      description: the type of docket
       enum:
         - Rulemaking
         - Nonrulemaking 
     SubmitterType:
       type: string
+      description: the submitter type
       enum:
         - Anonymous
         - Individual
@@ -614,8 +624,8 @@ components:
         fileFormats:
           type: array
           description: list of file formats
-          schema:
-            $ref: '#/components/schemas/FileFormat'
+          items:
+              $ref: '#/components/schemas/FileFormat'
         modifyDate:
           type: string
           format: date-time
@@ -667,10 +677,7 @@ components:
           type: string
           description: The unique identified of the document
         documentType:
-          type: string
-          description: The document type
-          schema:
-            $ref: '#/components/schemas/DocumentType'
+          $ref: '#/components/schemas/DocumentType'
         highlightedContent:
           type: string
           nullable: true
@@ -700,10 +707,7 @@ components:
           type: string
           description: The unique identified of the document
         documentType:
-          type: string
-          description: The document type
-          schema:
-            $ref: '#/components/schemas/DocumentType'
+          $ref: '#/components/schemas/DocumentType'
         highlightedContent:
           type: string
           nullable: true
@@ -723,14 +727,11 @@ components:
     Docket:
       type: object
       properties:
-         docketId:
+        docketId:
           type: string
           description: The unique identified of the docket
-        documentType:
-          type: string
-          description: The docket type
-          schema:
-            $ref: '#/components/schemas/DocketType'
+        docketType:
+          $ref: '#/components/schemas/DocketType'
         highlightedContent:
           type: string
           description: Content highlighted by search engine for the searchTerm. Only returned for searches with searchTerm.
@@ -754,7 +755,7 @@ components:
         attachments:
           type: array
           description: list of attachments
-          schema:
+          items: 
             $ref: '#/components/schemas/Attachment'
         city:
           type: string
@@ -775,7 +776,7 @@ components:
         displayProperties:
           type: array
           description: list of display properties
-          schema:
+          items:
             $ref: '#/components/schemas/DisplayProperty'
         docAbstract:
           type: string
@@ -784,10 +785,7 @@ components:
           type: string
           description: The ID of the docket to which the document corresponds.
         documentType:
-          type: string
-          description: The document type
-          schema:
-            $ref: '#/components/schemas/DocumentType'
+          $ref: '#/components/schemas/DocumentType'
         email:
           type: string
           nullable: true
@@ -807,7 +805,7 @@ components:
         fileFormats:
           type: array
           description: list of file formats
-          schema:
+          items:
             $ref: '#/components/schemas/FileFormat'
         firstName:
           type: string
@@ -988,7 +986,7 @@ components:
         displayProperties:
           type: array
           description: list of display properties
-          schema:
+          items:
             $ref: '#/components/schemas/DisplayProperty'
         dkAbstract:
           type: string
@@ -997,10 +995,7 @@ components:
           type: string
           description: The ID of the docket.
         docketType:
-          type: string
-          description: The docket type
-          schema:
-            $ref: '#/components/schemas/DocketType'
+          $ref: '#/components/schemas/DocketType'
         effectiveDate:
           type: string
           format: date-time
@@ -1042,8 +1037,7 @@ components:
           type: string
           description: The agency specific program associated with the docket.
         regulatoryActionInfo: #should this be a relationship with include?
-          type: object
-          ref: '#/components/schemas/RegulatoryActionInfo'
+            $ref: '#/components/schemas/RegulatoryActionInfo'
         rin:
           type: string
           description: OMB issued Regulation Identifier Number (RIN) uniquely identifies a docket and its documents.
@@ -1092,9 +1086,7 @@ components:
             submitterType:
               type: string
               description: The submitter type
-              schema:
-                $ref: '#/components/schemas/SubmitterType'
-              value: Individual
+              example: Individual
             zip:
               type: string
               description: The zip associated with the submitter's address.
@@ -1116,9 +1108,7 @@ components:
             submitterType:
               type: string
               description: The submitter type
-              schema:
-                $ref: '#/components/schemas/SubmitterType' 
-              value: Organization
+              example: Organization
     AnonymousComment: 
       allOf:     # Combines the BasicCommentPayLoad and the inline model
         - $ref: '#/components/schemas/BaseCommentPayload'
@@ -1129,9 +1119,7 @@ components:
             submitterType:
               type: string
               description: The submitter type
-              schema:
-                $ref: '#/components/schemas/SubmitterType' 
-              value: Anonymous
+              example: Anonymous
     BaseCommentPayload:
       type: object
       required:
@@ -1189,6 +1177,127 @@ components:
         submissionKey:
           type: string
           description: The unique identifier needed to submit a comment
+    RegulatoryActionInfo:
+      type: object
+      properties:
+        rin:
+          type: string
+        cfr:
+          type: array
+          items:
+            type: string
+        contact:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        abstractText:
+          type: string
+        energyEffected:
+          type: string
+        execOrder1377Designation:
+          type: string
+        federalism:
+          type: string
+        govtLevel:
+          type: array
+          items:
+            type: string
+        internationalInterest:
+          type: string
+        legalAuthority:
+          type: array
+          items:
+            type: string
+        legalDeadline: #shouldnt it be named legalDeadlines?
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalDeadline'
+        major:
+          type: string
+        priorityCategory:
+          type: string
+        publicationPeriod:
+          type: string
+        relatedRin: #shouldnt it be named in plural?
+          type: array
+          items:
+            type: string
+        regulatoryPlan:
+          type: string
+        rfaRequired:
+          type: string
+        ruleStage:
+          type: string
+        ruleTitle:
+          type: string
+        smallEntity:
+          type: array
+          items:
+            type: string
+        timetable:
+          type: array
+          items: #shouldnt it be named in plural?
+            $ref: '#/components/schemas/TimeTable'
+        unfundedMandate:
+          type: string
+    MailingAddress:
+      type: object
+      properties:
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state: 
+          type: string
+        zip: 
+          type: string
+    Contact:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName: 
+          type: string
+        middleName:
+          type: string
+        prefix:
+          type: string
+        suffix: 
+          type: string
+        title: 
+          type: string
+        phone: 
+          type: string
+        phoneExt:
+          type: string
+        tddPhone:
+          type: string
+        fax:
+          type: string
+        email:
+          type: string
+        mailingAddress: #shouldnt it be named legalDeadlines?
+          $ref: '#/components/schemas/MailingAddress'
+    LegalDeadline:
+      type: object
+      properties:
+        action:
+          type: string
+        source: 
+          type: string
+        description:
+          type: string
+        date: 
+          type: string
+    TimeTable:
+      type: object
+      properties:
+        action:
+          type: string
+        date: 
+          type: string
+        frCitation:
+          type: string
     Error:
       type: object
       properties:
@@ -1198,3 +1307,4 @@ components:
           type: string
         detail:
           type: string
+          
