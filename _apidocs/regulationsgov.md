@@ -3,6 +3,8 @@ title: Regulations.gov API
 banner-heading: Regulations.gov API
 ---
 
+<link rel="stylesheet" type="text/css" href="../../assets/swaggerui-dist/swagger-ui.css" >
+<link rel="stylesheet" type="text/css" href="../../assets/swaggerui-dist/custom.css" >
 
 ## Overview
 
@@ -44,7 +46,9 @@ The API will return one of the following responses:
 
 ## API Calls
 
-{% include swagger-section-header-disable-try-it-out.html %} url: "v4/openapi.yaml", {% include swagger-section-footer-disable-try-it-out.html %}
+{% include swagger-section-header-disable-try-it-out.html %} 
+url: "v4/openapi.yaml", 
+{% include swagger-section-footer-disable-try-it-out.html %}
 
 <p><small><a href="#">Back to top</a></small></p>
 
