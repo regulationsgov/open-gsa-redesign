@@ -118,25 +118,23 @@ paths:
             format: string
       responses:
         '200':
-          description: An array of documents
+          description: A JSON\:API document with the a list of documents
           content:
             application/vnd.api+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Document'
+                $ref: '#/components/schemas/JSONResourceFindAllResponse'
         '400':
           description: Validation error
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error' 
+                $ref: '#/components/schemas/JSONError' 
   /documents/{documentId}:
     get:
       tags:
@@ -162,25 +160,25 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/DocumentDetail'            
+                $ref: '#/components/schemas/SingleJSONResourceFindOneResponse'            
         '400':
           description: Validation error
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '404':
           description: Document not found
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
   /comments:
     get:
       summary: List of comments
@@ -246,25 +244,23 @@ paths:
             format: string
       responses:
         '200':
-          description: An array of comments
+          description: A JSON\:API document with the a list of comments
           content:
             application/vnd.api+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Comment'
+                $ref: '#/components/schemas/JSONResourceFindAllResponse'
         '400':
           description: Validation error
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error' 
+                $ref: '#/components/schemas/JSONError' 
   /comments/{documentId}:
     get:
       summary: Get detailed information for specified documentId
@@ -289,25 +285,25 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/CommentDetail'            
+                $ref: '#/components/schemas/SingleJSONResourceFindOneResponse'            
         '400':
           description: Validation error
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '404':
           description: Document not found
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
     post:
       summary: Creates a new comment.
       tags:
@@ -324,50 +320,32 @@ paths:
         content:
           application/vnd.api+json:
             schema:
-              oneOf:
-              - $ref: '#/components/schemas/IndividualComment'
-              - $ref: '#/components/schemas/AnonymousComment'
-              - $ref: '#/components/schemas/OrganizationComment'
+                $ref: '#/components/schemas/JSONResourcePostRequestObject'
       responses:
         '201':
           description: Created
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/CommentResponse'
-          links:
-            GetSubmitterKey:   # <---- arbitrary name for the link
-              operationId: GetSubmitterKey
-              parameters:
-                userId: '$response.body#/submitterKey'
-              description: >
-                The `submitterKey` value returned in the response can be used as
-                the `submitterKey` in `POST /comments/{documentId}`.  
-            GetAgencyCategories:   # <---- arbitrary name for the link
-              operationId: GetAgencyCategories
-              parameters:
-                userId: '$response.body#/category'
-              description: >
-                One of the `agencyCategories` value returned in the response can be used as
-                the `category` in `POST /comments/{documentId}`.  
+                $ref: '#/components/schemas/JSONResourcePostResponseObject'
         '400':
           description: Validation error
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '404':
           description: Document not found
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         
   /dockets:
     get:
@@ -420,25 +398,23 @@ paths:
             format: string
       responses:
         '200':
-          description: An array of dockets
+          description: A JSON\:API document with the a list of dockets
           content:
             application/vnd.api+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Docket'
+                $ref: '#/components/schemas/JSONResourceFindAllResponse'
         '400':
           description: Validation error
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error' 
+                $ref: '#/components/schemas/JSONError' 
   /dockets/{docketId}:
     get:
       tags:
@@ -458,25 +434,25 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/DocketDetail'            
+                $ref: '#/components/schemas/SingleJSONResourceFindOneResponse'            
         '400':
           description: Validation error
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '404':
           description: Document not found
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
   /agencyCategories:
     get:
       summary: Returns a list of categories
@@ -498,51 +474,78 @@ paths:
           description: List of agency categories
           content:
             application/vnd.api+json:
-             schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    default:
-                      type: boolean
-                      description: Defines if its the default category value
-                    acronym:
-                      type: string
-                      description: Agency acronym
-                    categories:
-                      type: string
-                      description: The name of the category
+             schema: #Pull this object out into a component
+                type: object 
+                properties: 
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        default:
+                          type: boolean
+                          description: Defines if its the default category value
+                        acronym:
+                          type: string
+                          description: Agency acronym
+                        categories:
+                          type: string
+                          description: The name of the category
         '400':
           description: Validation error
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
   /submissionkeys:
     post:
       summary: Creates the unique submission key
       operationId: GetSubmitterKey
       tags:
         - comment submission utilities
+      requestBody:
+        content: 
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: 'submissionkeys'
       responses:
         '201':
           description: Created
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/SubmissionKey'
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                        id:
+                          type: string
+                          description: the newly created submission key
+                        type:
+                          type: string
+                          example: 'submissionkeys'
+                        links:
+                          $ref: '#/components/schemas/SelfLink'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'      
+                $ref: '#/components/schemas/JSONError'      
   /fileUploadUrl: #method signature might change
     post:
       summary: get a presigned url to upload file
@@ -585,13 +588,13 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
         '403':
            description: API key is missing or invalid
            content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/JSONError'
 components:
   securitySchemes:
     ApiKeyAuth:        # arbitrary name for the security scheme
@@ -599,6 +602,220 @@ components:
         in: header       # can be "header", "query" or "cookie"
         name: X-Api-Key  # name of the header, query parameter or cookie
   schemas:
+    #JSON:API Specific documentation
+    JSONResourceFindAllResponse:
+      description: A JSON:API document with a list of resources
+      properties:
+        data:
+          description: The list of documents where each document is a JSON:API document
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/SingleJSONResourceFindAllResponse'
+        meta:
+          $ref: '#/components/schemas/FindAllResponseMetadata'
+        included:
+          description: The list of documents where each document is a JSON:API document
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/SingleJSONResourceFindAllResponse'
+    SingleJSONResourceFindAllResponse:
+      description: A JSON:API document which represents a single document in the list
+      properties:
+        id:
+          description: The JSON:API resource ID (documentId, docketId or attachmentId)
+          type: string
+        type:
+          description: The JSON:API resource type (documents, comments, dockets or attachments)
+          type: string
+        attributes: 
+          type: object
+          oneOf:
+              - $ref: '#/components/schemas/Document'
+              - $ref: '#/components/schemas/Comment'
+              - $ref: '#/components/schemas/Docket'
+              - $ref: '#/components/schemas/Attachment'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfLink'
+    FindAllResponseMetadata:
+      description: A JSON:API document
+      properties:
+        hasNextPage:
+          type: boolean
+        hasPreviousPage:
+          type: boolean
+        numberOfElements:
+          type: integer
+        pageNumber: 
+          type: integer
+        pageSize:
+          type: integer
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+        firstPage:
+          type: boolean
+        lastPage:
+          type: boolean
+      additionalProperties: true # not documenting filters and aggregations
+    SelfLink:
+      description: Link to the detailed information of the document resource
+      type: object
+      properties:
+        self:
+          description: A string containing the link URL.
+          format: uri
+          type: string
+    SingleJSONResourceFindOneResponse:
+      description: A JSON:API document which represents a single document
+      type: object
+      properties:
+        id:
+          description: The JSON:API resource ID (document id of the document)
+          type: string
+        type:
+          description: The JSON:API resource type (documents, comments or dockets)
+          type: string
+        attributes: 
+          type: object
+          oneOf:
+              - $ref: "#/components/schemas/DocumentDetail"
+              - $ref: "#/components/schemas/CommentDetail"
+              - $ref: "#/components/schemas/DocketDetail"
+        relationships:
+          $ref: "#/components/schemas/Relationship"
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfLink'
+    Relationship:
+      description: A single relationship description
+      type: object
+      properties:
+        links:
+          $ref: "#/components/schemas/RelationshipLinks"
+        data:
+          description: Member, whose value represents `resource linkage`.
+          oneOf:
+            - $ref: "#/components/schemas/RelationshipToOne"
+            - $ref: "#/components/schemas/RelationshipToMany"
+      anyOf:
+        - required:
+            - data
+        - required:
+            - links
+      additionalProperties: false
+    RelationshipLinks:
+      description: >-
+        A resource object **MAY** contain references to other resource objects
+        (`relationships`). Relationships may be to-one or to-many. Relationships
+        can be specified by including a member in a resource's links object.
+      type: object
+      properties:
+        self:
+          description: >-
+            A `self` member, whose value is a URL for the relationship itself (a
+            `relationship URL`). This URL allows the client to directly
+            manipulate the relationship. For example, it would allow a client to
+            remove an `author` from an `article` without deleting the people
+            resource itself.
+          $ref: "#/components/schemas/Link"
+        related:
+          $ref: "#/components/schemas/Link"
+      additionalProperties: true
+    Link:
+      description: >-
+        A link **MUST** be represented as either: a string containing the link's
+        URL or a link object.
+      oneOf:
+        - description: A string containing the link URL.
+          type: string
+          format: uri-reference
+        - type: object
+          required:
+            - href
+          properties:
+            href:
+              description: A string containing the link's URL.
+              type: string
+              format: uri-reference
+    RelationshipToOne:
+      description: >-
+        References to other resource objects in a to-one (`relationship`).
+        Relationships can be specified by including a member in a resource's
+        links object.
+      anyOf:
+        - $ref: "#/components/schemas/Empty"
+        - $ref: "#/components/schemas/Linkage"
+    RelationshipToMany:
+      description: >-
+        An array of objects each containing `type` and `id` members for to-many
+        relationships.
+      type: array
+      items:
+        $ref: "#/components/schemas/Linkage"
+      uniqueItems: true
+    Empty:
+      $ref: "#/components/schemas/NullType"
+    NullType:
+      description: OAS doesn't allow the null type so use this.
+      type: object
+      nullable: true
+      default: null
+    Linkage:
+      description: The `type` and `id` to non-empty members.
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+      additionalProperties: false
+    JSONResourcePostRequestObject:
+      description: A JSON:API document which represents a single document being posted
+      type: object
+      properties:
+        id:
+          description: The comment submission key
+          type: string
+        type:
+          description: The JSON:API resource type (comments)
+          type: string
+        attributes: 
+          type: object
+          oneOf:
+            - $ref: "#/components/schemas/IndividualComment"
+            - $ref: "#/components/schemas/OrganizationComment"
+            - $ref: "#/components/schemas/AnonymousComment"
+    JSONResourcePostResponseObject:
+      description: A JSON:API document which represents the response from post
+      type: object
+      properties:
+        id:
+          description: The comment tracking number
+          type: string
+        type:
+          description: The JSON:API resource type (comments)
+          type: string
+        attributes: 
+          $ref: "#/components/schemas/CommentResponse"
+    JSONError:
+      description: A JSON:API document
+      type: object
+      properties:
+        errors:
+          description: List of JSON:API Error
+          type: array
+          items:
+            $ref: "#/components/schemas/Error" 
+    #Regulations.gov documentation        
     DocumentType:
       type: string
       description: type of document
@@ -633,6 +850,7 @@ components:
         size:
           type: integer
           description: The file size
+    #Relationship model for attachments
     Attachment:
       type: object
       properties:
@@ -682,7 +900,8 @@ components:
           description: The label of the property
         tooltip: 
           type: string
-          description: The tooltip of the property      
+          description: The tooltip of the property 
+    #Search components     
     Document:
       type: object
       properties: # we might want to add numberOfCommentReceived here.
@@ -767,6 +986,7 @@ components:
         title:
           type: string
           description: The formal title of the docket.
+    #Detail components
     BasicDetailModel:
       type: object
       properties:
@@ -781,11 +1001,6 @@ components:
         agencyId:
           type: string
           description: The acronym used to abbreviate the name of the agency associated with the document.
-        attachments:
-          type: array
-          description: list of attachments
-          items: 
-            $ref: '#/components/schemas/Attachment'
         city:
           type: string
           nullable: true
@@ -928,9 +1143,6 @@ components:
               nullable: true
               format: date-time
               description: The date that begins the period when public comments may be submitted on the document.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
-            documentId:
-              type: string
-              description: The unique identified of the document
             effectiveDate:
               type: string
               format: date-time
@@ -996,9 +1208,6 @@ components:
             commentOnDocumentId:
               type: string
               description: documentId of the parent document
-            documentId:
-              type: string
-              description: The unique identified of the document
             duplicateComments:
               type: integer
               description: Number of duplicate comments
@@ -1020,9 +1229,6 @@ components:
         dkAbstract:
           type: string
           description: The detailed description of the docket.
-        docketId:
-          type: string
-          description: The ID of the docket.
         docketType:
           $ref: '#/components/schemas/DocketType'
         effectiveDate:
@@ -1082,6 +1288,7 @@ components:
         title:
           type: string
           description: A name or descriptive heading given to an agency's docket.
+    #Comment Submission Related components
     IndividualComment:
       allOf:     # Combines the BasicCommentPayLoad and the inline model
         - $ref: '#/components/schemas/BaseCommentPayload'
@@ -1191,21 +1398,13 @@ components:
           - $ref: '#/components/schemas/AnonymousComment'
         - type: object
           properties:
-            commentTrackingNumber:
-              type: string
-              description: comment tracking number of the comment #user will not have this. This is recieved by them.
             numItemsReceived: #Again, look this up - no need to document this maybe?
               type: integer
               description: The number of items included in the submission          
             receiveDate: 
               type: string
-              description: The date comment was received.          
-    SubmissionKey:
-      type: object
-      properties:
-        submissionKey:
-          type: string
-          description: The unique identifier needed to submit a comment
+              description: The date comment was received. 
+    #Unified Agenda Related components         
     RegulatoryActionInfo:
       type: object
       properties:
