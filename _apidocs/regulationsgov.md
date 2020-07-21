@@ -31,6 +31,14 @@ You can view the full details of this API in the OpenAPI Specification file avai
 
 <p><small><a href="#">Back to top</a></small></p>
 
+## API Calls
+
+{% include swagger-section-header-disable-try-it-out.html %} 
+url: "v4/openapi.yaml", 
+{% include swagger-section-footer-disable-try-it-out.html %}
+
+<p><small><a href="#">Back to top</a></small></p>
+
 ## HTTP Response Codes
 
 The API will return one of the following responses:
@@ -41,14 +49,6 @@ The API will return one of the following responses:
 | 400 | Bad request. Verify the query string parmaters that were provided. |
 | 403 | API key is not correct or was not provided. |
 | 4XX | Additional 400-level are caused by some type of error in the information submitted. |
-
-<p><small><a href="#">Back to top</a></small></p>
-
-## API Calls
-
-{% include swagger-section-header-disable-try-it-out.html %} 
-url: "v4/openapi.yaml", 
-{% include swagger-section-footer-disable-try-it-out.html %}
 
 <p><small><a href="#">Back to top</a></small></p>
 
