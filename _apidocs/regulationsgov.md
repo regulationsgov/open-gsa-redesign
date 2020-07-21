@@ -16,11 +16,11 @@ When Congress passes laws, federal agencies implement those laws through regulat
 
 To begin using this API, you will need to register for an API Key. You can sign up for an API key here: [API key signup page on api.data.gov](https://api.data.gov/signup/).
 
-After registration, you will need to provide this API key in the `x-api-key` HTTP header with every API request.
+After registration, you will need to provide this API key in the `X-Api-Key` HTTP header with every API request.
 
 | HTTP Header Name | Description |
 | ---- | ----------- |
-| x-api-key | API key from api.data.gov.  For sample purposes, you can use `DEMO_KEY` as an API key. |
+| X-Api-Key | API key from api.data.gov.  For sample purposes, you can use `DEMO_KEY` as an API key. |
 
 <p><small><a href="#">Back to top</a></small></p>
 
