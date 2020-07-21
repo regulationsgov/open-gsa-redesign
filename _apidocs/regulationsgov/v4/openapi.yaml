@@ -1,8 +1,7 @@
 #------------------
-# Temporary Notes:
-# nullable needs to be revisted.
-# All date formats are part of description. I think we can remove that.
-# TODO:  verify descriptions for attachments and display properties
+# Disclaimer:
+# This OpenAPI specification document is work in progress. This document will continue 
+# to be updated until our Public API v4 is finalized.
 #--------------------
 openapi: 3.0.0
 info:
@@ -22,7 +21,7 @@ paths:
       description: This endpoint returns list of documents
       tags:
         - documents
-      parameters: # we need one more filter added for frDocNum
+      parameters: 
         - name: filter[agencyId]
           in: query
           description: >-
@@ -51,6 +50,13 @@ paths:
           in: query
           description: >-
             Filters results on the specified document type.
+          required: false
+          schema:
+            $ref: '#/components/schemas/DocumentType'
+        - name: filter[frDocNum]
+          in: query
+          description: >-
+            Filters results on the specified frDocNum.
           required: false
           schema:
             $ref: '#/components/schemas/DocumentType'
@@ -114,7 +120,7 @@ paths:
         '200':
           description: An array of documents
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 type: array
                 items:
@@ -122,13 +128,13 @@ paths:
         '400':
           description: Validation error
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
         '403':
            description: API key is missing or invalid
            content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error' 
   /documents/{documentId}:
@@ -144,34 +150,35 @@ paths:
           required: true
           schema:
             type: string
-        - name: include #This must be attachments
+        - name: includes #This must be set to attachments
           in: query
           description: resources to include
           schema:
             type: string
+          example: attachments
       responses:
         '200':
           description: successful operation
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/DocumentDetail'            
         '400':
           description: Validation error
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
         '403':
            description: API key is missing or invalid
            content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
           description: Document not found
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
   /comments:
@@ -216,7 +223,7 @@ paths:
           in: query
           #update description and pull out possible values into an enum
           description: >-
-            Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> Supported values are `commentEndDate`, `postedDate`, and `title`.          
+            Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> The only supported value is `postedDate`.          
           required: false
           schema:
             type: string
@@ -241,7 +248,7 @@ paths:
         '200':
           description: An array of comments
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 type: array
                 items:
@@ -249,13 +256,13 @@ paths:
         '400':
           description: Validation error
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
         '403':
            description: API key is missing or invalid
            content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error' 
   /comments/{documentId}:
@@ -280,25 +287,25 @@ paths:
         '200':
           description: successful operation
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/CommentDetail'            
         '400':
           description: Validation error
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
         '403':
            description: API key is missing or invalid
            content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
           description: Document not found
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
@@ -315,17 +322,17 @@ paths:
       requestBody:
         description: A JSON object containing comment information
         content:
-          application/json:
+          application/vnd.api+json:
             schema:
               oneOf:
               - $ref: '#/components/schemas/IndividualComment'
               - $ref: '#/components/schemas/AnonymousComment'
               - $ref: '#/components/schemas/OrganizationComment'
       responses:
-        201:
+        '201':
           description: Created
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/CommentResponse'
           links:
@@ -342,7 +349,26 @@ paths:
                 userId: '$response.body#/category'
               description: >
                 One of the `agencyCategories` value returned in the response can be used as
-                the `category` in `POST /comments/{documentId}`.          
+                the `category` in `POST /comments/{documentId}`.  
+        '400':
+          description: Validation error
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Document not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        
   /dockets:
     get:
       summary: List of dockets
@@ -354,7 +380,6 @@ paths:
           in: query
           description: >-
             'Filters results for the agency acronym specified in the value. Example: ''EPA'''
-          required: false
           schema:
             type: string
             format: string
@@ -362,7 +387,6 @@ paths:
           in: query
           description: >-
             Filters results on the given term.
-          required: false
           schema:
             type: string
             format: string
@@ -370,15 +394,13 @@ paths:
           in: query
           description: >-
             Filters results on the specified docket type.
-          required: false
           schema:
             $ref: '#/components/schemas/DocketType'
         - name: sort
           in: query
           #update description and pull out possible values into an enum
           description: >-
-            Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> Supported values are `commentEndDate`, `postedDate`, and `title`.          
-          required: false
+            Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> The only supported value is `title`.          
           schema:
             type: string
             format: string
@@ -386,7 +408,6 @@ paths:
           in: query
           description: >-
             Specifies the number for the page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 1 and 20.          
-          required: false
           schema:
             type: string
             format: string
@@ -394,7 +415,6 @@ paths:
           in: query
           description: >-
             Specifies the size per page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 5 and 250.           
-          required: false
           schema:
             type: string
             format: string
@@ -402,7 +422,7 @@ paths:
         '200':
           description: An array of dockets
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 type: array
                 items:
@@ -410,13 +430,13 @@ paths:
         '400':
           description: Validation error
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
         '403':
            description: API key is missing or invalid
            content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error' 
   /dockets/{docketId}:
@@ -436,25 +456,25 @@ paths:
         '200':
           description: successful operation
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/DocketDetail'            
         '400':
           description: Validation error
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
         '403':
            description: API key is missing or invalid
            content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
           description: Document not found
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Error'
   /agencyCategories:
@@ -463,7 +483,7 @@ paths:
       operationId: GetAgencyCategories
       description: This endpoint returns list of categories
       tags:
-        - comments
+        - comment submission utilities
       parameters:
         - name: filter[agencyId]
           in: query
@@ -474,10 +494,10 @@ paths:
             type: string
             format: string 
       responses:
-        200:
+        '200':
           description: List of agency categories
           content:
-            application/json:
+            application/vnd.api+json:
              schema:
                 type: array
                 items:
@@ -492,25 +512,42 @@ paths:
                     categories:
                       type: string
                       description: The name of the category
+        '400':
+          description: Validation error
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /submissionkeys:
     post:
       summary: Creates the unique submission key
       operationId: GetSubmitterKey
       tags:
-        - comments
+        - comment submission utilities
       responses:
-        201:
+        '201':
           description: Created
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/SubmissionKey'            
-  
+                $ref: '#/components/schemas/SubmissionKey'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error'      
   /fileUploadUrl: #method signature might change
     post:
       summary: get a presigned url to upload file
       tags:
-        - comments
+        - comment submission utilities
       operationId: getUploadUrl
       description: 'Returns a pre-signed URL to upload a file to the S3 bucket'
       parameters:
@@ -529,46 +566,38 @@ paths:
         - name: contentType
           in: query
           description: the content type
-          required: true #?
+          required: true
           schema:
             type: string
       responses:
-        '200':
-          description: Successful operation.
+        '201':
+          description: Created
           content:
-            application/json:
+            application/vnd.api+json:
               schema:
                 type: object
                 properties:
                   presigned_url:
                     type: string
                     format: uri
-        '422':
-          description: Validation error. A filename must be provided.
-        '5XX':
-          description: Unexpected error.
-      callbacks: #do we need to document this?
-        upload:   # Event name
-          '{response.body#/presigned_url}':   # The callback URL,                                            # Refers to the passed URL
-            put:
-              description: >
-                This callback is provided for the client to upload their dataset to 
-                our S3 bucket using presigned_url provided in the response.
-              requestBody:
-                content:
-                  application/octet-stream:
-                    schema:
-                      type: string
-                      format: binary
-              responses:   # Expected responses to the callback message
-                '200':
-                  description: File uploaded successfully
+        '400':
+          description: Validation error
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+           description: API key is missing or invalid
+           content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     ApiKeyAuth:        # arbitrary name for the security scheme
         type: apiKey
         in: header       # can be "header", "query" or "cookie"
-        name: api_key  # name of the header, query parameter or cookie
+        name: X-Api-Key  # name of the header, query parameter or cookie
   schemas:
     DocumentType:
       type: string
