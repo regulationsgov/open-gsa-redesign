@@ -122,7 +122,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/JSONResourceFindAllResponse'
+                $ref: '#/components/schemas/JSONResourceFindAllDocumentResponse'
         '400':
           description: Validation error
           content:
@@ -160,7 +160,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/SingleJSONResourceFindOneResponse'            
+                $ref: '#/components/schemas/SingleJSONResourceFindOneDocumentResponse'            
         '400':
           description: Validation error
           content:
@@ -248,7 +248,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/JSONResourceFindAllResponse'
+                $ref: '#/components/schemas/JSONResourceFindAllCommentResponse'
         '400':
           description: Validation error
           content:
@@ -285,7 +285,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/SingleJSONResourceFindOneResponse'            
+                $ref: '#/components/schemas/SingleJSONResourceFindOneCommentResponse'            
         '400':
           description: Validation error
           content:
@@ -345,8 +345,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/JSONError'
-        
+                $ref: '#/components/schemas/JSONError'        
   /dockets:
     get:
       summary: List of dockets
@@ -402,7 +401,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/JSONResourceFindAllResponse'
+                $ref: '#/components/schemas/JSONResourceFindAllDocketResponse'
         '400':
           description: Validation error
           content:
@@ -434,7 +433,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/SingleJSONResourceFindOneResponse'            
+                $ref: '#/components/schemas/SingleJSONResourceFindOneDocketResponse'            
         '400':
           description: Validation error
           content:
@@ -546,7 +545,7 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/JSONError'      
-  /fileUploadUrl: #method signature might change
+  /fileUploadUrls: 
     post:
       summary: get a presigned url to upload file
       tags:
@@ -603,7 +602,7 @@ components:
         name: X-Api-Key  # name of the header, query parameter or cookie
   schemas:
     #JSON:API Specific documentation
-    JSONResourceFindAllResponse:
+    JSONResourceFindAllDocumentResponse:
       description: A JSON:API document with a list of resources
       properties:
         data:
@@ -611,31 +610,87 @@ components:
           type: array
           uniqueItems: true
           items:
-            $ref: '#/components/schemas/SingleJSONResourceFindAllResponse'
+            $ref: '#/components/schemas/SingleJSONResourceFindAllDocumentResponse'
         meta:
           $ref: '#/components/schemas/FindAllResponseMetadata'
-        included:
-          description: The list of documents where each document is a JSON:API document
+    JSONResourceFindAllCommentResponse:
+      description: A JSON:API document with a list of resources
+      properties:
+        data:
+          description: The list of comments where each comment is a JSON:API document
           type: array
           uniqueItems: true
           items:
-            $ref: '#/components/schemas/SingleJSONResourceFindAllResponse'
-    SingleJSONResourceFindAllResponse:
+            $ref: '#/components/schemas/SingleJSONResourceFindAllCommentResponse'
+        meta:
+          $ref: '#/components/schemas/FindAllResponseMetadata'
+    JSONResourceFindAllDocketResponse:
+      description: A JSON:API document with a list of resources
+      properties:
+        data:
+          description: The list of dockets where each docket is a JSON:API document
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/SingleJSONResourceFindAllDocketResponse'
+        meta:
+          $ref: '#/components/schemas/FindAllResponseMetadata'
+    SingleJSONResourceFindAllDocumentResponse:
       description: A JSON:API document which represents a single document in the list
       properties:
         id:
-          description: The JSON:API resource ID (documentId, docketId or attachmentId)
+          description: The JSON:API resource ID (documentId)
           type: string
         type:
-          description: The JSON:API resource type (documents, comments, dockets or attachments)
+          description: The JSON:API resource type (documents)
           type: string
         attributes: 
-          type: object
-          oneOf:
-              - $ref: '#/components/schemas/Document'
-              - $ref: '#/components/schemas/Comment'
-              - $ref: '#/components/schemas/Docket'
-              - $ref: '#/components/schemas/Attachment'
+          $ref: '#/components/schemas/Document'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfLink'
+    SingleJSONResourceFindAllCommentResponse:
+      description: A JSON:API document which represents a single document in the list
+      properties:
+        id:
+          description: The JSON:API resource ID (documentId)
+          type: string
+        type:
+          description: The JSON:API resource type (comments)
+          type: string
+        attributes: 
+          $ref: '#/components/schemas/Comment'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfLink'
+    SingleJSONResourceFindAllDocketResponse:
+      description: A JSON:API document which represents a single document in the list
+      properties:
+        id:
+          description: The JSON:API resource ID (docketId)
+          type: string
+        type:
+          description: The JSON:API resource type (dockets)
+          type: string
+        attributes: 
+          $ref: '#/components/schemas/Docket'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfLink'
+    SingleJSONResourceFindAllAttachmentResponse:
+      description: A JSON:API document which represents a single document in the list
+      properties:
+        id:
+          description: The JSON:API resource ID (attachmentId)
+          type: string
+        type:
+          description: The JSON:API resource type (attachments)
+          type: string
+        attributes: 
+          $ref: '#/components/schemas/Attachment'
         links: 
           type: array
           items:
@@ -670,7 +725,31 @@ components:
           description: A string containing the link URL.
           format: uri
           type: string
-    SingleJSONResourceFindOneResponse:
+    SingleJSONResourceFindOneDocumentResponse:
+      description: A JSON:API document which represents a single document
+      type: object
+      properties:
+        id:
+          description: The JSON:API resource ID (document id of the document)
+          type: string
+        type:
+          description: The JSON:API resource type (documents)
+          type: string
+        attributes: 
+          $ref: "#/components/schemas/DocumentDetail"
+        relationships:
+          $ref: "#/components/schemas/Relationship"
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfLink'
+        included:
+          description: The list of documents where each document is a JSON:API document
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/SingleJSONResourceFindAllAttachmentResponse'
+    SingleJSONResourceFindOneCommentResponse:
       description: A JSON:API document which represents a single document
       type: object
       properties:
@@ -681,11 +760,31 @@ components:
           description: The JSON:API resource type (documents, comments or dockets)
           type: string
         attributes: 
-          type: object
-          oneOf:
-              - $ref: "#/components/schemas/DocumentDetail"
-              - $ref: "#/components/schemas/CommentDetail"
-              - $ref: "#/components/schemas/DocketDetail"
+          $ref: "#/components/schemas/CommentDetail"
+        relationships:
+          $ref: "#/components/schemas/Relationship"
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfLink'
+        included:
+          description: The list of documents where each document is a JSON:API document
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/SingleJSONResourceFindAllAttachmentResponse'     
+    SingleJSONResourceFindOneDocketResponse:
+      description: A JSON:API document which represents a single document
+      type: object
+      properties:
+        id:
+          description: The JSON:API resource ID (docket id of the docket)
+          type: string
+        type:
+          description: The JSON:API resource type (dockets)
+          type: string
+        attributes: 
+          $ref: "#/components/schemas/DocketDetail"
         relationships:
           $ref: "#/components/schemas/Relationship"
         links: 
