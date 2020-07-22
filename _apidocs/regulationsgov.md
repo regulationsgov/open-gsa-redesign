@@ -27,14 +27,14 @@ After registration, you will need to provide this API key in the `X-Api-Key` HTT
 ## OpenAPI Specification File
 
 You can view the full details of this API in the OpenAPI Specification file available here:
-<a href="v4/openapi.yaml">Open API specification file for the Sample API</a>
+<a href="regulationsgov/v4/openapi.yaml">Open API specification file for the Sample API</a>
 
 <p><small><a href="#">Back to top</a></small></p>
 
 ## API Calls
 
 {% include swagger-section-header-disable-try-it-out.html %} 
-url: "v4/openapi.yaml", 
+url: "regulationsgov/v4/openapi.yaml", 
 {% include swagger-section-footer-disable-try-it-out.html %}
 
 <p><small><a href="#">Back to top</a></small></p>
