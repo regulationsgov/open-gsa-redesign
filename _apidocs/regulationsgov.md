@@ -12,6 +12,10 @@ When Congress passes laws, federal agencies implement those laws through regulat
 
 <p><small><a href="#">Back to top</a></small></p>
 
+## API Description
+
+
+
 ## Getting Started
 
 To begin using this API, you will need to register for an API Key. You can sign up for an API key here: [API key signup page on api.data.gov](https://api.data.gov/signup/).
@@ -23,6 +27,48 @@ After registration, you will need to provide this API key in the `X-Api-Key` HTT
 | X-Api-Key | API key from api.data.gov.  For sample purposes, you can use `DEMO_KEY` as an API key. |
 
 <p><small><a href="#">Back to top</a></small></p>
+
+## API Description
+
+Regulations.gov offers a GET API for documents, comments, and dockets and a POST API for comments. These endpoints can be used for searching document, comments and dockets, and posting a comment.
+
+#### Searching for documents
+
+You can search for a list of documents based on the criteria passed by using the endpoint https://api.regulations.gov/v4/documents. The search operation supports keyword searches as well as navigation-style searching based on a number of available parameters.
+
+#### Searching for a single document
+
+In order to obtain more details about a single document, you can use the endpoint https:// api.regulations.gov/v4/documents/{documentId}. A document is defined by one of the following types: Proposed Rule, Rule, Supporting & Related, or Other. Each document type has its own set of attributes, which vary based on the Agency posting the document. Another defining characteristic is if the document is part of a Rulemaking or Nonrulemaking Docket.
+
+#### Searching for comments
+
+You can search for a list of comments based on the criteria passed by using the endpoint https://api.regulations.gov/v4/comments. The search operation supports keyword searches as well as navigation-style searching based on a number of available parameters.
+
+#### Searching for a single comment
+
+In order to obtain more details about a single comment, you can use the endpoint https:// api.regulations.gov/v4/comments/{documentId}. Each comment has its own set of attributes, which vary based on the Agency posting the comment. Another defining characteristic is if the comment is part of a Rulemaking or Nonrulemaking Docket.
+
+#### Searching for dockets
+
+A docket is an organizational folder containing multiple documents. Dockets can be searched using the endpoint: https://api.regulations.gov/v4/dockets.
+
+#### Searching for a single docket
+
+In order to obtain more details about a single docket, you can use the endpoint https:// api.regulations.gov/v4/dockets/{docketId}. Each docket has its own set of attributes, which vary based on the Agency posting the docket. Another defining characteristic is if the docket is a Rulemaking or a Nonrulemaking Docket
+
+#### Posting a comment:
+
+User can post a comment using the endpoint https://api.regulations.gov/v4/comments. User can post the comment using one of the following submitter types:
+
+* Individual
+* Organization
+* Anonymous
+
+If user would like to attach files with their submission, user can get a presigned url for the amazon s3 bucket using the endpoint https://api.regulations.gov/v4/fileUploadUrls
+
+A submissionKey can be retrieved using https://api.regulations.gov/v4/submissionKeys endpoint.
+
+submissionType should be set to API
 
 ## OpenAPI Specification File
 
@@ -36,19 +82,6 @@ You can view the full details of this API in the OpenAPI Specification file avai
 {% include swagger-section-header-disable-try-it-out.html %} 
 url: "regulationsgov/v4/openapi.yaml", 
 {% include swagger-section-footer-disable-try-it-out.html %}
-
-<p><small><a href="#">Back to top</a></small></p>
-
-## HTTP Response Codes
-
-The API will return one of the following responses:
-
-| HTTP Response Code | Description |
-| ---- | ----------- |
-| 200 | Successful. Data will be returned in JSON format. |
-| 400 | Bad request. Verify the query string parmaters that were provided. |
-| 403 | API key is not correct or was not provided. |
-| 4XX | Additional 400-level are caused by some type of error in the information submitted. |
 
 <p><small><a href="#">Back to top</a></small></p>
 
