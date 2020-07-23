@@ -32,12 +32,11 @@ paths:
             format: string
         - name: filter[commentEndDate]
           in: query
-          description: >- # we might want to update our format here to accept 2017-07-21 format. 
+          description: >-  
             Filters results relative to the comment end date.  The value must be formatted as `MM-dd-yyyy`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used: <br/> `ge` - greater than or equal <br/> `le` - less than or equal
           required: false
           schema:
             type: string
-            #format: date - cannot add this format unless we update the format we accept for date.
         - name: filter[docketId]
           in: query
           description: >-
@@ -70,12 +69,11 @@ paths:
             format: string
         - name: filter[postedDate]
           in: query
-          description: >- # we might want to update our format here to accept 2017-07-21 format. 
+          description: >-  
             Filters results relative to the posted date.  The value must be formatted as `MM-dd-yyyy`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used: <br/> `ge` - greater than or equal <br/> `le` - less than or equal
           required: false
           schema:
             type: string
-            #format: date - cannot add this format unless we update the format we accept for date.
         - name: filter[subtype]
           in: query
           description: >-
@@ -93,7 +91,6 @@ paths:
             type: boolean
         - name: sort
           in: query
-          #update description and pull out possible values into an enum
           description: >-
             Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> Supported values are `commentEndDate`, `postedDate`, and `title`.          
           required: false
@@ -148,7 +145,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: includes #This must be set to attachments
+        - name: include #This must be set to attachments
           in: query
           description: resources to include
           schema:
@@ -204,12 +201,11 @@ paths:
             format: string
         - name: filter[postedDate]
           in: query
-          description: >- # we might want to update our format here to accept 2017-07-21 format. 
+          description: >- 
             Filters results relative to the posted date.  The value must be formatted as `MM-dd-yyyy`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used: <br/> `ge` - greater than or equal <br/> `le` - less than or equal
           required: false
           schema:
             type: string
-            #format: date - cannot add this format unless we update the format we accept for date.
         - name: filter[commentOnId]
           in: query
           description: >-
@@ -219,7 +215,6 @@ paths:
             type: string
         - name: sort
           in: query
-          #update description and pull out possible values into an enum
           description: >-
             Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> The only supported value is `postedDate`.          
           required: false
@@ -276,7 +271,8 @@ paths:
             type: string
         - name: include
           in: query
-          description: resources to include #attachments
+          description: resources to include
+          example: attachments
           schema:
             type: string
       responses:
@@ -375,7 +371,6 @@ paths:
             $ref: '#/components/schemas/DocketType'
         - name: sort
           in: query
-          #update description and pull out possible values into an enum
           description: >-
             Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> The only supported value is `title`.          
           schema:
@@ -473,7 +468,7 @@ paths:
           description: List of agency categories
           content:
             application/vnd.api+json:
-             schema: #Pull this object out into a component
+             schema: # TODO: Pull this object out into a component
                 type: object 
                 properties: 
                   data:
@@ -545,7 +540,7 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/JSONError'      
-  /fileUploadUrls: 
+  /fileUploadUrls: # This method signature might change
     post:
       summary: get a presigned url to upload file
       tags:
@@ -596,7 +591,7 @@ paths:
                 $ref: '#/components/schemas/JSONError'
 components:
   securitySchemes:
-    ApiKeyAuth:        # arbitrary name for the security scheme
+    ApiKeyAuth:          # arbitrary name for the security scheme
         type: apiKey
         in: header       # can be "header", "query" or "cookie"
         name: X-Api-Key  # name of the header, query parameter or cookie
@@ -639,10 +634,10 @@ components:
       description: A JSON:API document which represents a single document in the list
       properties:
         id:
-          description: The JSON:API resource ID (documentId)
+          description: The JSON:API resource ID: `documentId`
           type: string
         type:
-          description: The JSON:API resource type (documents)
+          description: The JSON:API resource type: `documents`
           type: string
         attributes: 
           $ref: '#/components/schemas/Document'
@@ -654,10 +649,10 @@ components:
       description: A JSON:API document which represents a single document in the list
       properties:
         id:
-          description: The JSON:API resource ID (documentId)
+          description: The JSON:API resource ID: `documentId`
           type: string
         type:
-          description: The JSON:API resource type (comments)
+          description: The JSON:API resource type: `comments`
           type: string
         attributes: 
           $ref: '#/components/schemas/Comment'
@@ -669,10 +664,10 @@ components:
       description: A JSON:API document which represents a single document in the list
       properties:
         id:
-          description: The JSON:API resource ID (docketId)
+          description: The JSON:API resource ID: `docketId`
           type: string
         type:
-          description: The JSON:API resource type (dockets)
+          description: The JSON:API resource type: `dockets`
           type: string
         attributes: 
           $ref: '#/components/schemas/Docket'
@@ -684,10 +679,10 @@ components:
       description: A JSON:API document which represents a single document in the list
       properties:
         id:
-          description: The JSON:API resource ID (attachmentId)
+          description: The JSON:API resource ID: `attachmentId`
           type: string
         type:
-          description: The JSON:API resource type (attachments)
+          description: The JSON:API resource type: `attachments`
           type: string
         attributes: 
           $ref: '#/components/schemas/Attachment'
@@ -733,7 +728,7 @@ components:
           description: The JSON:API resource ID (document id of the document)
           type: string
         type:
-          description: The JSON:API resource type (documents)
+          description: The JSON:API resource type: `documents`
           type: string
         attributes: 
           $ref: "#/components/schemas/DocumentDetail"
@@ -757,7 +752,7 @@ components:
           description: The JSON:API resource ID (document id of the document)
           type: string
         type:
-          description: The JSON:API resource type (documents, comments or dockets)
+          description: The JSON:API resource type: `comments`
           type: string
         attributes: 
           $ref: "#/components/schemas/CommentDetail"
@@ -781,7 +776,7 @@ components:
           description: The JSON:API resource ID (docket id of the docket)
           type: string
         type:
-          description: The JSON:API resource type (dockets)
+          description: The JSON:API resource type: `dockets`
           type: string
         attributes: 
           $ref: "#/components/schemas/DocketDetail"
@@ -885,7 +880,7 @@ components:
           description: The comment submission key
           type: string
         type:
-          description: The JSON:API resource type (comments)
+          description: The JSON:API resource type: `comments`
           type: string
         attributes: 
           type: object
@@ -901,7 +896,7 @@ components:
           description: The comment tracking number
           type: string
         type:
-          description: The JSON:API resource type (comments)
+          description: The JSON:API resource type: `comments`
           type: string
         attributes: 
           $ref: "#/components/schemas/CommentResponse"
@@ -1003,7 +998,7 @@ components:
     #Search components     
     Document:
       type: object
-      properties: # we might want to add numberOfCommentReceived here.
+      properties: 
         agencyId:
           type: string
           description: The acronym used to abbreviate the name of the agency associated with the document.
@@ -1108,10 +1103,6 @@ components:
           type: string
           nullable: true
           description: An agency-specific category allowing agencies to group comments according to their type.
-        content: # This will be renamed comment and we will add a content field to Document model per RGM-1031
-          type: string
-          nullable: true
-          description: The content of a document that has originated from the [Federal Register](https://www.federalregister.gov/).
         country:
           type: string
           nullable: true
@@ -1370,7 +1361,7 @@ components:
         program:
           type: string
           description: The agency specific program associated with the docket.
-        regulatoryActionInfo: #should this be a relationship with include?
+        regulatoryActionInfo: 
             $ref: '#/components/schemas/RegulatoryActionInfo'
         rin:
           type: string
@@ -1469,7 +1460,7 @@ components:
         comment:
           type: string
           description: The comment text
-        commentOnDocumentId: #we may want to hide this
+        commentOnDocumentId:
           type: string
           description: documentId of the parent document
         email:
@@ -1479,7 +1470,10 @@ components:
           type: array
           items:
             type: string
-          description: The names of the files submitted with the submission
+            description: The names of the files submitted with the submission
+        numItemsReceived:
+          type: integer
+          description: The number of items included in the submission          
         sendEmailReceipt:
           type: boolean
           description: Conveys if the user would like to receive an email receipt for the comment
@@ -1497,7 +1491,7 @@ components:
           - $ref: '#/components/schemas/AnonymousComment'
         - type: object
           properties:
-            numItemsReceived: #Again, look this up - no need to document this maybe?
+            numItemsReceived:
               type: integer
               description: The number of items included in the submission          
             receiveDate: 
@@ -1535,7 +1529,7 @@ components:
           type: array
           items:
             type: string
-        legalDeadline: #shouldnt it be named legalDeadlines?
+        legalDeadline:
           type: array
           items:
             $ref: '#/components/schemas/LegalDeadline'
@@ -1545,7 +1539,7 @@ components:
           type: string
         publicationPeriod:
           type: string
-        relatedRin: #shouldnt it be named in plural?
+        relatedRin:
           type: array
           items:
             type: string
@@ -1563,7 +1557,7 @@ components:
             type: string
         timetable:
           type: array
-          items: #shouldnt it be named in plural?
+          items:
             $ref: '#/components/schemas/TimeTable'
         unfundedMandate:
           type: string
@@ -1603,7 +1597,7 @@ components:
           type: string
         email:
           type: string
-        mailingAddress: #shouldnt it be named legalDeadlines?
+        mailingAddress:
           $ref: '#/components/schemas/MailingAddress'
     LegalDeadline:
       type: object
