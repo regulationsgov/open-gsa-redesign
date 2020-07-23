@@ -12,10 +12,6 @@ When Congress passes laws, federal agencies implement those laws through regulat
 
 <p><small><a href="#">Back to top</a></small></p>
 
-## API Description
-
-
-
 ## Getting Started
 
 To begin using this API, you will need to register for an API Key. You can sign up for an API key here: [API key signup page on api.data.gov](https://api.data.gov/signup/).
@@ -68,7 +64,9 @@ If user would like to attach files with their submission, user can get a presign
 
 A submissionKey can be retrieved using https://api.regulations.gov/v4/submissionKeys endpoint.
 
-submissionType should be set to API
+submissionType should be set to API.
+
+<p><small><a href="#">Back to top</a></small></p>
 
 ## OpenAPI Specification File
 
