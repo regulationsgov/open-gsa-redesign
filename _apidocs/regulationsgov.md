@@ -30,39 +30,39 @@ Regulations.gov offers a GET API for documents, comments, and dockets and a POST
 
 #### Searching for documents
 
-You can search for a list of documents based on the criteria passed by using the endpoint https://api.regulations.gov/v4/documents. The search operation supports keyword searches as well as navigation-style searching based on a number of available parameters.
+You can search for a list of documents based on the criteria passed by using the endpoint `/v4/documents`. The search operation supports full text keyword searches and filtering based on a number of available parameters.
 
 #### Searching for a single document
 
-In order to obtain more details about a single document, you can use the endpoint https:// api.regulations.gov/v4/documents/{documentId}. A document is defined by one of the following types: Proposed Rule, Rule, Supporting & Related, or Other. Each document type has its own set of attributes, which vary based on the Agency posting the document. Another defining characteristic is if the document is part of a Rulemaking or Nonrulemaking Docket.
+In order to obtain more details about a single document, you can use the endpoint `/v4/documents/{documentId}`. A document is defined by one of the following types: Proposed Rule, Rule, Supporting & Related, or Other. Each document type has its own set of attributes, which vary based on the Agency posting the document. Another defining characteristic is if the document is part of a Rulemaking or Nonrulemaking Docket.
 
 #### Searching for comments
 
-You can search for a list of comments based on the criteria passed by using the endpoint https://api.regulations.gov/v4/comments. The search operation supports keyword searches as well as navigation-style searching based on a number of available parameters.
+You can search for a list of comments based on the criteria passed by using the endpoint `/v4/comments`. The search operation supports full text keyword searches and filtering based on a number of available parameters.
 
 #### Searching for a single comment
 
-In order to obtain more details about a single comment, you can use the endpoint https:// api.regulations.gov/v4/comments/{documentId}. Each comment has its own set of attributes, which vary based on the Agency posting the comment. Another defining characteristic is if the comment is part of a Rulemaking or Nonrulemaking Docket.
+In order to obtain more details about a single comment, you can use the endpoint `/v4/comments/{documentId}`. Each comment has its own set of attributes, which vary based on the Agency posting the comment. Another defining characteristic is if the comment is part of a Rulemaking or Nonrulemaking Docket.
 
 #### Searching for dockets
 
-A docket is an organizational folder containing multiple documents. Dockets can be searched using the endpoint: https://api.regulations.gov/v4/dockets.
+A docket is an organizational folder containing multiple documents. Dockets can be searched using the endpoint: `/v4/dockets`.
 
 #### Searching for a single docket
 
-In order to obtain more details about a single docket, you can use the endpoint https:// api.regulations.gov/v4/dockets/{docketId}. Each docket has its own set of attributes, which vary based on the Agency posting the docket. Another defining characteristic is if the docket is a Rulemaking or a Nonrulemaking Docket
+In order to obtain more details about a single docket, you can use the endpoint `/v4/dockets/{docketId}`. Each docket has its own set of attributes, which vary based on the Agency posting the docket. Another defining characteristic is if the docket is a Rulemaking or a Nonrulemaking Docket
 
 #### Posting a comment:
 
-User can post a comment using the endpoint https://api.regulations.gov/v4/comments. User can post the comment using one of the following submitter types:
+User can post a comment using the endpoint `/v4/comments`. User can post the comment using one of the following submitter types:
 
 * Individual
 * Organization
 * Anonymous
 
-If user would like to attach files with their submission, user can get a presigned url for the amazon s3 bucket using the endpoint https://api.regulations.gov/v4/fileUploadUrls
+If user would like to attach files with their submission, user can get a presigned url for the amazon s3 bucket using the endpoint `/v4/fileUploadUrls`
 
-A submissionKey can be retrieved using https://api.regulations.gov/v4/submissionKeys endpoint.
+A submissionKey can be retrieved using `/v4/submissionKeys` endpoint.
 
 submissionType should be set to API.
 
