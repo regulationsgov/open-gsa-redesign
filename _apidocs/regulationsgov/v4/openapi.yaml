@@ -96,14 +96,14 @@ paths:
             type: string
         - name: page[number]
           in: query
-          description: >- #add max and minimum
+          description: >-
             Specifies the number for the page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 1 and 20.          
           required: false
           schema:
             type: integer
         - name: size
           in: query
-          description: >- #add max and minimum
+          description: >-
             Specifies the size per page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 5 and 250.           
           required: false
           schema:
@@ -215,14 +215,14 @@ paths:
           required: false
           schema:
             type: string
-        - name: page[number] #add minimum and max
+        - name: page[number]
           in: query
           description: >-
             Specifies the number for the page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 1 and 20.          
           required: false
           schema:
             type: integer
-        - name: size #add minimum and max
+        - name: size
           in: query
           description: >-
             Specifies the size per page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 5 and 250.           
