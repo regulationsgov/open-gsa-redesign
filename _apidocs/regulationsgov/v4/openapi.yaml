@@ -29,14 +29,14 @@ paths:
           required: false
           schema:
             type: string
-            format: string
         - name: filter[commentEndDate]
           in: query
           description: >-  
-            Filters results relative to the comment end date.  The value must be formatted as `MM-dd-yyyy`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used: <br/> `ge` - greater than or equal <br/> `le` - less than or equal
+            Filters results relative to the comment end date.  The value must be formatted as `yyyy-MM-dd`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used. <br/> `ge` - greater than or equal <br/> `le` - less than or equal
           required: false
           schema:
             type: string
+            format: date
         - name: filter[docketId]
           in: query
           description: >-
@@ -44,7 +44,6 @@ paths:
           required: false
           schema:
             type: string
-            format: string
         - name: filter[documentType]
           in: query
           description: >-
@@ -58,7 +57,7 @@ paths:
             Filters results on the specified frDocNum.
           required: false
           schema:
-            $ref: '#/components/schemas/DocumentType'
+            type: string
         - name: filter[searchTerm]
           in: query
           description: >-
@@ -66,14 +65,14 @@ paths:
           required: false
           schema:
             type: string
-            format: string
         - name: filter[postedDate]
           in: query
           description: >-  
-            Filters results relative to the posted date.  The value must be formatted as `MM-dd-yyyy`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used: <br/> `ge` - greater than or equal <br/> `le` - less than or equal
+            Filters results relative to the posted date.  The value must be formatted as `yyyy-MM-dd`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used. <br/> `ge` - greater than or equal <br/> `le` - less than or equal
           required: false
           schema:
             type: string
+            format: date
         - name: filter[subtype]
           in: query
           description: >-
@@ -81,7 +80,6 @@ paths:
           required: false
           schema:
             type: string
-            format: string
         - name: filter[withinCommentPeriod]
           in: query
           description: >-
@@ -96,23 +94,20 @@ paths:
           required: false
           schema:
             type: string
-            format: string
         - name: page[number]
           in: query
-          description: >-
+          description: >- #add max and minimum
             Specifies the number for the page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 1 and 20.          
           required: false
           schema:
-            type: string
-            format: string
+            type: integer
         - name: size
           in: query
-          description: >-
+          description: >- #add max and minimum
             Specifies the size per page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 5 and 250.           
           required: false
           schema:
-            type: string
-            format: string
+            type: integer
       responses:
         '200':
           description: A JSON\:API document with the a list of documents
@@ -145,9 +140,10 @@ paths:
           required: true
           schema:
             type: string
-        - name: include #This must be set to attachments
+        - name: include #Only supported value for include is attachments.
           in: query
           description: resources to include
+          required: false
           schema:
             type: string
           example: attachments
@@ -190,7 +186,6 @@ paths:
           required: false
           schema:
             type: string
-            format: string
         - name: filter[searchTerm]
           in: query
           description: >-
@@ -198,14 +193,14 @@ paths:
           required: false
           schema:
             type: string
-            format: string
         - name: filter[postedDate]
           in: query
-          description: >- 
-            Filters results relative to the posted date.  The value must be formatted as `MM-dd-yyyy`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used: <br/> `ge` - greater than or equal <br/> `le` - less than or equal
+          description: >-
+            Filters results relative to the posted date.  The value must be formatted as `yyyy-MM-dd`.<br/><br/> Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used. <br/> `ge` - greater than or equal <br/> `le` - less than or equal
           required: false
           schema:
             type: string
+            format: date
         - name: filter[commentOnId]
           in: query
           description: >-
@@ -220,23 +215,20 @@ paths:
           required: false
           schema:
             type: string
-            format: string
-        - name: page[number]
+        - name: page[number] #add minimum and max
           in: query
           description: >-
             Specifies the number for the page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 1 and 20.          
           required: false
           schema:
-            type: string
-            format: string
-        - name: size
+            type: integer
+        - name: size #add minimum and max
           in: query
           description: >-
             Specifies the size per page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 5 and 250.           
           required: false
           schema:
-            type: string
-            format: string
+            type: integer
       responses:
         '200':
           description: A JSON\:API document with the a list of comments
@@ -269,7 +261,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: include
+        - name: include #Only supported value for include is attachments.
           in: query
           description: resources to include
           example: attachments
@@ -313,6 +305,7 @@ paths:
             type: string
       requestBody:
         description: A JSON object containing comment information
+        required: true
         content:
           application/vnd.api+json:
             schema:
@@ -353,43 +346,44 @@ paths:
           in: query
           description: >-
             'Filters results for the agency acronym specified in the value. Example: ''EPA'''
+          required: false
           schema:
             type: string
-            format: string
         - name: filter[searchTerm]
           in: query
           description: >-
             Filters results on the given term.
+          required: false
           schema:
             type: string
-            format: string
         - name: filter[docketType]
           in: query
           description: >-
             Filters results on the specified docket type.
+          required: false
           schema:
             $ref: '#/components/schemas/DocketType'
         - name: sort
           in: query
           description: >-
             Sorts the results on the field specified in the value.  The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value. <br/><br/> The only supported value is `title`.          
+          required: false
           schema:
             type: string
-            format: string
         - name: page[number]
           in: query
           description: >-
             Specifies the number for the page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 1 and 20.          
+          required: false
           schema:
-            type: string
-            format: string
+            type: integer
         - name: size
           in: query
           description: >-
             Specifies the size per page of results that will be returned from the query. <br/><br/> Acceptable values are numerical between, and including, 5 and 250.           
+          required: false
           schema:
-            type: string
-            format: string
+            type: integer
       responses:
         '200':
           description: A JSON\:API document with the a list of dockets
@@ -450,7 +444,6 @@ paths:
   /agencyCategories:
     get:
       summary: Returns a list of categories
-      operationId: GetAgencyCategories
       description: This endpoint returns list of categories
       tags:
         - comment submission utilities
@@ -462,7 +455,6 @@ paths:
           required: true
           schema:
             type: string
-            format: string 
       responses:
         '200':
           description: List of agency categories
@@ -545,7 +537,6 @@ paths:
       summary: get a presigned url to upload file
       tags:
         - comment submission utilities
-      operationId: getUploadUrl
       description: 'Returns a pre-signed URL to upload a file to the S3 bucket'
       parameters:
         - name: filename
@@ -634,10 +625,10 @@ components:
       description: A JSON:API document which represents a single document in the list
       properties:
         id:
-          description: The JSON:API resource ID: `documentId`
+          description: The JSON:API resource ID `documentId`
           type: string
         type:
-          description: The JSON:API resource type: `documents`
+          description: The JSON:API resource type `documents`
           type: string
         attributes: 
           $ref: '#/components/schemas/Document'
@@ -649,10 +640,10 @@ components:
       description: A JSON:API document which represents a single document in the list
       properties:
         id:
-          description: The JSON:API resource ID: `documentId`
+          description: The JSON:API resource ID `documentId`
           type: string
         type:
-          description: The JSON:API resource type: `comments`
+          description: The JSON:API resource type `comments`
           type: string
         attributes: 
           $ref: '#/components/schemas/Comment'
@@ -664,10 +655,10 @@ components:
       description: A JSON:API document which represents a single document in the list
       properties:
         id:
-          description: The JSON:API resource ID: `docketId`
+          description: The JSON:API resource ID `docketId`
           type: string
         type:
-          description: The JSON:API resource type: `dockets`
+          description: The JSON:API resource type `dockets`
           type: string
         attributes: 
           $ref: '#/components/schemas/Docket'
@@ -679,10 +670,10 @@ components:
       description: A JSON:API document which represents a single document in the list
       properties:
         id:
-          description: The JSON:API resource ID: `attachmentId`
+          description: The JSON:API resource ID `attachmentId`
           type: string
         type:
-          description: The JSON:API resource type: `attachments`
+          description: The JSON:API resource type `attachments`
           type: string
         attributes: 
           $ref: '#/components/schemas/Attachment'
@@ -711,7 +702,6 @@ components:
           type: boolean
         lastPage:
           type: boolean
-      additionalProperties: true # not documenting filters and aggregations
     SelfLink:
       description: Link to the detailed information of the document resource
       type: object
@@ -725,10 +715,10 @@ components:
       type: object
       properties:
         id:
-          description: The JSON:API resource ID (document id of the document)
+          description: The JSON:API resource ID (documentId of the document)
           type: string
         type:
-          description: The JSON:API resource type: `documents`
+          description: The JSON:API resource type `documents`
           type: string
         attributes: 
           $ref: "#/components/schemas/DocumentDetail"
@@ -749,10 +739,10 @@ components:
       type: object
       properties:
         id:
-          description: The JSON:API resource ID (document id of the document)
+          description: The JSON:API resource ID (documentId of the comment)
           type: string
         type:
-          description: The JSON:API resource type: `comments`
+          description: The JSON:API resource type `comments`
           type: string
         attributes: 
           $ref: "#/components/schemas/CommentDetail"
@@ -773,10 +763,10 @@ components:
       type: object
       properties:
         id:
-          description: The JSON:API resource ID (docket id of the docket)
+          description: The JSON:API resource ID (docketId of the docket)
           type: string
         type:
-          description: The JSON:API resource type: `dockets`
+          description: The JSON:API resource type `dockets`
           type: string
         attributes: 
           $ref: "#/components/schemas/DocketDetail"
@@ -880,7 +870,7 @@ components:
           description: The comment submission key
           type: string
         type:
-          description: The JSON:API resource type: `comments`
+          description: The JSON:API resource type `comments`
           type: string
         attributes: 
           type: object
@@ -896,7 +886,7 @@ components:
           description: The comment tracking number
           type: string
         type:
-          description: The JSON:API resource type: `comments`
+          description: The JSON:API resource type `comments`
           type: string
         attributes: 
           $ref: "#/components/schemas/CommentResponse"
@@ -1023,7 +1013,7 @@ components:
         highlightedContent:
           type: string
           nullable: true
-          description: Content highlighted by the search index for the searchTerm
+          description: Content highlighted by search engine for the searchTerm. Only returned for searches with searchTerm.
         openForComment:
           type: boolean
           description: Conveys if the document is open for comment
@@ -1032,6 +1022,7 @@ components:
           description: The date that the document was posted by the agency to the system.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
         subtype:
           type: string
+          nullable: true
           description: An agency-specific attribute to further categorize a document beyond the type (`documentType`).
         title:
           type: string
@@ -1053,12 +1044,13 @@ components:
         highlightedContent:
           type: string
           nullable: true
-          description: Content highlighted by the search index for the searchTerm
+          description: Content highlighted by search engine for the searchTerm. Only returned for searches with searchTerm.
         postedDate:
           type: string
           description: The date that the document was posted by the agency to the system.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
         subtype:
           type: string
+          nullable: true
           description: An agency-specific attribute to further categorize a document beyond the type (`documentType`).
         title:
           type: string
@@ -1076,6 +1068,7 @@ components:
           $ref: '#/components/schemas/DocketType'
         highlightedContent:
           type: string
+          nullable: true
           description: Content highlighted by search engine for the searchTerm. Only returned for searches with searchTerm.
         title:
           type: string
@@ -1177,6 +1170,7 @@ components:
           description: The document ID that was assigned when first entered into the system should a change occur that requires a new document ID to be assigned.
         pageCount:
           type: string
+          nullable: true
           description: Conveys the number of pages contained in the document.
         phone:
           type: string
@@ -1188,13 +1182,16 @@ components:
           description: The date that the document was posted by the agency to the system.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
         postmarkDate:
           type: string
+          nullable: true
           format: date-time
           description: The postmark date of a document that was sent by mail.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
         reasonWithdrawn:
           type: string
+          nullable: true
           description: If the document is withdrawn, this field will state the reason.
         subtype:
           type: string
+          nullable: true
           description: An agency-specific attribute to further categorize a document beyond the documentType.
     DocumentDetail:
       allOf:     # Combines the BasicDetailModel and the inline model
@@ -1205,6 +1202,7 @@ components:
           properties: 
             additionalRins:
               type: array
+              nullable: true
               items:
                 type: string
               description: One or more Regulatory Information Numbers (RINs) to which the document relates.
@@ -1213,15 +1211,18 @@ components:
               description: Indicates whether the owning agency will accept comments on the document after the due date.
             authorDate:
               type: string
+              nullable: true
               format: date-time
               description: The date that the authors wrote or published the document.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
             authors:
               type: array
+              nullable: true
               items:
                 type: string
               description: The individual, organization, or group of collaborators that contributed to the creation of the document.
             cfrPart:
               type: string
+              nullable: true
               description: The Code of Federal Regulations (CFR) Citation applicable to the document.
             commentEndDate:
               type: string
@@ -1235,22 +1236,28 @@ components:
               description: The date that begins the period when public comments may be submitted on the document.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
             effectiveDate:
               type: string
+              nullable: true
               format: date-time
               description: The date the document is put into effect.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
             exhibitLocation:
               type: string
+              nullable: true
               description: The physical location of an exhibit to which a document refers.
             exhibitType:
               type: string
+              nullable: true
               description: The type of exhibit to which a document refers.
             frDocNum:
               type: string
+              nullable: true
               description: The unique identifier of a document originating in the [Federal Register](https://www.federalregister.gov/).
             frVolNum:
               type: string
+              nullable: true
               description: The [Federal Register](https://www.federalregister.gov/) volume number where the document was published.
             implementationDate:
               type: string
+              nullable: true
               format: date-time
               description: The date the document is to be implemented.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
             openForComment:
@@ -1258,9 +1265,11 @@ components:
               description: Conveys if a document is open for comment.
             media:
               type: string
+              nullable: true
               description: The media in which the document is stored.
             ombApproval:
               type: string
+              nullable: true
               description: The control number assigned when approval is given by the Office of Management and Budget (OMB) in accordance with the Paperwork Reduction Act (PRA).
             paperLength:
               type: integer
@@ -1270,18 +1279,23 @@ components:
               description: When the document is in paper format, indicates the width of the paper.
             regWriterInstruction:
               type: string
+              nullable: true
               description: Additional instructions provided by the writer of the regulation.
             sourceCitation:
               type: string
+              nullable: true
               description: The citation for the source that published the document.
             startEndPage:
               type: string
+              nullable: true
               description: The starting and ending pages where the document was published.
             subject:
               type: string
+              nullable: true
               description: The subject of the document.
             topics:
               type: array
+              nullable: true
               items:
                 type: string
               description: The principal topics to which the document pertains.
@@ -1292,7 +1306,7 @@ components:
           required:
             - documentId
           properties: 
-            commentOn: #we may want to hide this - this is used to get the comment counts maybe?
+            commentOn:
               type: string
               description: objectId of the parent document
             commentOnDocumentId:
@@ -1327,6 +1341,7 @@ components:
           description: The date the docket is put into effect.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
         field1:
           type: string
+          nullable: true
           description: An agency-specific field used for storing additional data with the docket.
         field2:
           type: string
@@ -1341,6 +1356,7 @@ components:
           description: The unique Regulations.gov ID associated with the docket.  This value is often expected for internal use only.
         keywords:
           type: array
+          nullable: true
           items:
             type: string
             description: Agency selected keywords associated with a docket to improve its searchability by the public.
@@ -1354,31 +1370,75 @@ components:
           description: The date when the docket was last modified.<br/><br/>The date is formatted as ISO 8601 with an offset such as `2019-01-20T13:15:45+01:00`.
         organization:
           type: string
+          nullable: true
           description: Identifies docket's (a regulatory action) orginating agency and/or department.
         petitionNbr:
           type: string
+          nullable: true
           description: Agency specific identifier associated with a docket.
         program:
           type: string
+          nullable: true
           description: The agency specific program associated with the docket.
         regulatoryActionInfo: 
             $ref: '#/components/schemas/RegulatoryActionInfo'
         rin:
           type: string
+          nullable: true
           description: OMB issued Regulation Identifier Number (RIN) uniquely identifies a docket and its documents.
         shortTitle:
           type: string
+          nullable: true
           description: A combination of letters and or numbers assigned to an agency's regulatory action for purposes of brevity.
         subType:
           type: string
+          nullable: true
           description: This agency specific attribute characterizes a docket (regulatory action) beyond its assigned docket type, e.g., Rulemaking.
         subType2:
           type: string
+          nullable: true
           description: This agency specific attribute characterizes a docket (regulatory action) beyond the designated docket subtype.
         title:
           type: string
           description: A name or descriptive heading given to an agency's docket.
     #Comment Submission Related components
+    BaseCommentPayload:
+      type: object
+      required:
+        - comment
+        - submissionKey #only required for comments submitted with attachments
+        - commentOnDocumentId
+        - submissionType #user should set submission Type to API
+      properties:
+        category:
+          type: string
+          description: An agency-specific category allowing agencies to group comments according to their type.
+        comment:
+          type: string
+          description: The comment text
+        commentOnDocumentId:
+          type: string
+          description: documentId of the parent document
+        email:
+          type: string
+          description: The email address to receive email receipt for the commenrt
+        files:
+          type: array
+          items:
+            type: string
+            description: The names of the files submitted with the submission
+        numItemsReceived:
+          type: integer
+          description: The number of items included in the submission          
+        sendEmailReceipt:
+          type: boolean
+          description: Conveys if the user would like to receive an email receipt for the comment
+        submissionKey:
+          type: string
+          description: The unique identifier associated with the submission
+        submissionType:
+          type: string
+          description: The submitter type - Its always going to be `API` for comments submitted via API 
     IndividualComment:
       allOf:     # Combines the BasicCommentPayLoad and the inline model
         - $ref: '#/components/schemas/BaseCommentPayload'
@@ -1406,9 +1466,6 @@ components:
             stateProvinceRegion:
               type: boolean
               description: The email associated with the submitter's address.
-            submitterRep: # we should not have this field
-              type: string
-              description: The submitter representative 
             submitterType:
               type: string
               description: The submitter type
@@ -1446,43 +1503,6 @@ components:
               type: string
               description: The submitter type
               example: Anonymous
-    BaseCommentPayload:
-      type: object
-      required:
-        - comment
-        - submissionKey
-        - commentOnDocumentId
-        - submissionType #user should set submission Type to API
-      properties:
-        category:
-          type: string
-          description: An agency-specific category allowing agencies to group comments according to their type.
-        comment:
-          type: string
-          description: The comment text
-        commentOnDocumentId:
-          type: string
-          description: documentId of the parent document
-        email:
-          type: string
-          description: The email address to receive email receipt for the commenrt
-        files:
-          type: array
-          items:
-            type: string
-            description: The names of the files submitted with the submission
-        numItemsReceived:
-          type: integer
-          description: The number of items included in the submission          
-        sendEmailReceipt:
-          type: boolean
-          description: Conveys if the user would like to receive an email receipt for the comment
-        submissionKey:
-          type: string
-          description: The unique identifier associated with the submission
-        submissionType:
-          type: string
-          description: The submitter type - Its always going to be API for comments submitted via API 
     CommentResponse: 
       allOf:
         - oneOf:     # Returns the created comment
@@ -1628,3 +1648,4 @@ components:
           type: string
         detail:
           type: string
+          
